@@ -1,0 +1,8 @@
+C:\Users\svyat_kravchenko\Desktop\forexsharp-master\TradePlatform.MT4\TradePlatform.MT4.Core\bin\Debug\TradePlatform.MT4.Core.dll
+C:\Users\svyat_kravchenko\Desktop\forexsharp-master\TradePlatform.MT4\TradePlatform.MT4.Core\bin\Debug\TradePlatform.MT4.Core.pdb
+C:\Users\svyat_kravchenko\Desktop\forexsharp-master\TradePlatform.MT4\TradePlatform.MT4.Core\obj\Debug\TradePlatform.MT4.Core.dll
+C:\Users\svyat_kravchenko\Desktop\forexsharp-master\TradePlatform.MT4\TradePlatform.MT4.Core\obj\Debug\TradePlatform.MT4.Core.pdb
+C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.Core\bin\Debug\TradePlatform.MT4.Core.dll
+C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.Core\bin\Debug\TradePlatform.MT4.Core.pdb
+C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.Core\obj\Debug\TradePlatform.MT4.Core.dll
+C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.Core\obj\Debug\TradePlatform.MT4.Core.pdb
