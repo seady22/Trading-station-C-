@@ -1,0 +1,9 @@
+To install TradePlatform.NET follow these instructions:
+Download zip package from this site.
+Unzip 'Shell' directory to desired location. For ex. C:\Gateway\
+Unzip 'Terminal' directory directly to your MetaTrader's directory.
+Run Shell.exe. (in order to use logging and WCF endpoint, should be run as administrator)
+Run or Restart MetaTrader.
+Attach Expert_NET expert advisor, Indicator_NET custom indicator or Script_NET script to desired chart. Allow "DLL import" and enable "Live Trading" for expert.
+Set System_NET_HandlerName parameter. Name must be one those are Shell.exe.config file. ex SmokeTestScript
+In .NET Shell console you will see execution results.
