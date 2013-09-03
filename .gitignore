@@ -1,1 +1,3 @@
-bin/Debug
+Debug/
+*.suo
+*.user
