@@ -9,6 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.Libra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{BFC4BFA4-F852-46B6-9528-061FA0FF7E2C}"
 	ProjectSection(SolutionItems) = preProject
+		Components\FluentNHibernate.dll = Components\FluentNHibernate.dll
+		Components\Iesi.Collections.dll = Components\Iesi.Collections.dll
+		Components\NHibernate.dll = Components\NHibernate.dll
 		Components\TradePlatform.MT4.Data.dll = Components\TradePlatform.MT4.Data.dll
 	EndProjectSection
 EndProject
@@ -18,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.Core", "TradePlatform.MT4.Core\TradePlatform.MT4.Core.csproj", "{65AA3653-CE56-4029-A9AD-46D5CAA45829}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.Db", "TradePlatform.MT4.Db\TradePlatform.MT4.Db.csproj", "{A05DB421-34B5-4AC0-9899-57C91B2A0D55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +46,10 @@ Global
 		{65AA3653-CE56-4029-A9AD-46D5CAA45829}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65AA3653-CE56-4029-A9AD-46D5CAA45829}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65AA3653-CE56-4029-A9AD-46D5CAA45829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
