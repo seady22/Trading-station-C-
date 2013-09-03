@@ -1,8 +1,0 @@
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\bin\Debug\TradePlatform.MT4.SDK.API.dll
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\bin\Debug\TradePlatform.MT4.SDK.API.pdb
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\bin\Debug\TradePlatform.MT4.Core.dll
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\bin\Debug\TradePlatform.MT4.Data.dll
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\obj\Debug\TradePlatform.MT4.SDK.API.dll
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\obj\Debug\TradePlatform.MT4.SDK.API.pdb
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\bin\Debug\TradePlatform.MT4.Core.pdb
-C:\Users\svyat_kravchenko\Desktop\tradeplatform-77760\TradePlatform.MT4.SDK\TradePlatform.MT4.SDK.API\obj\Debug\TradePlatform.MT4.SDK.API.csprojResolveAssemblyReference.cache
