@@ -30,5 +30,26 @@ namespace TradePlatform.MT4.Db
                 transaction.Commit();
             }
         }
+
+        public void Update(T entity)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                session.Update(entity);
+                transaction.Commit();
+            }
+        }
+
+        public T GetById(int id)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                var result = session.Get<T>(id);
+                transaction.Commit();
+                return result;
+            }
+        }
     }
 }
