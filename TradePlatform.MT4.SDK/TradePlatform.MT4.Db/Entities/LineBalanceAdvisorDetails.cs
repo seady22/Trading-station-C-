@@ -1,10 +1,14 @@
-﻿using FluentNHibernate.Data;
+﻿using System;
+using FluentNHibernate.Data;
 
 namespace TradePlatform.MT4.Db.Entities
 {
     public class LineBalanceAdvisorDetails :  Entity
     {
         public virtual int Id { get; set; }
-        public virtual string Content { get; set; }
+        public virtual String Pair { get; set; }
+        public virtual int TimeFrame { get; set; }
+        public virtual DateTime CreatedOn { get; set; }
+        public virtual int State { get; set; }
     }
 }

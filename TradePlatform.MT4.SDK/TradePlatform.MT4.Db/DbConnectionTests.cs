@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using TradePlatform.MT4.Db.Entities;
 
 namespace TradePlatform.MT4.Db
@@ -7,12 +8,15 @@ namespace TradePlatform.MT4.Db
     class DbConnectionTests
     {
          [Test]
-         public void BuildSessionFactory_ShouldReturnSessionFactory()
+         public void Insert_ShouldAddRecordCorrectly()
          {
              var repository = new Repository<LineBalanceAdvisorDetails>();
              repository.Insert(new LineBalanceAdvisorDetails
                  {
-                     Content = "test"
+                     CreatedOn = DateTime.UtcNow,
+                     Pair = "EUR/USD",
+                     State = 1,
+                     TimeFrame = 2
                  });
          }
     }

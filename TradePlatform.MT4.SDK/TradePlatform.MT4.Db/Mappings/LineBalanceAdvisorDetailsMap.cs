@@ -7,10 +7,13 @@ namespace TradePlatform.MT4.Db.Mappings
     {
         public LineBalanceAdvisorDetailsMap()
         {
-            Id(x => x.Id);
-            Map(x => x.Content).Column("Content");
             Table("LineBalanceAdvisorDetails");
             Schema("ExpertAdvisors");
+            Id(x => x.Id);
+            Map(x => x.Pair);
+            Map(x => x.State);
+            Map(x => x.TimeFrame);
+            Map(x => x.CreatedOn);
         }
     }
 }
