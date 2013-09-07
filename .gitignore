@@ -4,4 +4,4 @@ Debug/
 bin/
 *.obj
 *.pdb
-
+*.dll
