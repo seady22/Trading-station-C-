@@ -1,13 +1,16 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using TradePlatform.MT4.Db.Entities;
 
 namespace TradePlatform.MT4.Db
 {
     public class Repository<T> : IRepository<T>
     {
         protected ISessionFactory _sessionFactory;
+        public IList<LineBalanceAdvisorDetails> Items;
 
         public Repository()
         {
@@ -19,6 +22,14 @@ namespace TradePlatform.MT4.Db
                                        .Password("")))
                                        .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly()))
                                        .BuildSessionFactory();
+
+            using (var session = _sessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                Items = session.CreateCriteria<LineBalanceAdvisorDetails>().List<LineBalanceAdvisorDetails>();
+                transaction.Commit();
+            }
+
         } 
 
         public void Insert(T entity)
