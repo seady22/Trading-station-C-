@@ -1,3 +1,7 @@
 Debug/
 *.suo
 *.user
+bin/
+*.obj
+*.pdb
+
