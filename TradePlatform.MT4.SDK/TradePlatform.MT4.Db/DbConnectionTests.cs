@@ -14,9 +14,9 @@ namespace TradePlatform.MT4.Db
              repository.Insert(new LineBalanceAdvisorDetails
                  {
                      CreatedOn = DateTime.UtcNow,
-                     Pair = "EUR/USD",
+                     Pair = Pair.EURUSD,
                      State = 1,
-                     TimeFrame = 2
+                     TimeFrame = TimeFrame.H1
                  });
          }
     }
