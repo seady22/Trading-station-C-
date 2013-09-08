@@ -15,7 +15,7 @@ namespace TradePlatform.MT4.Db
                  {
                      CreatedOn = DateTime.UtcNow,
                      Pair = Pair.EURUSD,
-                     State = 1,
+                     State = State.Created,
                      TimeFrame = TimeFrame.H1
                  });
          }
