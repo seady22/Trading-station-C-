@@ -9,6 +9,6 @@ namespace TradePlatform.MT4.Db.Entities
         public virtual Pair Pair { get; set; }
         public virtual TimeFrame TimeFrame { get; set; }
         public virtual DateTime CreatedOn { get; set; }
-        public virtual int State { get; set; }
+        public virtual State State { get; set; }
     }
 }
