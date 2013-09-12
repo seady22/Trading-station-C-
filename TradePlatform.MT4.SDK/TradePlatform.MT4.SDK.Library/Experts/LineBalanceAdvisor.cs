@@ -9,7 +9,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 {
 
 
-    public class MACrossExpert : ExtendedExpertAdvisor
+    public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
         bool fastUnderSlow = false;
 

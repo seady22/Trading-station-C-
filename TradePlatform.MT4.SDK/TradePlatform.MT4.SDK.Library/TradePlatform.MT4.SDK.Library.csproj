@@ -74,7 +74,7 @@
     <Compile Include="Common\TickCounter.cs" />
     <Compile Include="Handlers\PerformanceCounterBase.cs" />
     <Compile Include="Handlers\ExtendedExpertAdvisor.cs" />
-    <Compile Include="Experts\MACrossExpert.cs" />
+    <Compile Include="Experts\LineBalanceAdvisor.cs" />
     <Compile Include="Indicators\PrevDayHighLowIndicator.cs" />
     <Compile Include="Scripts\UnitTestScript.cs" />
     <Compile Include="UnitTests\AccountInformationTests.cs" />
