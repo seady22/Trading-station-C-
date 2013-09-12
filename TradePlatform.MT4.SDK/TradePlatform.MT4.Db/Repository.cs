@@ -4,6 +4,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using TradePlatform.MT4.Db.Entities;
+using TradePlatform.MT4.Db.Mappings;
 
 namespace TradePlatform.MT4.Db
 {
@@ -20,7 +21,7 @@ namespace TradePlatform.MT4.Db
                                        .Database("ExpertAdvisors")
                                        .Username("root")
                                        .Password("")))
-                                       .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly()))
+                                       .Mappings(m => m.FluentMappings.AddFromAssemblyOf<LineBalanceAdvisorDetailsMap>())
                                        .BuildSessionFactory();
 
             using (var session = _sessionFactory.OpenSession())

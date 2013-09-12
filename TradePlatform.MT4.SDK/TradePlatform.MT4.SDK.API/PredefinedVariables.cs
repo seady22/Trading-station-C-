@@ -59,6 +59,20 @@
         }
 
         /// <summary>
+        /// Series array that contains close prices for each bar of the current chart.
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public static double iClose(this MqlHandler handler, string symbol, int i,TIME_FRAME timeFrame)
+        {
+            string retrunValue = handler.CallMqlMethod("iClose", symbol, i, (int) timeFrame);
+
+            return Convertor.ToDouble(retrunValue);
+        }
+
+
+        /// <summary>
         /// Number of digits after decimal point for the current symbol prices.
         /// </summary>
         /// <param name="handler"></param>
