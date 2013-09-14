@@ -25,8 +25,8 @@ CREATE TABLE `linebalanceadvisordetails` (
   `TimeFrame` int(11) NOT NULL,
   `CreatedOn` datetime NOT NULL,
   `State` int(11) NOT NULL,
-  `UpdatedBalance` decimal(10,0) DEFAULT '0.0',
-  `CurrentBalance` decimal(10,0) NOT NULL,
+  `UpdatedBalance` double(10,0) DEFAULT '0.0',
+  `CurrentBalance` double(10,0) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
