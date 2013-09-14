@@ -60,7 +60,6 @@
     <Compile Include="Extensions\LineBalanceAdvisorDetailsRepositoryExtension.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="DbConnectionTests.cs" />
     <Compile Include="Entities\LineBalanceAdvisorDetails.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Mappings\LineBalanceAdvisorDetailsMap.cs" />
@@ -70,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

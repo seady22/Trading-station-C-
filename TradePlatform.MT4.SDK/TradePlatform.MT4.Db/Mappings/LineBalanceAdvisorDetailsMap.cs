@@ -14,6 +14,8 @@ namespace TradePlatform.MT4.Db.Mappings
             Map(x => x.State).CustomType<State>();
             Map(x => x.TimeFrame).CustomType<TimeFrame>();
             Map(x => x.CreatedOn);
+            Map(x => x.CurrentBalance);
+            Map(x => x.UpdatedBalance).Nullable();
         }
     }
 }

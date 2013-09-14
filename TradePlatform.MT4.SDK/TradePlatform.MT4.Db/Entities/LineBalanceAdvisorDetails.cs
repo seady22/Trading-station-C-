@@ -10,5 +10,7 @@ namespace TradePlatform.MT4.Db.Entities
         public virtual TimeFrame TimeFrame { get; set; }
         public virtual DateTime CreatedOn { get; set; }
         public virtual State State { get; set; }
+        public virtual decimal CurrentBalance { get; set; }
+        public virtual decimal UpdatedBalance { get; set; }
     }
 }
