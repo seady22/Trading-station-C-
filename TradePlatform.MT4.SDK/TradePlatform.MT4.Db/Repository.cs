@@ -24,14 +24,18 @@ namespace TradePlatform.MT4.Db
                                        .Mappings(m => m.FluentMappings.AddFromAssemblyOf<LineBalanceAdvisorDetailsMap>())
                                        .BuildSessionFactory();
 
+            GetUpdatedDbContent();
+        }
+
+        private void GetUpdatedDbContent()
+        {
             using (var session = _sessionFactory.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
                 Items = session.CreateCriteria<LineBalanceAdvisorDetails>().List<LineBalanceAdvisorDetails>();
                 transaction.Commit();
             }
-
-        } 
+        }
 
         public void Insert(T entity)
         {
@@ -41,6 +45,7 @@ namespace TradePlatform.MT4.Db
                 session.Save(entity);
                 transaction.Commit();
             }
+            GetUpdatedDbContent();
         }
 
         public void Update(T entity)

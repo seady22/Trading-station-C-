@@ -42,6 +42,6 @@ namespace TradePlatform.MT4.Core
             return null;
         }
 
-        protected internal abstract string ResolveMethod(string methodName, List<string> parameters);
+        public abstract string ResolveMethod(string methodName, List<string> parameters);
     }
 }

@@ -8,7 +8,7 @@
         protected abstract void Begin();
         protected abstract void End();
 
-        protected override string ResolveMethod(string methodName, List<string> parameters)
+        public override string ResolveMethod(string methodName, List<string> parameters)
         {
             switch (methodName)
             {

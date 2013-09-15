@@ -7,7 +7,7 @@
 
     public abstract class ExtendedExpertAdvisor : ExpertAdvisor
     {
-        protected override string ResolveMethod(string methodName, List<string> parameters)
+        public override string ResolveMethod(string methodName, List<string> parameters)
         {
             switch (methodName)
             {

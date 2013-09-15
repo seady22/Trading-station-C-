@@ -1,17 +1,18 @@
-﻿using TradePlatform.MT4.Db;
+﻿using System.Linq;
+using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.Db.Extensions;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
+using TradePlatform.MT4.SDK.API.Wrappers;
 using TradePlatform.MT4.SDK.Library.Handlers;
 
 namespace TradePlatform.MT4.SDK.Library.Experts
 {
-
-
     public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
-        bool fastUnderSlow = false;
+        public TradingFunctionWrapper TradingFunctionWrapper { get; set; }
+        public Repository<LineBalanceAdvisorDetails> LineBalanceAdvisorDetails { get; set; }
 
         protected override int Init()
         {
@@ -20,18 +21,33 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected override int Start()
         {
-            var repo = new Repository<LineBalanceAdvisorDetails>();
-            var addedOrders = repo.GetBalanceAdvisorDetailsByState(State.Created);
+            var addedOrders = LineBalanceAdvisorDetails.GetBalanceAdvisorDetailsByState(State.Created);
             var currentTrend = TREND_TYPE.OTHER;
 
-            var ordersTotal = this.OrdersTotal();
+            var ordersTotal = TradingFunctionWrapper.OrdersTotal(this);
             if (ordersTotal != 0)
             {
                 if (addedOrders.Count == 1)
                 {
-                    // update info about order
+                    var item = LineBalanceAdvisorDetails.Items.Where(x => x.State == State.Created).Single();
+                    if (item != null)
+                    {
+                        item.State = State.Active;
+                        LineBalanceAdvisorDetails.Update(item);
+                    }
                 }
                 return 1;
+            }
+
+            if (ordersTotal == 0)
+            {
+                var item = LineBalanceAdvisorDetails.Items.Where(x => x.State == State.Active).SingleOrDefault();
+                if (item != null)
+                {
+                    var accountBalance = this.AccountBalance();
+                    item.UpdatedBalance = accountBalance;
+                    LineBalanceAdvisorDetails.Update(item);
+                }
             }
 
             var askPrice = PredefinedVariables.Ask(this);

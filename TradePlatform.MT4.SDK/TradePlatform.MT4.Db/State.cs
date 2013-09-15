@@ -4,6 +4,7 @@
     {
         Created,
         Active,
-        Deleted
+        Deleted,
+        Closed
     }
 }

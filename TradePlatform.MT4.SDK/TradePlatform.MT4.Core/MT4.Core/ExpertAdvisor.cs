@@ -9,7 +9,7 @@ namespace TradePlatform.MT4.Core
 
         protected abstract int Init();
 
-        protected internal override string ResolveMethod(string methodName, List<string> parameters)
+        public override string ResolveMethod(string methodName, List<string> parameters)
         {
             string str = methodName;
             string str1 = str;
