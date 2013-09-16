@@ -1,15 +1,12 @@
-﻿namespace TradePlatform.MT4.SDK.Shell
+﻿using Autofac;
+using TradePlatform.MT4.SDK.API.Wrappers;
+
+namespace TradePlatform.MT4.SDK.Shell
 {
     using System;
-    using System.Data.Services;
     using System.Diagnostics;
     using System.Reflection;
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Web;
-    using TradePlatform.MT4.Core;
-    using TradePlatform.MT4.Data;
-
+    using Core;
 
     class Program
     {

@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using Autofac;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.Db.Extensions;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
+using TradePlatform.MT4.SDK.API.DI;
 using TradePlatform.MT4.SDK.API.Wrappers;
 using TradePlatform.MT4.SDK.Library.Handlers;
 
@@ -17,6 +19,11 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         protected override int Init()
         {
             return 1;
+        }
+
+        public LineBalanceAdvisor()
+        {
+            Container.GetInstance().InjectProperties(this);
         }
 
         protected override int Start()
