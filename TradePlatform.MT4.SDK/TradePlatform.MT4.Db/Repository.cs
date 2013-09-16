@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -32,10 +33,15 @@ namespace TradePlatform.MT4.Db
             using (var session = _sessionFactory.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
-                Items = session.CreateCriteria<LineBalanceAdvisorDetails>().List<LineBalanceAdvisorDetails>();
+                Items = (IList<LineBalanceAdvisorDetails>) session.CreateCriteria(typeof(T)).List<T>();
                 transaction.Commit();
             }
         }
+
+        //public virtual IQueryable<T> Items
+        //{
+        //    get {  using (var session = _sessionFactory.OpenSession())};
+        //}
 
         public void Insert(T entity)
         {
@@ -48,13 +54,13 @@ namespace TradePlatform.MT4.Db
             GetUpdatedDbContent();
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             using (var session = _sessionFactory.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
                 session.Update(entity);
-                transaction.Commit();
+                //transaction.Commit();
             }
         }
 

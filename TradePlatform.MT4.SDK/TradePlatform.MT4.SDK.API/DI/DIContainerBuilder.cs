@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using TradePlatform.MT4.Db;
+using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API.Wrappers;
 
 namespace TradePlatform.MT4.SDK.API.DI
@@ -10,6 +12,10 @@ namespace TradePlatform.MT4.SDK.API.DI
         public DIContainerBuilder()
         {
             _containerBuilder.RegisterType<TradingFunctionWrapper>();
+            _containerBuilder.RegisterType<Repository<LineBalanceAdvisorDetails>>();
+            _containerBuilder.RegisterType<AccountInformationWrapper>();
+            _containerBuilder.RegisterType<PredefinedVariablesWrapper>();
+            _containerBuilder.RegisterType<TechnicalIndicatorsWrapper>();
         }
 
         public IContainer Build()

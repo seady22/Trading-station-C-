@@ -14,6 +14,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
         public TradingFunctionWrapper TradingFunctionWrapper { get; set; }
+        public AccountInformationWrapper AccountInformationWrapper { get; set; }
+        public PredefinedVariablesWrapper PredefinedVariablesWrapper { get; set; }
+        public TechnicalIndicatorsWrapper TechnicalIndicatorsWrapper { get; set; }
         public Repository<LineBalanceAdvisorDetails> LineBalanceAdvisorDetails { get; set; }
 
         protected override int Init()
@@ -36,10 +39,11 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 if (addedOrders.Count == 1)
                 {
-                    var item = LineBalanceAdvisorDetails.Items.Where(x => x.State == State.Created).Single();
+                    var item = addedOrders.Single();
                     if (item != null)
                     {
                         item.State = State.Active;
+                        item.CurrentBalance = AccountInformationWrapper.AccountBalance(this);
                         LineBalanceAdvisorDetails.Update(item);
                     }
                 }
@@ -48,18 +52,22 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (ordersTotal == 0)
             {
-                var item = LineBalanceAdvisorDetails.Items.Where(x => x.State == State.Active).SingleOrDefault();
+                var item = LineBalanceAdvisorDetails.Items.SingleOrDefault(x => x.State == State.Active);
                 if (item != null)
                 {
-                    var accountBalance = this.AccountBalance();
+                    var accountBalance = AccountInformationWrapper.AccountBalance(this);
                     item.UpdatedBalance = accountBalance;
+                    item.State = State.Closed;
                     LineBalanceAdvisorDetails.Update(item);
+
+                    return 1;
                 }
             }
 
-            var askPrice = PredefinedVariables.Ask(this);
-            var bidPrice = PredefinedVariables.Bid(this);
-            var movingPrice = TechnicalIndicators.iMA(this, "EURUSD", TIME_FRAME.PERIOD_H4, 25, 0, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var askPrice = PredefinedVariablesWrapper.Ask(this);
+            var bidPrice = PredefinedVariablesWrapper.Bid(this);
+
+            var movingPrice = TechnicalIndicatorsWrapper.iMA(this, "EURUSD", TIME_FRAME.PERIOD_H4, 25, 0, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             if (askPrice < movingPrice && bidPrice < movingPrice)
             {
                 currentTrend = TREND_TYPE.DESC;

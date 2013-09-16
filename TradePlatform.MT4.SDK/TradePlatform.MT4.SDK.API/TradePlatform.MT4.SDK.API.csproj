@@ -37,6 +37,9 @@
     <Reference Include="Autofac">
       <HintPath>..\Components\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\TradePlatform.MT4.Db\bin\Debug\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,12 +76,19 @@
     <Compile Include="PredefinedVariables.cs" />
     <Compile Include="TechnicalIndicators.cs" />
     <Compile Include="TradingFunctions.cs" />
+    <Compile Include="Wrappers\AccountInformationWrapper.cs" />
+    <Compile Include="Wrappers\PredefinedVariablesWrapper.cs" />
+    <Compile Include="Wrappers\TechnicalIndicatorsWrapper.cs" />
     <Compile Include="Wrappers\TradingFunctionWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TradePlatform.MT4.Core\TradePlatform.MT4.Core.csproj">
       <Project>{65aa3653-ce56-4029-a9ad-46d5caa45829}</Project>
       <Name>TradePlatform.MT4.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TradePlatform.MT4.Db\TradePlatform.MT4.Db.csproj">
+      <Project>{a05db421-34b5-4ac0-9899-57c91b2a0d55}</Project>
+      <Name>TradePlatform.MT4.Db</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
