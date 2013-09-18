@@ -9,13 +9,17 @@ namespace TradePlatform.MT4.Db.Mappings
         {
             Table("LineBalanceAdvisorDetails");
             Schema("ExpertAdvisors");
+
             Id(x => x.Id);
             Map(x => x.Pair).CustomType<Pair>();
             Map(x => x.State).CustomType<State>();
             Map(x => x.TimeFrame).CustomType<TimeFrame>();
             Map(x => x.CreatedOn);
             Map(x => x.CurrentBalance);
-            Map(x => x.UpdatedBalance).Nullable();
+            Map(x => x.UpdatedBalance);
+            Map(x => x.ActivedOn);
+            Map(x => x.ClosedOn);
+            Map(x => x.TrendType);
         }
     }
 }

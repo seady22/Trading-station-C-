@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Autofac;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
-using TradePlatform.MT4.Db.Extensions;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
 using TradePlatform.MT4.SDK.API.DI;
@@ -17,7 +17,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         public AccountInformationWrapper AccountInformationWrapper { get; set; }
         public PredefinedVariablesWrapper PredefinedVariablesWrapper { get; set; }
         public TechnicalIndicatorsWrapper TechnicalIndicatorsWrapper { get; set; }
-        public Repository<LineBalanceAdvisorDetails> LineBalanceAdvisorDetails { get; set; }
+        public CommonFunctionsWrapper CommonFunctionsWrapper { get; set; }
+        public Repository<LineBalanceAdvisorDetails> LineBalanceAdvisorDetailsRepository { get; set; }
 
         protected override int Init()
         {
@@ -31,37 +32,33 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected override int Start()
         {
-            var addedOrders = LineBalanceAdvisorDetails.GetBalanceAdvisorDetailsByState(State.Created);
             var currentTrend = TREND_TYPE.OTHER;
-
+            var createdOrder = LineBalanceAdvisorDetailsRepository.Items.SingleOrDefault(x => x.State == State.Created && x.ActivedOn == null);
             var ordersTotal = TradingFunctionWrapper.OrdersTotal(this);
-            if (ordersTotal != 0)
+            if (ordersTotal > 0)
             {
-                if (addedOrders.Count == 1)
+                if (createdOrder != null)
                 {
-                    var item = addedOrders.Single();
-                    if (item != null)
-                    {
-                        item.State = State.Active;
-                        item.CurrentBalance = AccountInformationWrapper.AccountBalance(this);
-                        LineBalanceAdvisorDetails.Update(item);
-                    }
+                    createdOrder.State = State.Active;
+                    createdOrder.ActivedOn = DateTime.UtcNow;
+                    createdOrder.CurrentBalance = AccountInformationWrapper.AccountBalance(this);
+                    LineBalanceAdvisorDetailsRepository.Update(createdOrder);
                 }
                 return 1;
             }
 
             if (ordersTotal == 0)
             {
-                var item = LineBalanceAdvisorDetails.Items.SingleOrDefault(x => x.State == State.Active);
+                var item = LineBalanceAdvisorDetailsRepository.Items.SingleOrDefault(x => x.State == State.Active && x.ActivedOn != null);
+                var accountBalance = AccountInformationWrapper.AccountBalance(this);
                 if (item != null)
                 {
-                    var accountBalance = AccountInformationWrapper.AccountBalance(this);
                     item.UpdatedBalance = accountBalance;
                     item.State = State.Closed;
-                    LineBalanceAdvisorDetails.Update(item);
-
-                    return 1;
+                    item.ClosedOn = DateTime.UtcNow;
+                    LineBalanceAdvisorDetailsRepository.Update(item);
                 }
+                return 1;
             }
 
             var askPrice = PredefinedVariablesWrapper.Ask(this);
@@ -77,16 +74,33 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 currentTrend = TREND_TYPE.ASC;
             }
-                                    
-            var lastBarClosePrice = PredefinedVariables.Close(this, 1);
-            var lastBarOpenPrice = PredefinedVariables.Open(this, 1);
+
+            var lastBarClosePrice = PredefinedVariablesWrapper.Close(this, 1);
+            var lastBarOpenPrice = PredefinedVariablesWrapper.Open(this, 1);
 
             if (currentTrend == TREND_TYPE.ASC)
             {
                     if (movingPrice >= lastBarOpenPrice && movingPrice <= lastBarClosePrice)
                     {
-                        // create buy stop
-                        //logging that order was added to db.
+                        var point = CommonFunctionsWrapper.MarketInfo(this, "EURUSD", MARKER_INFO_MODE.MODE_POINT);
+                        var orderSendResult = TradingFunctionWrapper.OrderSend(this, "EURUSD", ORDER_TYPE.OP_BUYSTOP, 0.01, askPrice, 1,
+                                                         askPrice - 30*point, askPrice + 50*point, "LineBalanceExpert",
+                                                         0, DateTime.UtcNow.AddDays(1));
+                        if (orderSendResult > 0)
+                        {
+                            var accountBalance = AccountInformationWrapper.AccountBalance(this);
+                            var lineBalanceAdvisorItem = new LineBalanceAdvisorDetails
+                            {
+                                CreatedOn = DateTime.UtcNow,
+                                State = State.Created,
+                                TimeFrame = TimeFrame.H4,
+                                Pair = Pair.EURUSD,
+                                CurrentBalance = accountBalance,
+                                TrendType = "ASC"
+                            };
+                            LineBalanceAdvisorDetailsRepository.Insert(lineBalanceAdvisorItem);
+                        }
+                        
                     }
             }
 
@@ -94,8 +108,21 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                     if (movingPrice <= lastBarOpenPrice && movingPrice >= lastBarClosePrice)
                     {
-                        // create sell stop
-                        //logging that order was added to db.
+                        var point = CommonFunctionsWrapper.MarketInfo(this, "EURUSD", MARKER_INFO_MODE.MODE_POINT);
+                        var orderSendResult = TradingFunctionWrapper.OrderSend(this, "EURUSD", ORDER_TYPE.OP_SELLSTOP, 0.01, askPrice, 1,
+                                                          bidPrice + 30 * point, bidPrice - 50 * point, "LineBalanceExpert",
+                                                          0, DateTime.UtcNow.AddDays(1));
+                        var accountBalance = AccountInformationWrapper.AccountBalance(this);
+                        var lineBalanceAdvisorItem = new LineBalanceAdvisorDetails
+                        {
+                            CreatedOn = DateTime.UtcNow,
+                            State = State.Created,
+                            TimeFrame = TimeFrame.H4,
+                            Pair = Pair.EURUSD,
+                            CurrentBalance = accountBalance,
+                            TrendType = "DESC"
+                        };
+                        LineBalanceAdvisorDetailsRepository.Insert(lineBalanceAdvisorItem);
                     }
             }
             return 1;

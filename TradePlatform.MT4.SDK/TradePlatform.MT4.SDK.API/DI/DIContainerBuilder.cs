@@ -16,6 +16,8 @@ namespace TradePlatform.MT4.SDK.API.DI
             _containerBuilder.RegisterType<AccountInformationWrapper>();
             _containerBuilder.RegisterType<PredefinedVariablesWrapper>();
             _containerBuilder.RegisterType<TechnicalIndicatorsWrapper>();
+            _containerBuilder.RegisterType<PredefinedVariablesWrapper>();
+            _containerBuilder.RegisterType<CommonFunctionsWrapper>();
         }
 
         public IContainer Build()
