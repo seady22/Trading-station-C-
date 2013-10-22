@@ -7,14 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.Shell
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.Library", "TradePlatform.MT4.SDK.Library\TradePlatform.MT4.SDK.Library.csproj", "{6B024C9D-EAE3-4450-981B-625D7A56A3ED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{BFC4BFA4-F852-46B6-9528-061FA0FF7E2C}"
-	ProjectSection(SolutionItems) = preProject
-		Components\FluentNHibernate.dll = Components\FluentNHibernate.dll
-		Components\Iesi.Collections.dll = Components\Iesi.Collections.dll
-		Components\NHibernate.dll = Components\NHibernate.dll
-		Components\TradePlatform.MT4.Data.dll = Components\TradePlatform.MT4.Data.dll
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F6017EC5-EC61-47E4-80D6-BF0339854D0E}"
 	ProjectSection(SolutionItems) = preProject
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs

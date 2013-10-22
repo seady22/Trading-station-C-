@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\Components\Autofac.dll</HintPath>
+      <HintPath>..\lib\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\TradePlatform.MT4.Db\bin\Debug\FluentNHibernate.dll</HintPath>
@@ -47,7 +47,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TradePlatform.MT4.Data">
-      <HintPath>..\Components\TradePlatform.MT4.Data.dll</HintPath>
+      <HintPath>..\lib\TradePlatform.MT4.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
