@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace TradePlatform.MT4.SDK.API.DI
+namespace TradePlatform.MT4.DI
 {
     public static class Container
     {

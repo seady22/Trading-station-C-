@@ -4,17 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{44136017-54EE-4868-9557-ACB70B85BD7C}</ProjectGuid>
+    <ProjectGuid>{0924A9C6-38D5-471C-BC3E-1682538FD111}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TradePlatform.MT4.SDK.API</RootNamespace>
-    <AssemblyName>TradePlatform.MT4.SDK.API</AssemblyName>
+    <RootNamespace>TradePlatform.MT4.DI</RootNamespace>
+    <AssemblyName>TradePlatform.MT4.DI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,56 +34,29 @@
       <HintPath>..\lib\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
-      <HintPath>..\TradePlatform.MT4.Db\bin\Debug\FluentNHibernate.dll</HintPath>
+      <HintPath>..\lib\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TradePlatform.MT4.Data">
-      <HintPath>..\lib\TradePlatform.MT4.Data.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="AccountInformation.cs" />
-    <Compile Include="CommonFunctions.cs" />
-    <Compile Include="Constants\ADX_MODE.cs" />
-    <Compile Include="Constants\APPLY_PRICE.cs" />
-    <Compile Include="Constants\BAND_MODE.cs" />
-    <Compile Include="Constants\GATOR_MODE.cs" />
-    <Compile Include="Constants\ICHIMOKU_MODE.cs" />
-    <Compile Include="Constants\MACD_MODE.cs" />
-    <Compile Include="Constants\MA_METHOD.cs" />
-    <Compile Include="Constants\SYMBOLS.cs" />
-    <Compile Include="Constants\TIME_FRAME.cs" />
-    <Compile Include="Constants\ORDER_TYPE.cs" />
-    <Compile Include="Constants\POOL_MODES.cs" />
-    <Compile Include="Constants\SELECT_BY.cs" />
-    <Compile Include="Constants\MARKER_INFO_MODE.cs" />
-    <Compile Include="Constants\TREND_TYPE.cs" />
-    <Compile Include="WindowFunctions.cs" />
-    <Compile Include="PredefinedVariables.cs" />
-    <Compile Include="TechnicalIndicators.cs" />
-    <Compile Include="TradingFunctions.cs" />
-    <Compile Include="Wrappers\AccountInformationWrapper.cs" />
-    <Compile Include="Wrappers\CommonFunctionsWrapper.cs" />
-    <Compile Include="Wrappers\PredefinedVariablesWrapper.cs" />
-    <Compile Include="Wrappers\TechnicalIndicatorsWrapper.cs" />
-    <Compile Include="Wrappers\TradingFunctionWrapper.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="DIContainerBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TradePlatform.MT4.Core\TradePlatform.MT4.Core.csproj">
-      <Project>{65aa3653-ce56-4029-a9ad-46d5caa45829}</Project>
-      <Name>TradePlatform.MT4.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TradePlatform.MT4.Db\TradePlatform.MT4.Db.csproj">
       <Project>{a05db421-34b5-4ac0-9899-57c91b2a0d55}</Project>
       <Name>TradePlatform.MT4.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TradePlatform.MT4.SDK.API\TradePlatform.MT4.SDK.API.csproj">
+      <Project>{44136017-54ee-4868-9557-acb70b85bd7c}</Project>
+      <Name>TradePlatform.MT4.SDK.API</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

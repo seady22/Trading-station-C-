@@ -3,7 +3,7 @@ using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API.Wrappers;
 
-namespace TradePlatform.MT4.SDK.API.DI
+namespace TradePlatform.MT4.DI
 {
     public class DIContainerBuilder
     {
