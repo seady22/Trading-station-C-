@@ -38,10 +38,6 @@ namespace TradePlatform.MT4.Db
             }
         }
 
-        //public virtual IQueryable<T> Items
-        //{
-        //    get {  using (var session = _sessionFactory.OpenSession())};
-        //}
 
         public void Insert(T entity)
         {
