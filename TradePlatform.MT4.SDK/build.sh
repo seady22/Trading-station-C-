@@ -1,0 +1,1 @@
+msbuild.exe TradePlatform.MT4.SDK.sln
