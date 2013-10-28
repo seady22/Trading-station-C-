@@ -60,6 +60,8 @@ namespace TradePlatform.MT4.SDK.Shell
              if (isMockEnabled)
              {
                  _log.Debug("Mock was enabled");
+                 //create mocked impl
+                 //create instance off Expert
              }
              else
              {
