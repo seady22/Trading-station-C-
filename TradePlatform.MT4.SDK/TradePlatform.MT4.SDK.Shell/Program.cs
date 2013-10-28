@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using TradePlatform.MT4.Core.Utils;
 using TradePlatform.MT4.SDK.API.Wrappers;
 
 namespace TradePlatform.MT4.SDK.Shell
@@ -16,7 +17,7 @@ namespace TradePlatform.MT4.SDK.Shell
 
             SetupConsole();
 
-            Bridge.InitializeHosts();
+            InitializeHosts();
         }
 
         private static void SetupConsole()
@@ -49,6 +50,20 @@ namespace TradePlatform.MT4.SDK.Shell
 
                 Environment.Exit(1);
             }
+        }
+
+         static void InitializeHosts()
+        {
+            bool isMockEnabled = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["IsMockEnabled"]);
+             if (isMockEnabled)
+             {
+                 Console.WriteLine("Mock was disabled");
+             }
+             else
+             {
+                Console.WriteLine("Mock was disabled");
+                Bridge.InitializeHosts();
+             }
         }
     }
 }
