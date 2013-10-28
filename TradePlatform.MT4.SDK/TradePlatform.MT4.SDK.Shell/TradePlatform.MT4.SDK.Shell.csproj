@@ -44,9 +44,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\lib\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\lib\common_logging\Common.Logging.dll</HintPath>
     </Reference>

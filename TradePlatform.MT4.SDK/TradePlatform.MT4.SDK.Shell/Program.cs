@@ -1,6 +1,4 @@
-﻿
-using Autofac.Util;
-using log4net;
+﻿using log4net;
 
 namespace TradePlatform.MT4.SDK.Shell
 {

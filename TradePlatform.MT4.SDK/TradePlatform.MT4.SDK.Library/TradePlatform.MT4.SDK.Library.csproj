@@ -37,9 +37,6 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\lib\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\TradePlatform.MT4.Db\bin\Debug\FluentNHibernate.dll</HintPath>
     </Reference>
