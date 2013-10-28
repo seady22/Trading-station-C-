@@ -1,6 +1,6 @@
-﻿using Autofac;
-using TradePlatform.MT4.Core.Utils;
-using TradePlatform.MT4.SDK.API.Wrappers;
+﻿
+using Autofac.Util;
+using log4net;
 
 namespace TradePlatform.MT4.SDK.Shell
 {
@@ -11,8 +11,10 @@ namespace TradePlatform.MT4.SDK.Shell
 
     class Program
     {
+        private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof(Program)), typeof(Program));
         static void Main(string[] args)
         {
+            log4net.Config.XmlConfigurator.Configure();
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             SetupConsole();
@@ -57,11 +59,11 @@ namespace TradePlatform.MT4.SDK.Shell
             bool isMockEnabled = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["IsMockEnabled"]);
              if (isMockEnabled)
              {
-                 Console.WriteLine("Mock was disabled");
+                 _log.Debug("Mock was enabled");
              }
              else
              {
-                Console.WriteLine("Mock was disabled");
+               _log.Debug("Mock was disabled");
                 Bridge.InitializeHosts();
              }
         }
