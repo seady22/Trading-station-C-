@@ -82,10 +82,6 @@
       <Project>{65aa3653-ce56-4029-a9ad-46d5caa45829}</Project>
       <Name>TradePlatform.MT4.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TradePlatform.MT4.Db\TradePlatform.MT4.Db.csproj">
-      <Project>{a05db421-34b5-4ac0-9899-57c91b2a0d55}</Project>
-      <Name>TradePlatform.MT4.Db</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

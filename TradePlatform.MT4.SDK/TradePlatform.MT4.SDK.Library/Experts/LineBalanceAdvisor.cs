@@ -88,7 +88,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                                 CreatedOn = DateTime.UtcNow,
                                 State = State.Created,
                                 TimeFrame = TimeFrame.H4,
-                                Pair = Pair.EURUSD,
+                                Pair = SymbolsEnum.EURUSD,
                                 CurrentBalance = accountBalance,
                                 TrendType = "ASC"
                             };
@@ -112,7 +112,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                             CreatedOn = DateTime.UtcNow,
                             State = State.Created,
                             TimeFrame = TimeFrame.H4,
-                            Pair = Pair.EURUSD,
+                            Pair = SymbolsEnum.EURUSD,
                             CurrentBalance = accountBalance,
                             TrendType = "DESC"
                         };

@@ -42,4 +42,9 @@
             get { return "GBPJPY"; }
         }
     }
+
+    public enum SymbolsEnum
+    {
+        EURUSD, GBPUSD, USDCHF
+    }
 }

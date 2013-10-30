@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 using TradePlatform.MT4.Db.Entities;
+using TradePlatform.MT4.SDK.API;
 
 namespace TradePlatform.MT4.Db.Mappings
 {
@@ -11,7 +12,7 @@ namespace TradePlatform.MT4.Db.Mappings
             Schema("ExpertAdvisors");
 
             Id(x => x.Id);
-            Map(x => x.Pair).CustomType<Pair>();
+            Map(x => x.Pair).CustomType<SymbolsEnum>();
             Map(x => x.State).CustomType<State>();
             Map(x => x.TimeFrame).CustomType<TimeFrame>();
             Map(x => x.CreatedOn);
