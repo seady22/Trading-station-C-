@@ -14,7 +14,7 @@ namespace TradePlatform.MT4.Db.Mappings
             Id(x => x.Id);
             Map(x => x.Pair).CustomType<SymbolsEnum>();
             Map(x => x.State).CustomType<State>();
-            Map(x => x.TimeFrame).CustomType<TimeFrame>();
+            Map(x => x.TimeFrame).CustomType<TIME_FRAME>();
             Map(x => x.CreatedOn);
             Map(x => x.CurrentBalance);
             Map(x => x.UpdatedBalance);
