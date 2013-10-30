@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -16,12 +14,17 @@ namespace TradePlatform.MT4.Db
 
         public Repository()
         {
+            var serverName = System.Configuration.ConfigurationManager.AppSettings["Server"];
+            var dbName = System.Configuration.ConfigurationManager.AppSettings["DataBase"];
+            var userName = System.Configuration.ConfigurationManager.AppSettings["UserName"];
+            var pwd = System.Configuration.ConfigurationManager.AppSettings["Password"];
+
             _sessionFactory = Fluently.Configure().Database(MySQLConfiguration.Standard
                                        .ConnectionString(c => c
-                                       .Server("localhost")
-                                       .Database("ExpertAdvisors")
-                                       .Username("root")
-                                       .Password("")))
+                                       .Server(serverName)
+                                       .Database(dbName)
+                                       .Username(userName)
+                                       .Password(pwd)))
                                        .Mappings(m => m.FluentMappings.AddFromAssemblyOf<LineBalanceAdvisorDetailsMap>())
                                        .BuildSessionFactory();
 
