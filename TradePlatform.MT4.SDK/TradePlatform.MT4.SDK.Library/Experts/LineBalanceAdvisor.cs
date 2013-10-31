@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Ninject;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
@@ -27,7 +26,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         protected override int Start()
         {
             var currentTrend = TREND_TYPE.OTHER;
-            var createdOrder = LineBalanceAdvisorDetailsRepository.Items.SingleOrDefault(x => x.State == State.Created && x.ActivedOn == null);
+            var createdOrder = LineBalanceAdvisorDetailsRepository.GetAll().SingleOrDefault(x => x.State == State.Created && x.ActivedOn == null);
             var ordersTotal = TradingFunctionWrapper.OrdersTotal(this);
             if (ordersTotal > 0)
             {
@@ -43,7 +42,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (ordersTotal == 0)
             {
-                var item = LineBalanceAdvisorDetailsRepository.Items.SingleOrDefault(x => x.State == State.Active && x.ActivedOn != null);
+                var item = LineBalanceAdvisorDetailsRepository.GetAll().SingleOrDefault(x => x.State == State.Active && x.ActivedOn != null);
                 var accountBalance = AccountInformationWrapper.AccountBalance(this);
                 if (item != null)
                 {
@@ -92,7 +91,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                                 CurrentBalance = accountBalance,
                                 TrendType = "ASC"
                             };
-                            LineBalanceAdvisorDetailsRepository.Insert(lineBalanceAdvisorItem);
+                            LineBalanceAdvisorDetailsRepository.Save(lineBalanceAdvisorItem);
                         }
                         
                     }
@@ -116,7 +115,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                             CurrentBalance = accountBalance,
                             TrendType = "DESC"
                         };
-                        LineBalanceAdvisorDetailsRepository.Insert(lineBalanceAdvisorItem);
+                        LineBalanceAdvisorDetailsRepository.Save(lineBalanceAdvisorItem);
                     }
             }
             return 1;

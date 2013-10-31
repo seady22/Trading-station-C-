@@ -2,15 +2,15 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using TradePlatform.MT4.Db.Entities;
-using TradePlatform.MT4.Db.Mappings;
+using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace TradePlatform.MT4.Db
 {
-    public class Repository<T> : IRepository<T>
+    public class Repository<T> : IRepository<T> where T : class
     {
-        protected ISessionFactory _sessionFactory;
-        public IList<LineBalanceAdvisorDetails> Items;
+        protected Configuration config;
+        protected ISessionFactory sessionFactory;
 
         public Repository()
         {
@@ -19,59 +19,73 @@ namespace TradePlatform.MT4.Db
             var userName = System.Configuration.ConfigurationManager.AppSettings["UserName"];
             var pwd = System.Configuration.ConfigurationManager.AppSettings["Password"];
 
-            _sessionFactory = Fluently.Configure().Database(MySQLConfiguration.Standard
-                                       .ConnectionString(c => c
-                                       .Server(serverName)
-                                       .Database(dbName)
-                                       .Username(userName)
-                                       .Password(pwd)))
-                                       .Mappings(m => m.FluentMappings.AddFromAssemblyOf<LineBalanceAdvisorDetailsMap>())
-                                       .BuildSessionFactory();
+            config = Fluently.Configure().Database(MySQLConfiguration.Standard
+                .ConnectionString(c => c
+                    .Server(serverName)
+                    .Database(dbName)
+                    .Username(userName)
+                    .Password(pwd)))
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Repository<T>>()).BuildConfiguration();
+        
 
-            GetUpdatedDbContent();
+            sessionFactory = config.BuildSessionFactory();
         }
 
-        private void GetUpdatedDbContent()
+        public T Get(object id)
         {
-            using (var session = _sessionFactory.OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
-                Items = (IList<LineBalanceAdvisorDetails>) session.CreateCriteria(typeof(T)).List<T>();
+                T returnVal = session.Get<T>(id);
+                transaction.Commit();
+                return returnVal;
+            }
+        }
+
+        public void Save(T value)
+        {
+            using (var session = sessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                session.Save(value);
                 transaction.Commit();
             }
         }
 
-
-        public void Insert(T entity)
+        public void Update(T value)
         {
-            using (var session = _sessionFactory.OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
-                session.Save(entity);
+                session.Update(value);
                 transaction.Commit();
-            }
-            GetUpdatedDbContent();
-        }
-
-        public virtual void Update(T entity)
-        {
-            using (var session = _sessionFactory.OpenSession())
-            using (var transaction = session.BeginTransaction())
-            {
-                session.Update(entity);
-                //transaction.Commit();
             }
         }
 
-        public T GetById(int id)
+        public void Delete(T value)
         {
-            using (var session = _sessionFactory.OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
-                var result = session.Get<T>(id);
+                session.Delete(value);
                 transaction.Commit();
-                return result;
             }
+        }
+
+        public IList<T> GetAll()
+        {
+            using (var session = sessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                IList<T> returnVal = session.CreateCriteria<T>().List<T>();
+                transaction.Commit();
+                return returnVal;
+            }
+        }
+
+        public void GenerateSchema()
+        {
+            new SchemaExport(config).Execute(true, true, false);
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿using FluentNHibernate.Data;
+﻿using System.Collections.Generic;
 
 namespace TradePlatform.MT4.Db
 {
     public interface IRepository<T>
     {
-        void Insert(T entity);
-        void Update(T entity);
-        T GetById(int id);
+        T Get(object id);
+        void Save(T value);
+        void Update(T value);
+        void Delete(T value);
+        IList<T> GetAll();
     }
 }

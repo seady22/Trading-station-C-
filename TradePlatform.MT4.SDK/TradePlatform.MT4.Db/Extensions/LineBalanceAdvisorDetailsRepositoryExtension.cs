@@ -8,7 +8,7 @@ namespace TradePlatform.MT4.Db.Extensions
     {
         public static List<LineBalanceAdvisorDetails> GetBalanceAdvisorDetailsByState(this Repository<LineBalanceAdvisorDetails> repository, State state )
         {
-            return repository.Items.Where(q => q.State == state).ToList();
+            return repository.GetAll().Where(q => q.State == state).ToList();
         }
     }
 }
