@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TradePlatform.MT4.Db.Entities;
+using TradePlatform.MT4.SDK.API.Constants;
 
 namespace TradePlatform.MT4.Db.Extensions
 {

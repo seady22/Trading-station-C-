@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
+using TradePlatform.MT4.SDK.API.Constants;
 
 namespace TradePlatform.MT4.Db.Mappings
 {

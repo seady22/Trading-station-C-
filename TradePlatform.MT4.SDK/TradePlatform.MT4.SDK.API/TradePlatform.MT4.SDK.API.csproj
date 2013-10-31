@@ -60,6 +60,7 @@
     <Compile Include="Constants\ICHIMOKU_MODE.cs" />
     <Compile Include="Constants\MACD_MODE.cs" />
     <Compile Include="Constants\MA_METHOD.cs" />
+    <Compile Include="Constants\State.cs" />
     <Compile Include="Constants\SYMBOLS.cs" />
     <Compile Include="Constants\TIME_FRAME.cs" />
     <Compile Include="Constants\ORDER_TYPE.cs" />

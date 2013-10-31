@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentNHibernate.Data;
 using TradePlatform.MT4.SDK.API;
+using TradePlatform.MT4.SDK.API.Constants;
 
 namespace TradePlatform.MT4.Db.Entities
 {

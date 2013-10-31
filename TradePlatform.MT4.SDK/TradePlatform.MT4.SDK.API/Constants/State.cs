@@ -1,4 +1,4 @@
-﻿namespace TradePlatform.MT4.Db
+﻿namespace TradePlatform.MT4.SDK.API.Constants
 {
     public enum State
     {
