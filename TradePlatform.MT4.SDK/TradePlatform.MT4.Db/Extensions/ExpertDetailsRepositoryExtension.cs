@@ -5,9 +5,9 @@ using TradePlatform.MT4.SDK.API.Constants;
 
 namespace TradePlatform.MT4.Db.Extensions
 {
-    public static class LineBalanceAdvisorDetailsRepositoryExtension
+    public static class ExpertDetailsRepositoryExtension
     {
-        public static List<LineBalanceAdvisorDetails> GetBalanceAdvisorDetailsByState(this Repository<LineBalanceAdvisorDetails> repository, State state )
+        public static List<ExpertDetails> GetBalanceAdvisorDetailsByState(this Repository<ExpertDetails> repository, State state )
         {
             return repository.GetAll().Where(q => q.State == state).ToList();
         }

@@ -84,7 +84,7 @@ namespace TradePlatform.MT4.SDK.Shell
             kernel.Bind<PredefinedVariablesWrapper>();
             kernel.Bind<TechnicalIndicatorsWrapper>();
             kernel.Bind<TradingFunctionWrapper>();
-            kernel.Bind <Repository<LineBalanceAdvisorDetails>>();
+            kernel.Bind <Repository<ExpertDetails>>();
         }
     }
 }

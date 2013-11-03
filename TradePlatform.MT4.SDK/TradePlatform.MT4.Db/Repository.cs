@@ -25,10 +25,16 @@ namespace TradePlatform.MT4.Db
                     .Database(dbName)
                     .Username(userName)
                     .Password(pwd)))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Repository<T>>()).BuildConfiguration();
-        
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Repository<T>>())
+                .ExposeConfiguration(DropCreateSchema)
+                .BuildConfiguration();
 
             sessionFactory = config.BuildSessionFactory();
+        }
+
+        private static void DropCreateSchema(Configuration cfg)
+        {
+            new SchemaUpdate(cfg).Execute(false, true);
         }
 
         public T Get(object id)
@@ -81,11 +87,6 @@ namespace TradePlatform.MT4.Db
                 transaction.Commit();
                 return returnVal;
             }
-        }
-
-        public void GenerateSchema()
-        {
-            new SchemaExport(config).Execute(true, true, false);
         }
     }
 }

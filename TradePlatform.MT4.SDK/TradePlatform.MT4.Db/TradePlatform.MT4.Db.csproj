@@ -66,13 +66,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\LineBalanceAdvisorDetailsRepositoryExtension.cs" />
-    <Compile Include="Entities\LineBalanceAdvisorDetails.cs" />
+    <Compile Include="Entities\State.cs" />
+    <Compile Include="Extensions\ExpertDetailsRepositoryExtension.cs" />
+    <Compile Include="Entities\ExpertDetails.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Mappings\LineBalanceAdvisorDetailsMap.cs" />
+    <Compile Include="Mappings\ExpertDetailsMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Tests\BaseDataAccessTests.cs" />
+    <Compile Include="Tests\RepositoryDataAccessTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

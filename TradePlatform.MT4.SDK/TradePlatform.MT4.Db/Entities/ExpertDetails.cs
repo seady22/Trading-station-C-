@@ -5,17 +5,16 @@ using TradePlatform.MT4.SDK.API.Constants;
 
 namespace TradePlatform.MT4.Db.Entities
 {
-    public class LineBalanceAdvisorDetails :  Entity
+    public class ExpertDetails :  Entity
     {
         public virtual int Id { get; set; }
         public virtual SymbolsEnum Pair { get; set; }
         public virtual TIME_FRAME TimeFrame { get; set; }
         public virtual DateTime CreatedOn { get; set; }
-        public virtual DateTime? ActivedOn { get; set; }
         public virtual DateTime? ClosedOn { get; set; }
         public virtual State State { get; set; }
-        public virtual double CurrentBalance { get; set; }
-        public virtual double? UpdatedBalance { get; set; }
-        public virtual string TrendType { get; set; }
+        public virtual double BalanceOnCreate { get; set; }
+        public virtual double? BalanceOnClose { get; set; }
+        public virtual TREND_TYPE TrendType { get; set; }
     }
 }

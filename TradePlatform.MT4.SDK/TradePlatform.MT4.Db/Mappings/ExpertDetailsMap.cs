@@ -5,11 +5,11 @@ using TradePlatform.MT4.SDK.API.Constants;
 
 namespace TradePlatform.MT4.Db.Mappings
 {
-    public class LineBalanceAdvisorDetailsMap : ClassMap<LineBalanceAdvisorDetails>
+    public class ExpertDetailsMap : ClassMap<ExpertDetails>
     {
-        public LineBalanceAdvisorDetailsMap()
+        public ExpertDetailsMap()
         {
-            Table("LineBalanceAdvisorDetails");
+            Table("ExpertDetails");
             Schema("ExpertAdvisors");
 
             Id(x => x.Id);
@@ -17,11 +17,10 @@ namespace TradePlatform.MT4.Db.Mappings
             Map(x => x.State).CustomType<State>();
             Map(x => x.TimeFrame).CustomType<TIME_FRAME>();
             Map(x => x.CreatedOn);
-            Map(x => x.CurrentBalance);
-            Map(x => x.UpdatedBalance);
-            Map(x => x.ActivedOn);
+            Map(x => x.BalanceOnCreate);
+            Map(x => x.BalanceOnClose);
             Map(x => x.ClosedOn);
-            Map(x => x.TrendType);
+            Map(x => x.TrendType).CustomType<TREND_TYPE>();
         }
     }
 }
