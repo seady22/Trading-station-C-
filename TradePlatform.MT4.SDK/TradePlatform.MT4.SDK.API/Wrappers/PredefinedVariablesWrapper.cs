@@ -33,5 +33,12 @@ namespace TradePlatform.MT4.SDK.API.Wrappers
             return Convertor.ToDouble(retrunValue);
         }
 
+        public  double Point( MqlHandler handler)
+        {
+            string retrunValue = handler.CallMqlMethod("Point", null);
+
+            return Convertor.ToDouble(retrunValue);
+        }
+
     }
 }

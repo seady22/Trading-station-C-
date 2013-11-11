@@ -37,19 +37,20 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             TechnicalIndicatorsWrapper = new TechnicalIndicatorsWrapper();
             CommonFunctionsWrapper = new CommonFunctionsWrapper();
             ExpertDetailsRepository = new Repository<ExpertDetails>();
-            if (!IsOrdersOpen())
-            {
-                var trendType = GetTrendType();
-                if (CanOpenOffer(trendType))
-                {
-                   // OpenOffer(trendType);
-                }
+            OpenOffer(TREND_TYPE.DESC);
+            //if (!IsOrdersOpen())
+           // {
+           //     var trendType = GetTrendType();
+           //     if (CanOpenOffer(trendType))
+           //     {
+           //        // OpenOffer(trendType);
+           //     }
 
-            }
-            else
-            {
-                _log.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
-            }
+          //  }
+          //  else
+          ///  {
+           //     _log.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
+           // }
             return 1;
         }
 
@@ -140,6 +141,23 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             _log.DebugFormat("Can open offer={0}", result);
 
             return result;
+        }
+
+        public void OpenOffer(TREND_TYPE trendType)
+        {
+            if (trendType == TREND_TYPE.ASC)
+            {
+                
+            }
+
+            if (trendType == TREND_TYPE.DESC)
+            {
+                double bid = PredefinedVariablesWrapper.Bid(this);
+                var point = PredefinedVariablesWrapper.Point(this);
+                var result = TradingFunctionWrapper.OrderSend(this, "EURUSD", ORDER_TYPE.OP_SELL, (double)0.1, bid, 0,
+                                                 bid - 50*point, bid + 50*point, "Automated lot", 0, DateTime.UtcNow.AddDays(3),0);
+
+            }
         }
     }
 }
