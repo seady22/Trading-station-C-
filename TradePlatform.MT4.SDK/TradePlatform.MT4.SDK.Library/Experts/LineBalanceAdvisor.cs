@@ -37,7 +37,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             TechnicalIndicatorsWrapper = new TechnicalIndicatorsWrapper();
             CommonFunctionsWrapper = new CommonFunctionsWrapper();
             ExpertDetailsRepository = new Repository<ExpertDetails>();
-            _log.DebugFormat("Start to execute expert logic");
             if (!IsOrdersOpen())
             {
                 var trendType = GetTrendType();
@@ -87,11 +86,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             var ema25Price = TechnicalIndicatorsWrapper.iMA(this, _currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA,
                                            APPLY_PRICE.PRICE_CLOSE, 0);
-            _log.DebugFormat("Ema 25 Price={0}", ema25Price);
             var askPrice = PredefinedVariablesWrapper.Ask(this);
             var bidPrice = PredefinedVariablesWrapper.Bid(this);
-            _log.DebugFormat("Ask price={0}", askPrice);
-            _log.DebugFormat("Bid price={0}", bidPrice);
 
             if (askPrice > ema25Price && bidPrice > ema25Price)
             {
@@ -109,22 +105,17 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         private bool CanOpenOffer(TREND_TYPE trendType)
         {
             var result = false;
-            if (trendType == TREND_TYPE.OTHER)
-            {
-                _log.DebugFormat("Something wrong with trendType. For now TrentType is other");
-            }
             var ema25Price = TechnicalIndicatorsWrapper.iMA(this, _currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA,
                                            APPLY_PRICE.PRICE_CLOSE, 0);
-            _log.DebugFormat("Ema 25 Price={0}", ema25Price);
 
             var lastBarClosePrice = PredefinedVariablesWrapper.Close(this, 0);
-            _log.DebugFormat("Last Bar ClosedPrice = {0}", lastBarClosePrice);
+            //_log.DebugFormat("Last Bar ClosedPrice = {0}", lastBarClosePrice);
 
             var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Close(this, 2);
-            _log.DebugFormat("Last Two Bars ClosedPrice={0}", lastTwoBarsClosePrice);
+            //_log.DebugFormat("Last Two Bars ClosedPrice={0}", lastTwoBarsClosePrice);
 
             var lastOneBarClosePrice = PredefinedVariablesWrapper.Close(this, 1);
-            _log.DebugFormat("Last One Bar ClosedPrice={0}", lastOneBarClosePrice);
+            //_log.DebugFormat("Last One Bar ClosedPrice={0}", lastOneBarClosePrice);
 
             if (trendType == TREND_TYPE.ASC)
             {
@@ -145,6 +136,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     _log.DebugFormat("Ready to open DESC offer");
                 }   
             }
+
+            _log.DebugFormat("Can open offer={0}", result);
 
             return result;
         }
