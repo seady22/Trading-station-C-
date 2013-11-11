@@ -14,10 +14,10 @@ namespace TradePlatform.MT4.Db
 
         public Repository()
         {
-            var serverName = System.Configuration.ConfigurationManager.AppSettings["Server"];
-            var dbName = System.Configuration.ConfigurationManager.AppSettings["DataBase"];
-            var userName = System.Configuration.ConfigurationManager.AppSettings["UserName"];
-            var pwd = System.Configuration.ConfigurationManager.AppSettings["Password"];
+            var serverName = "localhost";
+            var dbName = "ExpertAdvisors";
+            var userName = "root";
+            var pwd = "";
 
             config = Fluently.Configure().Database(MySQLConfiguration.Standard
                 .ConnectionString(c => c
