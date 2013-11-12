@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
@@ -37,20 +38,20 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             TechnicalIndicatorsWrapper = new TechnicalIndicatorsWrapper();
             CommonFunctionsWrapper = new CommonFunctionsWrapper();
             ExpertDetailsRepository = new Repository<ExpertDetails>();
-            OpenOffer(TREND_TYPE.DESC);
-            //if (!IsOrdersOpen())
-           // {
-           //     var trendType = GetTrendType();
-           //     if (CanOpenOffer(trendType))
-           //     {
-           //        // OpenOffer(trendType);
-           //     }
+           // OpenOffer(TREND_TYPE.DESC);
+            if (!IsOrdersOpen())
+            {
+                var trendType = GetTrendType();
+                if (CanOpenOffer(trendType))
+                {
+                     OpenOffer(trendType);
+                }
 
-          //  }
-          //  else
-          ///  {
-           //     _log.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
-           // }
+            }
+            else
+            {
+                _log.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
+            }
             return 1;
         }
 
@@ -72,6 +73,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     var currentOrder = ordersInDb.Single();
                     currentOrder.ClosedOn = DateTime.Now;
                     currentOrder.BalanceOnClose = AccountInformationWrapper.AccountBalance(this);
+                    currentOrder.State = State.Closed;
+                    
 
                     ExpertDetailsRepository.Update(currentOrder);
                     _log.DebugFormat("Order in db was updated. Id={0}, ClosedOn={1}, BalanceOnClose={2}", currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose);
@@ -147,15 +150,64 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             if (trendType == TREND_TYPE.ASC)
             {
-                
+                double ask = PredefinedVariablesWrapper.Ask(this);
+                var point = PredefinedVariablesWrapper.Point(this);
+                var takeProfit = ask + 1000 * point;
+                var stopLoss = ask - 500 * point;
+                var accountBalance = AccountInformationWrapper.AccountBalance(this);
+                var result = this.OrderSend("EURUSD", ORDER_TYPE.OP_BUY, 0.1, ask, 3,
+                                                 stopLoss, takeProfit);
+
+                if (result == -1)
+                {
+                    _log.DebugFormat("First order send attempt return -1. Another try");
+                    this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, ask, 3,
+                                                 stopLoss, takeProfit);
+                }
+
+                var expertDetailRecord = new ExpertDetails
+                {
+                    State = State.Active,
+                    CreatedOn = DateTime.Now,
+                    Pair = SymbolsEnum.EURUSD,
+                    TimeFrame = TIME_FRAME.PERIOD_H4,
+                    TrendType = TREND_TYPE.ASC,
+                    BalanceOnCreate = accountBalance
+                };
+                ExpertDetailsRepository.Save(expertDetailRecord);
+                _log.DebugFormat("Expert detail record was added. TrneType = DESC");
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
                 double bid = PredefinedVariablesWrapper.Bid(this);
                 var point = PredefinedVariablesWrapper.Point(this);
-                var result = TradingFunctionWrapper.OrderSend(this, "EURUSD", ORDER_TYPE.OP_SELL, (double)0.1, bid, 0,
-                                                 bid - 50*point, bid + 50*point, "Automated lot", 0, DateTime.UtcNow.AddDays(3),0);
+                var accountBalance = AccountInformationWrapper.AccountBalance(this);
+                var takeProfit = bid - 1000*point;
+                var stopLoss = bid + 500*point;
+                var result = this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, bid, 3,
+                                                 stopLoss, takeProfit);
+
+                if (result == -1)
+                {
+                    _log.DebugFormat("First order send attempt return -1. Another try");
+                    this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, bid, 3,
+                                                 stopLoss, takeProfit);
+                }
+
+                var expertDetailRecord = new ExpertDetails
+                    {
+                        State = State.Active,
+                        CreatedOn = DateTime.Now,
+                        Pair = SymbolsEnum.EURUSD,
+                        TimeFrame = TIME_FRAME.PERIOD_H4,
+                        TrendType = TREND_TYPE.DESC,
+                        BalanceOnCreate = accountBalance
+                    };
+                ExpertDetailsRepository.Save(expertDetailRecord);
+                _log.DebugFormat("Expert detail record was added. TrneType = DESC");
+
+
 
             }
         }
