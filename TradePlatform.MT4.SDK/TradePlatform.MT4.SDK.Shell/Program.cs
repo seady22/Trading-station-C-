@@ -1,8 +1,4 @@
 ﻿using log4net;
-using Ninject;
-using TradePlatform.MT4.Db;
-using TradePlatform.MT4.Db.Entities;
-using TradePlatform.MT4.SDK.API.Wrappers;
 
 namespace TradePlatform.MT4.SDK.Shell
 {
@@ -16,7 +12,6 @@ namespace TradePlatform.MT4.SDK.Shell
         private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof(Program)), typeof(Program));
         static void Main(string[] args)
         {
-           SetupIOC();
            SetupLogger();
            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
            SetupConsole();
@@ -74,17 +69,6 @@ namespace TradePlatform.MT4.SDK.Shell
         static void SetupLogger()
          {
              log4net.Config.XmlConfigurator.Configure();
-        }
-
-        static void SetupIOC()
-        {
-            IKernel kernel = new StandardKernel();
-            kernel.Bind<AccountInformationWrapper>();
-            kernel.Bind<CommonFunctionsWrapper>();
-            kernel.Bind<PredefinedVariablesWrapper>();
-            kernel.Bind<TechnicalIndicatorsWrapper>();
-            kernel.Bind<TradingFunctionWrapper>();
-            kernel.Bind <Repository<ExpertDetails>>();
         }
     }
 }

@@ -44,6 +44,7 @@ namespace TradePlatform.MT4.Core
 
         public abstract string ResolveMethod(string methodName, List<string> parameters);
 
+        
         }
 
         }

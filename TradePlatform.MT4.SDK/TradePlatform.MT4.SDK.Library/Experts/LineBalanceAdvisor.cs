@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using Ninject;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
@@ -15,18 +14,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 {
     public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
-        [Inject]
-        public TradingFunctionWrapper TradingFunctionWrapper { get; set; }
-        [Inject]
-        public AccountInformationWrapper AccountInformationWrapper { get; set; }
-        [Inject]
-        public PredefinedVariablesWrapper PredefinedVariablesWrapper { get; set; }
-        [Inject]
-        public TechnicalIndicatorsWrapper TechnicalIndicatorsWrapper { get; set; }
-        [Inject]
-        public CommonFunctionsWrapper CommonFunctionsWrapper { get; set; }
-        [Inject]
-        public IRepository<ExpertDetails> ExpertDetailsRepository { get; set; }
+        public TradingFunctionWrapper TradingFunctionWrapper = new TradingFunctionWrapper();
+        public AccountInformationWrapper AccountInformationWrapper = new AccountInformationWrapper();
+        public PredefinedVariablesWrapper PredefinedVariablesWrapper = new PredefinedVariablesWrapper();
+        public TechnicalIndicatorsWrapper TechnicalIndicatorsWrapper = new TechnicalIndicatorsWrapper();
+        public CommonFunctionsWrapper CommonFunctionsWrapper = new CommonFunctionsWrapper();
+        public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
 
         private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof(LineBalanceAdvisor)), typeof(LineBalanceAdvisor));
 
@@ -44,7 +37,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var trendType = GetTrendType();
                 if (CanOpenOffer(trendType))
                 {
-                     OpenOffer(trendType);
+                    OpenOffer(trendType);
                 }
 
             }
