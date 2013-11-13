@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Ninject;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
-using TradePlatform.MT4.SDK.API.Wrappers;
 using TradePlatform.MT4.SDK.Library.Handlers;
 using log4net;
 
@@ -14,15 +12,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 {
     public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
-        public TradingFunctionWrapper TradingFunctionWrapper = new TradingFunctionWrapper();
-        public AccountInformationWrapper AccountInformationWrapper = new AccountInformationWrapper();
-        public PredefinedVariablesWrapper PredefinedVariablesWrapper = new PredefinedVariablesWrapper();
-        public TechnicalIndicatorsWrapper TechnicalIndicatorsWrapper = new TechnicalIndicatorsWrapper();
-        public CommonFunctionsWrapper CommonFunctionsWrapper = new CommonFunctionsWrapper();
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-
         private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof(LineBalanceAdvisor)), typeof(LineBalanceAdvisor));
-
         private SymbolsEnum _currentSymbol = SymbolsEnum.EURUSD; // only for first time
 
         protected override int Init()
@@ -55,7 +46,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private bool IsOrdersOpen()
         {
-            var ordersTotal = TradingFunctionWrapper.OrdersTotal(this);
+            var ordersTotal = this.OrdersTotal();
             var ordersInDb = ExpertDetailsRepository.GetAll().Where(t => t.ClosedOn == null).ToList();
             _log.DebugFormat("Total opened Orders={0}. Opened orders in db={1}", ordersTotal, ordersInDb.Count());
 
@@ -65,7 +56,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 {
                     var currentOrder = ordersInDb.Single();
                     currentOrder.ClosedOn = DateTime.Now;
-                    currentOrder.BalanceOnClose = AccountInformationWrapper.AccountBalance(this);
+                    currentOrder.BalanceOnClose = this.AccountBalance();
                     currentOrder.State = State.Closed;
                     
 
@@ -81,10 +72,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             var result = TREND_TYPE.OTHER;
 
-            var ema25Price = TechnicalIndicatorsWrapper.iMA(this, _currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA,
-                                           APPLY_PRICE.PRICE_CLOSE, 0);
-            var askPrice = PredefinedVariablesWrapper.Ask(this);
-            var bidPrice = PredefinedVariablesWrapper.Bid(this);
+            var ema25Price = this.iMA(_currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);                               
+            var askPrice = this.Ask();
+            var bidPrice = this.Bid();
 
             if (askPrice > ema25Price && bidPrice > ema25Price)
             {
@@ -102,16 +92,14 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         private bool CanOpenOffer(TREND_TYPE trendType)
         {
             var result = false;
-            var ema25Price = TechnicalIndicatorsWrapper.iMA(this, _currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA,
-                                           APPLY_PRICE.PRICE_CLOSE, 0);
-
-            var lastBarClosePrice = PredefinedVariablesWrapper.Close(this, 0);
+            var ema25Price = this.iMA(_currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var lastBarClosePrice = this.Close(0);
             //_log.DebugFormat("Last Bar ClosedPrice = {0}", lastBarClosePrice);
 
-            var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Close(this, 2);
+            var lastTwoBarsClosePrice = this.Close(2);
             //_log.DebugFormat("Last Two Bars ClosedPrice={0}", lastTwoBarsClosePrice);
 
-            var lastOneBarClosePrice = PredefinedVariablesWrapper.Close(this, 1);
+            var lastOneBarClosePrice = this.Close(1);
             //_log.DebugFormat("Last One Bar ClosedPrice={0}", lastOneBarClosePrice);
 
             if (trendType == TREND_TYPE.ASC)
@@ -143,11 +131,11 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             if (trendType == TREND_TYPE.ASC)
             {
-                double ask = PredefinedVariablesWrapper.Ask(this);
-                var point = PredefinedVariablesWrapper.Point(this);
+                double ask = this.Ask();
+                var point = this.Point();
                 var takeProfit = ask + 1000 * point;
                 var stopLoss = ask - 500 * point;
-                var accountBalance = AccountInformationWrapper.AccountBalance(this);
+                var accountBalance = this.AccountBalance();
                 var result = this.OrderSend("EURUSD", ORDER_TYPE.OP_BUY, 0.1, ask, 3,
                                                  stopLoss, takeProfit);
 
@@ -173,9 +161,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (trendType == TREND_TYPE.DESC)
             {
-                double bid = PredefinedVariablesWrapper.Bid(this);
-                var point = PredefinedVariablesWrapper.Point(this);
-                var accountBalance = AccountInformationWrapper.AccountBalance(this);
+                double bid = this.Bid();
+                var point = this.Point();
+                var accountBalance = this.AccountBalance();
                 var takeProfit = bid - 1000*point;
                 var stopLoss = bid + 500*point;
                 var result = this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, bid, 3,

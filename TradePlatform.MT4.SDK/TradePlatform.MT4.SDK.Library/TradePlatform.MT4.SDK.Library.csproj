@@ -79,7 +79,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Common\TickCounter.cs" />
-    <Compile Include="Experts\SimpleMovingAverageExpert.cs" />
     <Compile Include="Handlers\PerformanceCounterBase.cs" />
     <Compile Include="Handlers\ExtendedExpertAdvisor.cs" />
     <Compile Include="Experts\LineBalanceAdvisor.cs" />
