@@ -79,6 +79,8 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Common\TickCounter.cs" />
+    <Compile Include="Config\ExpertConfiguration.cs" />
+    <Compile Include="Config\ExpertElement.cs" />
     <Compile Include="Handlers\PerformanceCounterBase.cs" />
     <Compile Include="Handlers\ExtendedExpertAdvisor.cs" />
     <Compile Include="Experts\LineBalanceAdvisor.cs" />
