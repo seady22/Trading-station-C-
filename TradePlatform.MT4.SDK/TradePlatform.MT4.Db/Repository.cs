@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using TradePlatform.MT4.Db.Config;
+using Configuration = NHibernate.Cfg.Configuration;
 
 namespace TradePlatform.MT4.Db
 {
@@ -14,10 +16,11 @@ namespace TradePlatform.MT4.Db
 
         public Repository()
         {
-            var serverName = "localhost";
-            var dbName = "ExpertAdvisors";
-            var userName = "root";
-            var pwd = "";
+            var section = (DbConfiguration)ConfigurationManager.GetSection("DbConfiguration");
+            var serverName = section.ConnectionStringElement.Server;
+            var dbName = section.ConnectionStringElement.DataBase;
+            var userName = section.ConnectionStringElement.Username;
+            var pwd = section.ConnectionStringElement.Pwd;
 
             config = Fluently.Configure().Database(MySQLConfiguration.Standard
                 .ConnectionString(c => c

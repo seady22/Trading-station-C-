@@ -70,6 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\DbConfiguration.cs" />
+    <Compile Include="Config\DbConnectionStringElement.cs" />
     <Compile Include="Entities\State.cs" />
     <Compile Include="Extensions\ExpertDetailsRepositoryExtension.cs" />
     <Compile Include="Entities\ExpertDetails.cs" />
@@ -80,7 +82,6 @@
     <Compile Include="Tests\RepositoryDataAccessTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
