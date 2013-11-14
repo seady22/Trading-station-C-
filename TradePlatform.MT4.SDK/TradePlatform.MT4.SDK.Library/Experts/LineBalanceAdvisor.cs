@@ -112,15 +112,14 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var result = false;
             var timeFrame = GetCurrentTimeFrame();
             var ema25Price = this.iMA(_config.Symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
-            var lastBarClosePrice = this.Close(0);
             var lastTwoBarsClosePrice = this.Close(2);
             var lastOneBarClosePrice = this.Close(1);
-
+            var lastThreeBarPrice = this.Close(3);
 
             if (trendType == TREND_TYPE.ASC)
             {
-                if (ema25Price > lastTwoBarsClosePrice && ema25Price > lastOneBarClosePrice &&
-                    lastBarClosePrice > ema25Price)
+                if (ema25Price > lastThreeBarPrice && ema25Price < lastOneBarClosePrice &&
+                    ema25Price < lastTwoBarsClosePrice)
                 {
                     result = true;
                     _log.DebugFormat("Ready to open ASC offer");
@@ -129,8 +128,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (trendType == TREND_TYPE.DESC)
             {
-                if (ema25Price < lastTwoBarsClosePrice && ema25Price < lastOneBarClosePrice &&
-                    lastBarClosePrice < ema25Price)
+                if (lastOneBarClosePrice> ema25Price && lastTwoBarsClosePrice<ema25Price && lastThreeBarPrice<ema25Price)
                 {
                     result = true;
                     _log.DebugFormat("Ready to open DESC offer");
