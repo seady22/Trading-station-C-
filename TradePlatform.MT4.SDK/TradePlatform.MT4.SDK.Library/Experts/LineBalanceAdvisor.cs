@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
+using TradePlatform.MT4.SDK.Library.Config;
 using TradePlatform.MT4.SDK.Library.Handlers;
 using log4net;
 
@@ -13,8 +15,11 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-        private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof(LineBalanceAdvisor)), typeof(LineBalanceAdvisor));
-        private SymbolsEnum _currentSymbol = SymbolsEnum.EURUSD; // only for first time
+
+        private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof (LineBalanceAdvisor)),
+                                                                 typeof (LineBalanceAdvisor));
+
+        private ExpertElement _config;
 
         protected override int Init()
         {
@@ -23,6 +28,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected override int Start()
         {
+            var section = (ExpertConfiguration) ConfigurationManager.GetSection("ExpertConfiguration");
+            _config = section.Experts["LineBalanceAdvisor"];
             if (!IsOrdersOpen())
             {
                 var trendType = GetTrendType();
@@ -30,7 +37,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 {
                     OpenOffer(trendType);
                 }
-
             }
             else
             {
@@ -58,10 +64,10 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     currentOrder.ClosedOn = DateTime.Now;
                     currentOrder.BalanceOnClose = this.AccountBalance();
                     currentOrder.State = State.Closed;
-                    
 
                     ExpertDetailsRepository.Update(currentOrder);
-                    _log.DebugFormat("Order in db was updated. Id={0}, ClosedOn={1}, BalanceOnClose={2}", currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose);
+                    _log.DebugFormat("Order in db was updated. Id={0}, ClosedOn={1}, BalanceOnClose={2}",
+                                     currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose);
                 }
                 return true;
             }
@@ -71,8 +77,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         private TREND_TYPE GetTrendType()
         {
             var result = TREND_TYPE.OTHER;
-
-            var ema25Price = this.iMA(_currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);                               
+            var timeFrame = GetCurrentTimeFrame();
+            var ema25Price = this.iMA(_config.Symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var askPrice = this.Ask();
             var bidPrice = this.Bid();
 
@@ -89,37 +95,46 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             return result;
         }
 
+        private TIME_FRAME GetCurrentTimeFrame()
+        {
+            var timeFrame = (TIME_FRAME) Enum.Parse(typeof (TIME_FRAME), _config.TimeFrame);
+            return timeFrame;
+        }
+
+        private SymbolsEnum GetCurrentSymbol()
+        {
+            var symbol = (SymbolsEnum)Enum.Parse(typeof(SymbolsEnum), _config.Symbol);
+            return symbol;
+        }
+
         private bool CanOpenOffer(TREND_TYPE trendType)
         {
             var result = false;
-            var ema25Price = this.iMA(_currentSymbol.ToString(), TIME_FRAME.PERIOD_H4, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var timeFrame = GetCurrentTimeFrame();
+            var ema25Price = this.iMA(_config.Symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var lastBarClosePrice = this.Close(0);
-            //_log.DebugFormat("Last Bar ClosedPrice = {0}", lastBarClosePrice);
-
             var lastTwoBarsClosePrice = this.Close(2);
-            //_log.DebugFormat("Last Two Bars ClosedPrice={0}", lastTwoBarsClosePrice);
-
             var lastOneBarClosePrice = this.Close(1);
-            //_log.DebugFormat("Last One Bar ClosedPrice={0}", lastOneBarClosePrice);
+
 
             if (trendType == TREND_TYPE.ASC)
             {
-               if (ema25Price > lastTwoBarsClosePrice && ema25Price > lastOneBarClosePrice &&
-                   lastBarClosePrice > ema25Price)
-               {
-                   result = true;
-                   _log.DebugFormat("Ready to open ASC offer");
-               }   
+                if (ema25Price > lastTwoBarsClosePrice && ema25Price > lastOneBarClosePrice &&
+                    lastBarClosePrice > ema25Price)
+                {
+                    result = true;
+                    _log.DebugFormat("Ready to open ASC offer");
+                }
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
                 if (ema25Price < lastTwoBarsClosePrice && ema25Price < lastOneBarClosePrice &&
-                   lastBarClosePrice < ema25Price)
+                    lastBarClosePrice < ema25Price)
                 {
                     result = true;
                     _log.DebugFormat("Ready to open DESC offer");
-                }   
+                }
             }
 
             _log.DebugFormat("Can open offer={0}", result);
@@ -129,68 +144,54 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         public void OpenOffer(TREND_TYPE trendType)
         {
+            var point = this.Point();
+            var accountBalance = this.AccountBalance();
+
             if (trendType == TREND_TYPE.ASC)
             {
                 double ask = this.Ask();
-                var point = this.Point();
-                var takeProfit = ask + 1000 * point;
-                var stopLoss = ask - 500 * point;
-                var accountBalance = this.AccountBalance();
-                var result = this.OrderSend("EURUSD", ORDER_TYPE.OP_BUY, 0.1, ask, 3,
-                                                 stopLoss, takeProfit);
+                var takeProfit = ask + int.Parse(_config.TakeProfit)*point;
+                var stopLoss = ask - int.Parse(_config.StopLoss)*point;
+                var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
+                                            stopLoss, takeProfit);
 
                 if (result == -1)
                 {
                     _log.DebugFormat("First order send attempt return -1. Another try");
-                    this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, ask, 3,
-                                                 stopLoss, takeProfit);
+                    this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), ask, 3,
+                                   stopLoss, takeProfit);
                 }
-
-                var expertDetailRecord = new ExpertDetails
-                {
-                    State = State.Active,
-                    CreatedOn = DateTime.Now,
-                    Pair = SymbolsEnum.EURUSD,
-                    TimeFrame = TIME_FRAME.PERIOD_H4,
-                    TrendType = TREND_TYPE.ASC,
-                    BalanceOnCreate = accountBalance
-                };
-                ExpertDetailsRepository.Save(expertDetailRecord);
-                _log.DebugFormat("Expert detail record was added. TrneType = DESC");
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
                 double bid = this.Bid();
-                var point = this.Point();
-                var accountBalance = this.AccountBalance();
-                var takeProfit = bid - 1000*point;
-                var stopLoss = bid + 500*point;
-                var result = this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, bid, 3,
-                                                 stopLoss, takeProfit);
+                var takeProfit = bid - int.Parse(_config.TakeProfit)*point;
+                var stopLoss = bid + int.Parse(_config.StopLoss)*point;
+                var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
+                                            3, stopLoss, takeProfit);
+                                            
 
                 if (result == -1)
                 {
                     _log.DebugFormat("First order send attempt return -1. Another try");
-                    this.OrderSend("EURUSD", ORDER_TYPE.OP_SELL, 0.1, bid, 3,
-                                                 stopLoss, takeProfit);
+                    this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
+                                   stopLoss, takeProfit);
                 }
-
-                var expertDetailRecord = new ExpertDetails
-                    {
-                        State = State.Active,
-                        CreatedOn = DateTime.Now,
-                        Pair = SymbolsEnum.EURUSD,
-                        TimeFrame = TIME_FRAME.PERIOD_H4,
-                        TrendType = TREND_TYPE.DESC,
-                        BalanceOnCreate = accountBalance
-                    };
-                ExpertDetailsRepository.Save(expertDetailRecord);
-                _log.DebugFormat("Expert detail record was added. TrneType = DESC");
-
-
-
             }
+
+
+            var expertDetailRecord = new ExpertDetails
+                {
+                    State = State.Active,
+                    CreatedOn = DateTime.Now,
+                    Pair = GetCurrentSymbol(),
+                    TimeFrame = GetCurrentTimeFrame(),
+                    TrendType = trendType,
+                    BalanceOnCreate = accountBalance
+                };
+            ExpertDetailsRepository.Save(expertDetailRecord);
+            _log.DebugFormat("Expert detail record was added. TrneType = DESC");
         }
     }
 }
