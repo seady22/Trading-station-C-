@@ -191,7 +191,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     BalanceOnCreate = accountBalance
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _log.DebugFormat("Expert detail record was added. TrneType = DESC");
+            _log.DebugFormat("Expert detail record was added. TrendType={0}, Symbol={1}, Pair={2}, Balance={3}, CreatedOn={4}", trendType, _config.Symbol, expertDetailRecord.Pair, expertDetailRecord.BalanceOnCreate, expertDetailRecord.CreatedOn);
         }
     }
 }
