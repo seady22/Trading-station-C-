@@ -21,6 +21,7 @@ namespace TradePlatform.MT4.Db.Mappings
             Map(x => x.BalanceOnClose);
             Map(x => x.ClosedOn);
             Map(x => x.TrendType).CustomType<TREND_TYPE>();
+            Map(x => x.ExpertName);
         }
     }
 }

@@ -16,5 +16,6 @@ namespace TradePlatform.MT4.Db.Entities
         public virtual double BalanceOnCreate { get; set; }
         public virtual double? BalanceOnClose { get; set; }
         public virtual TREND_TYPE TrendType { get; set; }
+        public virtual string ExpertName { get; set; }
     }
 }

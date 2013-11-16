@@ -54,20 +54,17 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             var ordersTotal = this.OrdersTotal();
             var ordersInDb = ExpertDetailsRepository.GetAll().Where(t => t.ClosedOn == null).ToList();
-            _log.DebugFormat("Total opened Orders={0}. Opened orders in db={1}", ordersTotal, ordersInDb.Count());
-
             if (ordersTotal > 0)
             {
                 if (ordersInDb.Any())
                 {
+                    //assume we will create one one offer
                     var currentOrder = ordersInDb.Single();
                     currentOrder.ClosedOn = DateTime.Now;
                     currentOrder.BalanceOnClose = this.AccountBalance();
                     currentOrder.State = State.Closed;
 
                     ExpertDetailsRepository.Update(currentOrder);
-                    _log.DebugFormat("Order in db was updated. Id={0}, ClosedOn={1}, BalanceOnClose={2}",
-                                     currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose);
                 }
                 return true;
             }
@@ -82,16 +79,15 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var askPrice = this.Ask();
             var bidPrice = this.Bid();
 
-            if (askPrice > ema25Price && bidPrice > ema25Price)
+            if (askPrice >= ema25Price && bidPrice >= ema25Price)
             {
                 result = TREND_TYPE.ASC;
             }
 
-            if (askPrice < ema25Price && bidPrice < ema25Price)
+            if (askPrice <= ema25Price && bidPrice <= ema25Price)
             {
                 result = TREND_TYPE.DESC;
             }
-            _log.DebugFormat("TrendType={0}", result);
             return result;
         }
 
@@ -122,7 +118,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     ema25Price < lastTwoBarsClosePrice)
                 {
                     result = true;
-                    _log.DebugFormat("Ready to open ASC offer");
                 }
             }
 
@@ -131,11 +126,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 if (lastOneBarClosePrice> ema25Price && lastTwoBarsClosePrice<ema25Price && lastThreeBarPrice<ema25Price)
                 {
                     result = true;
-                    _log.DebugFormat("Ready to open DESC offer");
                 }
             }
-
-            _log.DebugFormat("Can open offer={0}", result);
 
             return result;
         }
@@ -155,7 +147,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
                 if (result == -1)
                 {
-                    _log.DebugFormat("First order send attempt return -1. Another try");
                     this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), ask, 3,
                                    stopLoss, takeProfit);
                 }
@@ -172,7 +163,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
                 if (result == -1)
                 {
-                    _log.DebugFormat("First order send attempt return -1. Another try");
                     this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
                 }
@@ -186,10 +176,10 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     Pair = GetCurrentSymbol(),
                     TimeFrame = GetCurrentTimeFrame(),
                     TrendType = trendType,
-                    BalanceOnCreate = accountBalance
+                    BalanceOnCreate = accountBalance,
+                    ExpertName = GetType().ToString()
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _log.DebugFormat("Expert detail record was added. TrendType={0}, Symbol={1}, Pair={2}, Balance={3}, CreatedOn={4}", trendType, _config.Symbol, expertDetailRecord.Pair, expertDetailRecord.BalanceOnCreate, expertDetailRecord.CreatedOn);
         }
     }
 }
