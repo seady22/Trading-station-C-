@@ -16,7 +16,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
 
         private ILog _openOfferLog  = LogManager.GetLogger("OpenOfferLog");
-        private ILog _sendOfferLog = LogManager.GetLogger("SendOffer");
 
         private ExpertElement _config;
 
