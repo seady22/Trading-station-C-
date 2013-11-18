@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
-using System.Reflection;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
@@ -16,8 +15,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
 
-        private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof (LineBalanceAdvisor)),
-                                                                 typeof (LineBalanceAdvisor));
+        private ILog _openOfferLog  = LogManager.GetLogger("OpenOfferLog");
+        private ILog _sendOfferLog = LogManager.GetLogger("SendOffer");
 
         private ExpertElement _config;
 
@@ -40,7 +39,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             }
             else
             {
-                _log.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
+                _openOfferLog.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
             }
             return 1;
         }
@@ -88,6 +87,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 result = TREND_TYPE.DESC;
             }
+            _openOfferLog.DebugFormat("TrendType={0}", result);
             return result;
         }
 
@@ -118,6 +118,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     ema25Price < lastTwoBarsClosePrice)
                 {
                     result = true;
+                    _openOfferLog.Debug("Can open ASC offer");
+                    _openOfferLog.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
                 }
             }
 
@@ -126,6 +128,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 if (lastOneBarClosePrice> ema25Price && lastTwoBarsClosePrice<ema25Price && lastThreeBarPrice<ema25Price)
                 {
                     result = true;
+                    _openOfferLog.Debug("Can open desc offer");
+                    _openOfferLog.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
                 }
             }
 
@@ -144,11 +148,13 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = ask - int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
+                _openOfferLog.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1], TakeProfit={2}", ask, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
                     this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), ask, 3,
                                    stopLoss, takeProfit);
+                    _openOfferLog.DebugFormat("OpenOffer was sent second time");
                 }
             }
 
@@ -159,16 +165,15 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = bid + int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
-                                            
+                _openOfferLog.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1], TakeProfit={2}", bid, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
                     this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
+                    _openOfferLog.DebugFormat("OpenOffer was sent second time");
                 }
             }
-
-
             var expertDetailRecord = new ExpertDetails
                 {
                     State = State.Active,
@@ -180,6 +185,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     ExpertName = GetType().ToString()
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
+            _openOfferLog.DebugFormat("New expertDetail Record was added. Id={0}", expertDetailRecord.Id);
         }
     }
 }
