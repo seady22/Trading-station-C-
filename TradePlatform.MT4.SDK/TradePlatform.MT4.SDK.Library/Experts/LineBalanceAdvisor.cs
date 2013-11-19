@@ -14,9 +14,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-
-        private ILog _openOfferLog  = LogManager.GetLogger("OpenOfferLog");
-
+        private ILog _logger = LogManager.GetLogger("LineBalanceAdvisor");
         private ExpertElement _config;
 
         protected override int Init()
@@ -36,10 +34,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     OpenOffer(trendType);
                 }
             }
-            else
-            {
-                _openOfferLog.DebugFormat("There is open orders. Expert will wait while all orders will be closed");
-            }
             return 1;
         }
 
@@ -56,13 +50,15 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 if (ordersInDb.Any())
                 {
-                    //assume we will create one one offer
+                    _logger.DebugFormat("OrdersTotal={0}, active orders in db={1}", ordersTotal, ordersInDb);
+
                     var currentOrder = ordersInDb.Single();
                     currentOrder.ClosedOn = DateTime.Now;
                     currentOrder.BalanceOnClose = this.AccountBalance();
                     currentOrder.State = State.Closed;
-
                     ExpertDetailsRepository.Update(currentOrder);
+                    
+                    _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}", currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose, currentOrder.State);
                 }
                 return true;
             }
@@ -86,7 +82,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 result = TREND_TYPE.DESC;
             }
-            _openOfferLog.DebugFormat("TrendType={0}", result);
+            //_openOfferLog.DebugFormat("TrendType={0}", result);
             return result;
         }
 
@@ -117,8 +113,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     ema25Price < lastTwoBarsClosePrice)
                 {
                     result = true;
-                    _openOfferLog.Debug("Can open ASC offer");
-                    _openOfferLog.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
+                    _logger.Debug("Can open ASC offer");
+                    _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
                 }
             }
 
@@ -127,8 +123,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 if (lastOneBarClosePrice> ema25Price && lastTwoBarsClosePrice<ema25Price && lastThreeBarPrice<ema25Price)
                 {
                     result = true;
-                    _openOfferLog.Debug("Can open desc offer");
-                    _openOfferLog.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
+                   _logger.Debug("Can open DESC offer");
+                   _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
                 }
             }
 
@@ -147,13 +143,13 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = ask - int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
-                _openOfferLog.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1], TakeProfit={2}", ask, stopLoss, takeProfit);
+                _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1], TakeProfit={2}", ask, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
-                    this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), ask, 3,
+                    this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                    stopLoss, takeProfit);
-                    _openOfferLog.DebugFormat("OpenOffer was sent second time");
+                  _logger.DebugFormat("OpenOffer was sent second time");
                 }
             }
 
@@ -164,13 +160,13 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = bid + int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
-                _openOfferLog.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1], TakeProfit={2}", bid, stopLoss, takeProfit);
+                _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1], TakeProfit={2}", bid, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
                     this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
-                    _openOfferLog.DebugFormat("OpenOffer was sent second time");
+                  _logger.DebugFormat("OpenOffer was sent second time");
                 }
             }
             var expertDetailRecord = new ExpertDetails
@@ -184,7 +180,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     ExpertName = GetType().ToString()
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _openOfferLog.DebugFormat("New expertDetail Record was added. Id={0}", expertDetailRecord.Id);
+            _logger.DebugFormat("New expertDetail Record was added. Id={0}", expertDetailRecord.Id);
         }
     }
 }
