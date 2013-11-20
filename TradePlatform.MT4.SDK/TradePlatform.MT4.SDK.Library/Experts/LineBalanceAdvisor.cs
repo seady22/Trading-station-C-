@@ -146,7 +146,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = ask - int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
-                _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1], TakeProfit={2}", ask, stopLoss, takeProfit);
+                _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}", ask, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
@@ -163,7 +163,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = bid + int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
-                _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1], TakeProfit={2}", bid, stopLoss, takeProfit);
+                _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}", bid, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
