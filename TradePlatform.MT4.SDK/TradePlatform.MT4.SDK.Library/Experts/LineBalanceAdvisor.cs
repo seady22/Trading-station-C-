@@ -58,13 +58,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null);
             foreach (ExpertDetails details in ordersInDb)
             {
-                var currentOrder = details;
-                currentOrder.ClosedOn = DateTime.Now;
-                currentOrder.BalanceOnClose = this.AccountBalance();
-                currentOrder.State = State.Closed;
-                ExpertDetailsRepository.Update(currentOrder);
+                details.ClosedOn = DateTime.Now;
+                details.BalanceOnClose = this.AccountBalance();
+                details.State = State.Closed;
+                ExpertDetailsRepository.Update(details);
 
-                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}", currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose, currentOrder.State);
+                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}", details.Id, details.ClosedOn, details.BalanceOnClose, details.State);
                 break;
             }
         }
