@@ -28,6 +28,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             _config = section.Experts["LineBalanceAdvisor"];
             if (!IsOrdersOpen())
             {
+                UpdateOrdersInDb();
                 var trendType = GetTrendType();
                 if (CanOpenOffer(trendType))
                 {
@@ -45,24 +46,27 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         private bool IsOrdersOpen()
         {
             var ordersTotal = this.OrdersTotal();
-            var ordersInDb = ExpertDetailsRepository.GetAll().Where(t => t.ClosedOn == null).ToList();
-            if (ordersTotal > 0)
+            if (ordersTotal>0)
             {
-                if (ordersInDb.Any())
-                {
-                    _logger.DebugFormat("OrdersTotal={0}, active orders in db={1}", ordersTotal, ordersInDb);
-
-                    var currentOrder = ordersInDb.Single();
-                    currentOrder.ClosedOn = DateTime.Now;
-                    currentOrder.BalanceOnClose = this.AccountBalance();
-                    currentOrder.State = State.Closed;
-                    ExpertDetailsRepository.Update(currentOrder);
-                    
-                    _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}", currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose, currentOrder.State);
-                }
                 return true;
             }
             return false;
+        }
+
+        private void UpdateOrdersInDb()
+        {
+            var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null);
+            foreach (ExpertDetails details in ordersInDb)
+            {
+                var currentOrder = details;
+                currentOrder.ClosedOn = DateTime.Now;
+                currentOrder.BalanceOnClose = this.AccountBalance();
+                currentOrder.State = State.Closed;
+                ExpertDetailsRepository.Update(currentOrder);
+
+                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}", currentOrder.Id, currentOrder.ClosedOn, currentOrder.BalanceOnClose, currentOrder.State);
+                break;
+            }
         }
 
         private TREND_TYPE GetTrendType()
@@ -82,7 +86,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 result = TREND_TYPE.DESC;
             }
-            //_openOfferLog.DebugFormat("TrendType={0}", result);
             return result;
         }
 
