@@ -16,6 +16,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
         private ILog _logger = LogManager.GetLogger("LineBalanceAdvisor");
         private ExpertElement _config;
+        private string _symbol;
 
         protected override int Init()
         {
@@ -26,6 +27,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             var section = (ExpertConfiguration) ConfigurationManager.GetSection("ExpertConfiguration");
             _config = section.Experts["LineBalanceAdvisor"];
+            _symbol = this.Symbol();
             if (!IsOrdersOpen())
             {
                 UpdateOrdersInDb();
@@ -55,7 +57,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private void UpdateOrdersInDb()
         {
-            var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null);
+            var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == GetCurrentSymbol());
             foreach (ExpertDetails details in ordersInDb)
             {
                 details.ClosedOn = DateTime.Now;
@@ -72,7 +74,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             var result = TREND_TYPE.OTHER;
             var timeFrame = GetCurrentTimeFrame();
-            var ema25Price = this.iMA(_config.Symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var ema25Price = this.iMA(_symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var askPrice = this.Ask();
             var bidPrice = this.Bid();
 
@@ -96,7 +98,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private SymbolsEnum GetCurrentSymbol()
         {
-            var symbol = (SymbolsEnum)Enum.Parse(typeof(SymbolsEnum), _config.Symbol);
+            var symbol = (SymbolsEnum)Enum.Parse(typeof(SymbolsEnum), _symbol);
             return symbol;
         }
 
@@ -104,7 +106,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             var result = false;
             var timeFrame = GetCurrentTimeFrame();
-            var ema25Price = this.iMA(_config.Symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var ema25Price = this.iMA(_symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var lastTwoBarsClosePrice = this.Close(2);
             var lastOneBarClosePrice = this.Close(1);
             var lastThreeBarPrice = this.Close(3);
@@ -122,7 +124,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (trendType == TREND_TYPE.DESC)
             {
-                if (lastOneBarClosePrice> ema25Price && lastTwoBarsClosePrice<ema25Price && lastThreeBarPrice<ema25Price)
+                if (lastThreeBarPrice > ema25Price && lastTwoBarsClosePrice<ema25Price && lastOneBarClosePrice<ema25Price)
                 {
                     result = true;
                    _logger.Debug("Can open DESC offer");
@@ -143,13 +145,13 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 double ask = this.Ask();
                 var takeProfit = ask + int.Parse(_config.TakeProfit)*point;
                 var stopLoss = ask - int.Parse(_config.StopLoss)*point;
-                var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
+                var result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
                 _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}", ask, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
-                    this.OrderSend(_config.Symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
+                    this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                    stopLoss, takeProfit);
                   _logger.DebugFormat("OpenOffer was sent second time");
                 }
@@ -160,13 +162,13 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 double bid = this.Bid();
                 var takeProfit = bid - int.Parse(_config.TakeProfit)*point;
                 var stopLoss = bid + int.Parse(_config.StopLoss)*point;
-                var result = this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
+                var result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
                 _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}", bid, stopLoss, takeProfit);
 
                 if (result == -1)
                 {
-                    this.OrderSend(_config.Symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
+                    this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
                   _logger.DebugFormat("OpenOffer was sent second time");
                 }

@@ -32,12 +32,7 @@ namespace TradePlatform.MT4.SDK.Library.Config
             set { base["orderAmount"] = value; }
         }
 
-        [ConfigurationProperty("symbol", IsRequired = true, IsKey = true)]
-        public string Symbol
-        {
-            get { return base["symbol"] as string; }
-            set { base["symbol"] = value; }
-        }
+       
 
         [ConfigurationProperty("timeFrame", IsRequired = true, IsKey = true)]
         public string TimeFrame
