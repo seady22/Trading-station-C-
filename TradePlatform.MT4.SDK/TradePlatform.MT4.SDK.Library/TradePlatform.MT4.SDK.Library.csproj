@@ -82,6 +82,9 @@
     <Compile Include="Config\ExpertConfiguration.cs" />
     <Compile Include="Config\ExpertElement.cs" />
     <Compile Include="Config\ExpertElementCollection.cs" />
+    <Compile Include="Experts\LineBalanceAdvisorEURUSD.cs" />
+    <Compile Include="Experts\LineBalanceAdvisorUSDCHF.cs" />
+    <Compile Include="Experts\LineBalanceAdvisorUSDJPY.cs" />
     <Compile Include="Handlers\PerformanceCounterBase.cs" />
     <Compile Include="Handlers\ExtendedExpertAdvisor.cs" />
     <Compile Include="Experts\LineBalanceAdvisor.cs" />

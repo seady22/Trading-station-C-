@@ -11,7 +11,7 @@ using log4net;
 
 namespace TradePlatform.MT4.SDK.Library.Experts
 {
-    public class LineBalanceAdvisor : ExtendedExpertAdvisor
+    public abstract class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
         private ILog _logger = LogManager.GetLogger("LineBalanceAdvisor");

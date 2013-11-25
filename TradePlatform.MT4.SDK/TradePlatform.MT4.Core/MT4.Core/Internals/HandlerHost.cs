@@ -216,7 +216,7 @@ namespace TradePlatform.MT4.Core.Internals
             while (true)
             {
                 TcpClient tcpClient = _tcpListener.AcceptTcpClient();
-                Thread.Sleep(5000);
+                Thread.Sleep(10000);
                 var thread = new Thread(HandleClientComm);
                 thread.IsBackground = _isBackground;
                 Thread thread1 = thread;
