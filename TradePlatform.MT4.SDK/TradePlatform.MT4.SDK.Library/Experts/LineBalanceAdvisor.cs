@@ -14,7 +14,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public abstract class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-        private ILog _logger = LogManager.GetLogger("LineBalanceAdvisor");
+        private ILog _logger = LogManager.GetLogger(typeof(LineBalanceAdvisor));
         private ExpertElement _config;
         private string _symbol;
 
@@ -57,15 +57,16 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private void UpdateOrdersInDb()
         {
-            var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == GetCurrentSymbol());
+            var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol);
             foreach (ExpertDetails details in ordersInDb)
             {
                 details.ClosedOn = DateTime.Now;
                 details.BalanceOnClose = this.AccountBalance();
-                details.State = State.Closed;
+                details.State = State.Closed.ToString();
+                details.Profit = (double) (details.BalanceOnClose - details.BalanceOnCreate);
                 ExpertDetailsRepository.Update(details);
 
-                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}", details.Id, details.ClosedOn, details.BalanceOnClose, details.State);
+                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}", details.Id, details.ClosedOn, details.BalanceOnClose, details.State, details.Profit);
                 break;
             }
         }
@@ -95,13 +96,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var timeFrame = (TIME_FRAME) Enum.Parse(typeof (TIME_FRAME), _config.TimeFrame);
             return timeFrame;
         }
-
-        private SymbolsEnum GetCurrentSymbol()
-        {
-            var symbol = (SymbolsEnum)Enum.Parse(typeof(SymbolsEnum), _symbol);
-            return symbol;
-        }
-
         private bool CanOpenOffer(TREND_TYPE trendType)
         {
             var result = false;
@@ -147,13 +141,18 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = ask - int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
-                _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}", ask, stopLoss, takeProfit);
+                _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
 
                 if (result == -1)
                 {
-                    this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
+                    var secondAttempt = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                    stopLoss, takeProfit);
-                  _logger.DebugFormat("OpenOffer was sent second time");
+                  _logger.DebugFormat("OpenOffer was sent second time. Result = {0}",secondAttempt);
+                  if (secondAttempt == -1)
+                  {
+                      _logger.DebugFormat("OpenOffer was not executed. Try later");
+                      return;
+                  }
                 }
             }
 
@@ -164,27 +163,32 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = bid + int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
-                _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}", bid, stopLoss, takeProfit);
+                _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);
 
                 if (result == -1)
                 {
-                    this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
+                    var secondAttempt = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
                   _logger.DebugFormat("OpenOffer was sent second time");
+                  if (secondAttempt == -1)
+                  {
+                      _logger.DebugFormat("OpenOffer was not executed. Try later");
+                      return;
+                  }
                 }
             }
             var expertDetailRecord = new ExpertDetails
                 {
-                    State = State.Active,
+                    State = State.Active.ToString(),
                     CreatedOn = DateTime.Now,
-                    Pair = GetCurrentSymbol(),
+                    Pair = _symbol,
                     TimeFrame = GetCurrentTimeFrame(),
-                    TrendType = trendType,
+                    TrendType = trendType.ToString(),
                     BalanceOnCreate = accountBalance,
                     ExpertName = GetType().ToString()
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _logger.DebugFormat("New expertDetail Record was added. Id={0}", expertDetailRecord.Id);
+            _logger.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}", expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType);
         }
     }
 }

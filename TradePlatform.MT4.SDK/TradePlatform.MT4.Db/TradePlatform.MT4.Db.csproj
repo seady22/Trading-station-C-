@@ -79,7 +79,6 @@
     <Compile Include="Mappings\ExpertDetailsMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Tests\RepositoryDataAccessTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
