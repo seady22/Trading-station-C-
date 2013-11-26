@@ -1,4 +1,8 @@
+
+Before run you need to install Mysql Data driver on your local PC
+
 To install TradePlatform.NET follow these instructions:
+
 Download zip package from this site.
 Unzip 'Shell' directory to desired location. For ex. C:\Gateway\
 Unzip 'Terminal' directory directly to your MetaTrader's directory.
