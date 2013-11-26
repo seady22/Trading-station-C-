@@ -28,7 +28,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var section = (ExpertConfiguration) ConfigurationManager.GetSection("ExpertConfiguration");
             _config = section.Experts["LineBalanceAdvisor"];
             _symbol = this.Symbol();
-            if (!IsOrdersOpen())
+            if (!IsOrderOpenForCurrentSymbol())
             {
                 UpdateOrdersInDb();
                 var trendType = GetTrendType();
@@ -45,14 +45,24 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             return 1;
         }
 
-        private bool IsOrdersOpen()
+        private bool IsOrderOpenForCurrentSymbol()
         {
+            var result = false;
             var ordersTotal = this.OrdersTotal();
-            if (ordersTotal>0)
+            for (int i = 0; i < ordersTotal; i++)
             {
-                return true;
+                var selectedOrder = this.OrderSelect(i, SELECT_BY.SELECT_BY_POS);
+                if (selectedOrder)
+                {
+                    var orderSymbol = this.OrderSymbol();
+                    if (orderSymbol == _symbol)
+                    {
+                        result = true;
+                    }
+                }
+                
             }
-            return false;
+            return result;
         }
 
         private void UpdateOrdersInDb()
