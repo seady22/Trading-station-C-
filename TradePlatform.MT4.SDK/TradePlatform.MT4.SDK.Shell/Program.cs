@@ -54,6 +54,7 @@ namespace TradePlatform.MT4.SDK.Shell
         {
             
           Bridge.InitializeHosts();
+         _log.DebugFormat("Program was started");
         }
 
         static void SetupLogger()
