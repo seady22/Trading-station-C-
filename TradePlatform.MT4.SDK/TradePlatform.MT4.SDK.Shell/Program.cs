@@ -52,19 +52,8 @@ namespace TradePlatform.MT4.SDK.Shell
 
          static void InitializeHosts()
         {
-            bool isMockEnabled = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["IsMockEnabled"]);
-             if (isMockEnabled)
-             {
-                 //_log.Debug("Mock was enabled");
-                 //create mocked impl
-                 //create instance off Expert
-             }
-             else
-             {
-              // _log.Debug("Mock was disabled");
-                Bridge.InitializeHosts();
-             }
-             _log.DebugFormat("Program was started");
+            
+          Bridge.InitializeHosts();
         }
 
         static void SetupLogger()
