@@ -179,7 +179,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 {
                     var secondAttempt = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
-                  _logger.DebugFormat("OpenOffer was sent second time");
+                  _logger.DebugFormat("OpenOffer was sent second time.Symbol={0}", _symbol);
                   if (secondAttempt == -1)
                   {
                       _logger.DebugFormat("OpenOffer was not executed. Try later");
