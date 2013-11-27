@@ -63,10 +63,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TradePlatform.MT4.Data, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\TradePlatform.MT4.Data.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
@@ -89,7 +85,6 @@
     <Compile Include="UnitTests\TechnicalIndicatorsTests.cs" />
     <Compile Include="UnitTests\WindowFunctionsTests.cs" />
     <Compile Include="UnitTests\PredefinedVariablesTests.cs" />
-    <Compile Include="Scripts\ImportOrdersScript.cs" />
     <Compile Include="Scripts\SendEmailScript.cs" />
     <Compile Include="Scripts\SmokeTestScript.cs" />
     <Compile Include="UnitTests\TradingFunctionsTests.cs" />
