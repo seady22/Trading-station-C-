@@ -121,7 +121,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     ema25Price < lastTwoBarsClosePrice)
                 {
                     result = true;
-                    _logger.Debug("Can open ASC offer");
+                    _logger.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
                     _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
                 }
             }
@@ -131,7 +131,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 if (lastThreeBarPrice > ema25Price && lastTwoBarsClosePrice<ema25Price && lastOneBarClosePrice<ema25Price)
                 {
                     result = true;
-                   _logger.Debug("Can open DESC offer");
+                    _logger.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
                    _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
                 }
             }
@@ -147,8 +147,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             if (trendType == TREND_TYPE.ASC)
             {
                 double ask = this.Ask();
-                var takeProfit = ask + int.Parse(_config.TakeProfit)*point;
-                var stopLoss = ask - int.Parse(_config.StopLoss)*point;
+                double bid = this.Bid();
+                var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
+                var stopLoss = bid - int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
                 _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
@@ -169,8 +170,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             if (trendType == TREND_TYPE.DESC)
             {
                 double bid = this.Bid();
-                var takeProfit = bid - int.Parse(_config.TakeProfit)*point;
-                var stopLoss = bid + int.Parse(_config.StopLoss)*point;
+                double ask = this.Ask();
+                var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
+                var stopLoss = ask + int.Parse(_config.StopLoss)*point;
                 var result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
                 _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);
