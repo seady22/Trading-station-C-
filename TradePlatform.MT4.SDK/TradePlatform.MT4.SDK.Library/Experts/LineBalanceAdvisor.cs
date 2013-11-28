@@ -25,10 +25,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected override int Start()
         {
-            var section = (ExpertConfiguration) ConfigurationManager.GetSection("ExpertConfiguration");
-            _config = section.Experts["LineBalanceAdvisor"];
-            _symbol = this.Symbol();
-            if (!IsOrderOpenForCurrentSymbol())
+            GetConfig();
+            GetSymbol();
+            if (!IsOrderOpenForSymbol())
             {
                 UpdateOrdersInDb();
                 var trendType = GetTrendType();
@@ -40,19 +39,30 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             return 1;
         }
 
+        private void GetSymbol()
+        {
+            _symbol = this.Symbol();
+        }
+
+        private void GetConfig()
+        {
+            var section = (ExpertConfiguration) ConfigurationManager.GetSection("ExpertConfiguration");
+            _config = section.Experts["LineBalanceAdvisor"];
+        }
+
         protected override int DeInit()
         {
             return 1;
         }
 
-        private bool IsOrderOpenForCurrentSymbol()
+        private bool IsOrderOpenForSymbol()
         {
             var result = false;
             var ordersTotal = this.OrdersTotal();
             for (int i = 0; i < ordersTotal; i++)
             {
-                var selectedOrder = this.OrderSelect(i, SELECT_BY.SELECT_BY_POS);
-                if (selectedOrder)
+                var isOrderSelected = this.OrderSelect(i, SELECT_BY.SELECT_BY_POS);
+                if (isOrderSelected)
                 {
                     var orderSymbol = this.OrderSymbol();
                     if (orderSymbol == _symbol)
@@ -60,7 +70,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                         result = true;
                     }
                 }
-                
             }
             return result;
         }
@@ -76,7 +85,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 details.Profit = (double) (details.BalanceOnClose - details.BalanceOnCreate);
                 ExpertDetailsRepository.Update(details);
 
-                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}", details.Id, details.ClosedOn, details.BalanceOnClose, details.State, details.Profit);
+                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", details.Id, details.ClosedOn, details.BalanceOnClose, details.State, details.Profit, details.Pair);
                 break;
             }
         }
