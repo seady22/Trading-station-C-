@@ -17,5 +17,6 @@ namespace TradePlatform.MT4.Db.Entities
         public virtual string TrendType { get; set; }
         public virtual string ExpertName { get; set; }
         public virtual double Profit { get; set; }
+        public virtual int OrderId { get; set; }
     }
 }

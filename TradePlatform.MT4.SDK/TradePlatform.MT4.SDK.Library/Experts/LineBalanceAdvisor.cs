@@ -143,6 +143,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             var point = this.Point();
             var accountBalance = this.AccountBalance();
+            var result = -1;
 
             if (trendType == TREND_TYPE.ASC)
             {
@@ -150,16 +151,16 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 double bid = this.Bid();
                 var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
                 var stopLoss = bid - int.Parse(_config.StopLoss)*point;
-                var result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
+                result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                             stopLoss, takeProfit);
                 _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
 
                 if (result == -1)
                 {
-                    var secondAttempt = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
+                    result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
                                    stopLoss, takeProfit);
-                  _logger.DebugFormat("OpenOffer was sent second time. Result = {0}",secondAttempt);
-                  if (secondAttempt == -1)
+                  _logger.DebugFormat("OpenOffer was sent second time. Result = {0}",result);
+                  if (result == -1)
                   {
                       _logger.DebugFormat("OpenOffer was not executed. Try later");
                       return;
@@ -173,16 +174,16 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 double ask = this.Ask();
                 var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
                 var stopLoss = ask + int.Parse(_config.StopLoss)*point;
-                var result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
+                result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
                                             3, stopLoss, takeProfit);
                 _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);
 
                 if (result == -1)
                 {
-                    var secondAttempt = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
+                    result= this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3,
                                    stopLoss, takeProfit);
                   _logger.DebugFormat("OpenOffer was sent second time.Symbol={0}", _symbol);
-                  if (secondAttempt == -1)
+                  if (result == -1)
                   {
                       _logger.DebugFormat("OpenOffer was not executed. Try later");
                       return;
@@ -197,7 +198,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     TimeFrame = GetCurrentTimeFrame(),
                     TrendType = trendType.ToString(),
                     BalanceOnCreate = accountBalance,
-                    ExpertName = GetType().ToString()
+                    ExpertName = GetType().ToString(),
+                    OrderId = result
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
             _logger.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}", expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType);
