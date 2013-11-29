@@ -64,8 +64,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
                 var isOrderSelected = this.OrderSelect(i, SELECT_BY.SELECT_BY_POS);
                 if (isOrderSelected)
                 {
+                    var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol);
                     var orderSymbol = this.OrderSymbol();
-                    if (orderSymbol == _symbol)
+                    if (orderSymbol == _symbol && ordersInDb.Count() == 1)
                     {
                         result = true;
                     }
