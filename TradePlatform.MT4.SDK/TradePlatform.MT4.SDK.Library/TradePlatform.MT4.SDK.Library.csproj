@@ -79,15 +79,7 @@
     <Compile Include="Handlers\ExtendedExpertAdvisor.cs" />
     <Compile Include="Experts\LineBalanceAdvisor.cs" />
     <Compile Include="Indicators\PrevDayHighLowIndicator.cs" />
-    <Compile Include="Scripts\UnitTestScript.cs" />
-    <Compile Include="UnitTests\AccountInformationTests.cs" />
-    <Compile Include="UnitTests\CommonFunctionsTests.cs" />
-    <Compile Include="UnitTests\TechnicalIndicatorsTests.cs" />
-    <Compile Include="UnitTests\WindowFunctionsTests.cs" />
-    <Compile Include="UnitTests\PredefinedVariablesTests.cs" />
     <Compile Include="Scripts\SendEmailScript.cs" />
-    <Compile Include="Scripts\SmokeTestScript.cs" />
-    <Compile Include="UnitTests\TradingFunctionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TradePlatform.MT4.Core\TradePlatform.MT4.Core.csproj">
