@@ -208,7 +208,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
                     TimeFrame = GetCurrentTimeFrame(),
                     TrendType = trendType.ToString(),
                     BalanceOnCreate = accountBalance,
-                    ExpertName = GetType().ToString(),
+                    ExpertName = GetType().Name,
                     OrderId = result
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
