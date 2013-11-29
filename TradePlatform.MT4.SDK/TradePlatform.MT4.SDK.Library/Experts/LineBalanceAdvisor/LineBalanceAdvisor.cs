@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using log4net;
 using TradePlatform.MT4.Db;
 using TradePlatform.MT4.Db.Entities;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
 using TradePlatform.MT4.SDK.Library.Config;
 using TradePlatform.MT4.SDK.Library.Handlers;
-using log4net;
 
-namespace TradePlatform.MT4.SDK.Library.Experts
+namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
 {
     public abstract class LineBalanceAdvisor : ExtendedExpertAdvisor
     {
