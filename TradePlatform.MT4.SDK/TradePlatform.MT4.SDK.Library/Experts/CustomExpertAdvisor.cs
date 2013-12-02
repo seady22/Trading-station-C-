@@ -30,9 +30,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected override int Start()
         {
-            GetConfig();
-            GetSymbol();
-            if (!IsOrderOpenForSymbol())
+            ReadConfigData();
+            if (!IsOrderOpenForSymbol() & IsWorkDay())
             {
                 UpdateOrdersInDb();
                 var trendType = GetTrendType();
@@ -43,18 +42,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             }
             return 1;
         }
-
-        private void GetSymbol()
+        private void ReadConfigData()
         {
             _symbol = this.Symbol();
-        }
-
-        private void GetConfig()
-        {
-            var section = (ExpertConfiguration)ConfigurationManager.GetSection("ExpertConfiguration");
+             var section = (ExpertConfiguration)ConfigurationManager.GetSection("ExpertConfiguration");
             _config = section.Experts["LineBalanceAdvisor"];
         }
-
         private bool IsOrderOpenForSymbol()
         {
             var result = false;
@@ -64,9 +57,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var isOrderSelected = this.OrderSelect(i, SELECT_BY.SELECT_BY_POS);
                 if (isOrderSelected)
                 {
-                    var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
+                    var orderInDb = ExpertDetailsRepository.GetAll().Single(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
                     var orderSymbol = this.OrderSymbol();
-                    if (orderSymbol == _symbol && ordersInDb.Count() == 1)
+                    if (orderSymbol == _symbol & orderInDb != null)
                     {
                         result = true;
                     }
@@ -75,20 +68,21 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             return result;
         }
 
+        private bool IsWorkDay()
+        {
+            var currentDateTime = DateTime.Now;
+            return (currentDateTime.DayOfWeek != DayOfWeek.Saturday | currentDateTime.DayOfWeek != DayOfWeek.Sunday) ;
+        }
+
         private void UpdateOrdersInDb()
         {
-            var ordersInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol);
-            foreach (ExpertDetails details in ordersInDb)
-            {
-                details.ClosedOn = DateTime.Now;
-                details.BalanceOnClose = this.AccountBalance();
-                details.State = State.Closed.ToString();
-                details.Profit = (double)(details.BalanceOnClose - details.BalanceOnCreate);
-                ExpertDetailsRepository.Update(details);
-
-                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", details.Id, details.ClosedOn, details.BalanceOnClose, details.State, details.Profit, details.Pair);
-                break;
-            }
+            var orderInDb = ExpertDetailsRepository.GetAll().Single(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
+            orderInDb.ClosedOn = DateTime.Now;
+            orderInDb.BalanceOnClose = this.AccountEquity();
+            orderInDb.State = State.Closed.ToString();
+            orderInDb.Profit = (double)(orderInDb.BalanceOnClose - orderInDb.BalanceOnCreate);
+            ExpertDetailsRepository.Update(orderInDb);
+            _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", orderInDb.Id, orderInDb.ClosedOn, orderInDb.BalanceOnClose, orderInDb.State, orderInDb.Profit, orderInDb.Pair);
         }
 
         protected TIME_FRAME GetCurrentTimeFrame()
@@ -100,13 +94,14 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         public void OpenOffer(TREND_TYPE trendType)
         {
             var point = this.Point();
-            var accountBalance = this.AccountBalance();
+            var accountBalance = this.AccountEquity();
             var result = -1;
+
+            double ask = this.Ask();
+            double bid = this.Bid();
 
             if (trendType == TREND_TYPE.ASC)
             {
-                double ask = this.Ask();
-                double bid = this.Bid();
                 var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
                 var stopLoss = bid - int.Parse(_config.StopLoss)*point;
                 result = this.OrderSend(_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3,
@@ -129,12 +124,10 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (trendType == TREND_TYPE.DESC)
             {
-                double bid = this.Bid();
-                double ask = this.Ask();
                 var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
                 var stopLoss = ask + int.Parse(_config.StopLoss)*point;
-                result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid,
-                    3, stopLoss, takeProfit);
+                result = this.OrderSend(_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
+                    
                 _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid,
                     stopLoss, takeProfit, _symbol);
 
