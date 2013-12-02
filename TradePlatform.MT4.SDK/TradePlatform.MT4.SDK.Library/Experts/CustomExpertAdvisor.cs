@@ -30,6 +30,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected override int Start()
         {
+            GetSymbol();
             ReadConfigData();
             if (!IsOrderOpenForSymbol() & IsWorkDay())
             {
@@ -42,12 +43,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             }
             return 1;
         }
-        private void ReadConfigData()
+
+        private void GetSymbol()
         {
             _symbol = this.Symbol();
-             var section = (ExpertConfiguration)ConfigurationManager.GetSection("ExpertConfiguration");
-            _config = section.Experts["LineBalanceAdvisor"];
         }
+
         private bool IsOrderOpenForSymbol()
         {
             var result = false;
@@ -76,13 +77,18 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private void UpdateOrdersInDb()
         {
-            var orderInDb = ExpertDetailsRepository.GetAll().Single(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
-            orderInDb.ClosedOn = DateTime.Now;
-            orderInDb.BalanceOnClose = this.AccountEquity();
-            orderInDb.State = State.Closed.ToString();
-            orderInDb.Profit = (double)(orderInDb.BalanceOnClose - orderInDb.BalanceOnCreate);
-            ExpertDetailsRepository.Update(orderInDb);
-            _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", orderInDb.Id, orderInDb.ClosedOn, orderInDb.BalanceOnClose, orderInDb.State, orderInDb.Profit, orderInDb.Pair);
+            var orderInDb =
+                ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList();
+
+            foreach (var openedOrder in orderInDb)
+            {
+                openedOrder.ClosedOn = DateTime.Now;
+                openedOrder.BalanceOnClose = this.AccountEquity();
+                openedOrder.State = State.Closed.ToString();
+                openedOrder.Profit = (double)(openedOrder.BalanceOnClose - openedOrder.BalanceOnCreate);
+                ExpertDetailsRepository.Update(openedOrder);
+                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
+            }
         }
 
         protected TIME_FRAME GetCurrentTimeFrame()
@@ -161,5 +167,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         abstract protected TREND_TYPE GetTrendType();
         abstract protected bool CanOpenOffer(TREND_TYPE trendType);
+        protected abstract void ReadConfigData();
     }
 }

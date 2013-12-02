@@ -1,5 +1,7 @@
-﻿using TradePlatform.MT4.SDK.API;
+﻿using System.Configuration;
+using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
+using TradePlatform.MT4.SDK.Library.Config;
 
 namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaExpert
 {
@@ -58,6 +60,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaExpert
             }
 
             return result;
+        }
+
+        protected override void ReadConfigData()
+        {
+            var section = (ExpertConfiguration)ConfigurationManager.GetSection("ExpertConfiguration");
+            _config = section.Experts["SimpleMaExpert"];
         }
     }
 }
