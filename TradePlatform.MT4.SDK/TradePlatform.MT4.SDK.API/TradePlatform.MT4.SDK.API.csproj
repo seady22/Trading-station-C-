@@ -76,6 +76,12 @@
     <Compile Include="PredefinedVariables.cs" />
     <Compile Include="TechnicalIndicators.cs" />
     <Compile Include="TradingFunctions.cs" />
+    <Compile Include="Wrappers\AccountInformationWrapper.cs" />
+    <Compile Include="Wrappers\CommonFunctionsWrapper.cs" />
+    <Compile Include="Wrappers\PredefinedVariabledWrapper.cs" />
+    <Compile Include="Wrappers\TechnicalIndicatorsWrapper.cs" />
+    <Compile Include="Wrappers\TradingFunctionsWrapper.cs" />
+    <Compile Include="Wrappers\WindowsFunctionWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TradePlatform.MT4.Core\TradePlatform.MT4.Core.csproj">
