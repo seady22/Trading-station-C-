@@ -31,7 +31,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         {
             GetSymbol();
             ReadConfigData();
-            if (!IsOrderOpenForSymbol() & IsWorkDay())
+            if (!IsOrderOpenForSymbol() && IsWorkDay())
             {
                 UpdateOrdersInDb();
                 var trendType = GetTrendType();
@@ -57,9 +57,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var isOrderSelected = this.OrderSelect(i, SELECT_BY.SELECT_BY_POS);
                 if (isOrderSelected)
                 {
-                    var orderInDb = ExpertDetailsRepository.GetAll().Single(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
+                    var orderInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
                     var orderSymbol = this.OrderSymbol();
-                    if (orderSymbol == _symbol & orderInDb != null)
+                    if (orderSymbol == _symbol & orderInDb.Count() == 1)
                     {
                         result = true;
                     }
