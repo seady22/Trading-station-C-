@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
 using TradePlatform.MT4.SDK.Library.Config;
@@ -23,6 +24,10 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
             if (askPrice <= ema25Price && bidPrice <= ema25Price)
             {
                 result = TREND_TYPE.DESC;
+            }
+            if (result == TREND_TYPE.OTHER)
+            {
+                throw new Exception("Problem with declaring trend type");
             }
             return result;
         }

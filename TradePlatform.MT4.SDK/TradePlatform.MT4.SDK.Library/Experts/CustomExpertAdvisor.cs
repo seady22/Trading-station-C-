@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
 using log4net;
 using TradePlatform.MT4.Db;
@@ -14,7 +13,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public abstract class CustomExpertAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-        protected ILog _logger = LogManager.GetLogger(typeof(LineBalanceAdvisor.LineBalanceAdvisor));
+        protected ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected ExpertElement _config;
         protected string _symbol;
 
