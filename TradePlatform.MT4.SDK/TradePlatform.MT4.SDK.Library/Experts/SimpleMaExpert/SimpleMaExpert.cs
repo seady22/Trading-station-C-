@@ -11,8 +11,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaExpert
         {
             var result = TREND_TYPE.OTHER;
             var timeFrame = GetCurrentTimeFrame();
-            var sma21Price = this.iMA(_symbol, timeFrame, 21, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
-            var sma70Price = this.iMA(_symbol, timeFrame, 70, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma21Price = TechnicalIndicatiorsWrapper.Value.iMA(this,_symbol, timeFrame, 21, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma70Price = TechnicalIndicatiorsWrapper.Value.iMA(this,_symbol, timeFrame, 70, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
 
             if (sma21Price >= sma70Price)
             {
@@ -32,12 +32,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaExpert
             var result = false;
             var timeFrame = GetCurrentTimeFrame();
             
-            var sma21Price = this.iMA(_symbol, timeFrame, 21, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
-            var sma70Price = this.iMA(_symbol, timeFrame, 70, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma21Price = TechnicalIndicatiorsWrapper.Value.iMA(this,_symbol, timeFrame, 21, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma70Price = TechnicalIndicatiorsWrapper.Value.iMA(this,_symbol, timeFrame, 70, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
 
-            var lastTwoBarsClosePrice = this.Close(2);
-            var lastOneBarClosePrice = this.Close(1);
-            var lastThreeBarPrice = this.Close(3);
+            var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Value.Close(this,2);
+            var lastOneBarClosePrice = PredefinedVariablesWrapper.Value.Close(this,1);
+            var lastThreeBarPrice = PredefinedVariablesWrapper.Value.Close(this,3);
 
             if (trendType == TREND_TYPE.ASC)
             {
