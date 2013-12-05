@@ -21,12 +21,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         #region Wrapper Members
 
-        protected ThreadLocal<AccountInformationWrapper> AccoutInformationWrapper = new ThreadLocal<AccountInformationWrapper>(() => new AccountInformationWrapper());
-        protected ThreadLocal<CommonFunctionsWrapper> CommonFunctionsWrapper = new ThreadLocal<CommonFunctionsWrapper>(()=> new CommonFunctionsWrapper());
-        protected ThreadLocal<PredefinedVariabledWrapper> PredefinedVariablesWrapper = new ThreadLocal<PredefinedVariabledWrapper>(()=> new PredefinedVariabledWrapper());
-        protected ThreadLocal<TechnicalIndicatorsWrapper> TechnicalIndicatiorsWrapper = new ThreadLocal<TechnicalIndicatorsWrapper>(()=> new TechnicalIndicatorsWrapper());
-        protected ThreadLocal<TradingFunctionsWrapper>  TradingFunctionsWrapper = new ThreadLocal<TradingFunctionsWrapper>(()=> new TradingFunctionsWrapper());
-        protected ThreadLocal<WindowsFunctionWrapper> WindowsFunctionWrapper = new ThreadLocal<WindowsFunctionWrapper>(() => new WindowsFunctionWrapper());  
+        public AccountInformationWrapper AccoutInformationWrapper = new AccountInformationWrapper();
+        public CommonFunctionsWrapper CommonFunctionsWrapper = new CommonFunctionsWrapper();
+        public PredefinedVariabledWrapper PredefinedVariablesWrapper = new PredefinedVariabledWrapper();
+        public TechnicalIndicatorsWrapper TechnicalIndicatiorsWrapper = new TechnicalIndicatorsWrapper();
+        public TradingFunctionsWrapper TradingFunctionsWrapper = new TradingFunctionsWrapper();
+        public WindowsFunctionWrapper WindowsFunctionWrapper = new WindowsFunctionWrapper();  
        
         #endregion
 
@@ -58,20 +58,20 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private void GetSymbol()
         {
-            _symbol = WindowsFunctionWrapper.Value.Symbol(this);
+            _symbol = WindowsFunctionWrapper.Symbol(this);
         }
 
         private bool IsOrderOpenForSymbol()
         {
             var result = false;
-            var ordersTotal = TradingFunctionsWrapper.Value.OrdersTotal(this);
+            var ordersTotal = TradingFunctionsWrapper.OrdersTotal(this);
             for (int i = 0; i < ordersTotal; i++)
             {
-                var isOrderSelected = TradingFunctionsWrapper.Value.OrderSelect(this, i, SELECT_BY.SELECT_BY_POS);
+                var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, i, SELECT_BY.SELECT_BY_POS);
                 if (isOrderSelected)
                 {
                     var orderInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
-                    var orderSymbol = TradingFunctionsWrapper.Value.OrderSymbol(this);
+                    var orderSymbol = TradingFunctionsWrapper.OrderSymbol(this);
                     if (orderSymbol == _symbol & orderInDb.Count() == 1)
                     {
                         result = true;
@@ -89,15 +89,18 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         private void UpdateOrdersInDb()
         {
-            var orderInDb =
-                ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList();
-
+            var orderInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList();
             foreach (var openedOrder in orderInDb)
             {
                 openedOrder.ClosedOn = DateTime.Now;
-                openedOrder.BalanceOnClose = AccoutInformationWrapper.Value.AccountEquity(this);
+                openedOrder.BalanceOnClose = AccoutInformationWrapper.AccountEquity(this);
                 openedOrder.State = State.Closed.ToString();
-                openedOrder.Profit = (double)(openedOrder.BalanceOnClose - openedOrder.BalanceOnCreate);
+                openedOrder.Profit = 0;
+
+                if (TradingFunctionsWrapper.OrderSelect(this, openedOrder.OrderId, SELECT_BY.SELECT_BY_TICKET))
+                {
+                    openedOrder.Profit = TradingFunctionsWrapper.OrderProfit(this);
+                }
                 ExpertDetailsRepository.Update(openedOrder);
                 _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
             }
@@ -111,24 +114,24 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         public void OpenOffer(TREND_TYPE trendType)
         {
-            var point = PredefinedVariablesWrapper.Value.Point(this);
-            var accountBalance = AccoutInformationWrapper.Value.AccountEquity(this);
+            var point = PredefinedVariablesWrapper.Point(this);
+            var accountBalance = AccoutInformationWrapper.AccountEquity(this);
             var result = -1;
 
-            double ask = PredefinedVariablesWrapper.Value.Ask(this);
-            double bid = PredefinedVariablesWrapper.Value.Bid(this);
+            double ask = PredefinedVariablesWrapper.Ask(this);
+            double bid = PredefinedVariablesWrapper.Bid(this);
 
             if (trendType == TREND_TYPE.ASC)
             {
                 var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
                 var stopLoss = bid - int.Parse(_config.StopLoss)*point;
-                result = TradingFunctionsWrapper.Value.OrderSend(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
+                result = TradingFunctionsWrapper.OrderSend(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
 
                 _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
                
                 if (result == -1)
                 {
-                    result = TradingFunctionsWrapper.Value.OrderSend(this,_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
+                    result = TradingFunctionsWrapper.OrderSend(this,_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
                     _logger.DebugFormat("OpenOffer was sent second time. Result = {0}", result);
                     if (result == -1)
                     {
@@ -142,13 +145,13 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
                 var stopLoss = ask + int.Parse(_config.StopLoss)*point;
-                result = TradingFunctionsWrapper.Value.OrderSend(this,_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
+                result = TradingFunctionsWrapper.OrderSend(this,_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
 
                 _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);  
 
                 if (result == -1)
                 {
-                    result = TradingFunctionsWrapper.Value.OrderSend(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
+                    result = TradingFunctionsWrapper.OrderSend(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
                         
                     _logger.DebugFormat("OpenOffer was sent second time.Symbol={0}", _symbol);
                     if (result == -1)

@@ -12,9 +12,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
         {
             var result = TREND_TYPE.OTHER;
             var timeFrame = GetCurrentTimeFrame();
-            var ema25Price = TechnicalIndicatiorsWrapper.Value.iMA(this, _symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
-            var askPrice = PredefinedVariablesWrapper.Value.Ask(this);
-            var bidPrice = PredefinedVariablesWrapper.Value.Bid(this);
+            var ema25Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var askPrice = PredefinedVariablesWrapper.Ask(this);
+            var bidPrice = PredefinedVariablesWrapper.Bid(this);
 
             if (askPrice >= ema25Price && bidPrice >= ema25Price)
             {
@@ -36,10 +36,10 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
         {
             var result = false;
             var timeFrame = GetCurrentTimeFrame();
-            var ema25Price = TechnicalIndicatiorsWrapper.Value.iMA(this,_symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
-            var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Value.Close(this,2);
-            var lastOneBarClosePrice = PredefinedVariablesWrapper.Value.Close(this,1);
-            var lastThreeBarPrice = PredefinedVariablesWrapper.Value.Close(this,3);
+            var ema25Price = TechnicalIndicatiorsWrapper.iMA(this,_symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Close(this,2);
+            var lastOneBarClosePrice = PredefinedVariablesWrapper.Close(this,1);
+            var lastThreeBarPrice = PredefinedVariablesWrapper.Close(this,3);
 
             if (trendType == TREND_TYPE.ASC)
             {
