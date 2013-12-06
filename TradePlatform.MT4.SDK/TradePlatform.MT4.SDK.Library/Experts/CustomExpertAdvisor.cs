@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using TradePlatform.MT4.SDK.API.Wrappers;
 using log4net;
 using TradePlatform.MT4.Db;
@@ -15,10 +14,14 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public abstract class CustomExpertAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-        protected ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected ExpertElement _config;
         protected string _symbol;
 
+        protected ILog _generalLog = LogManager.GetLogger("GeneralLog");
+        protected ILog _openOfferLog = LogManager.GetLogger("OpenOffer");
+        protected ILog _sendOrdersLog = LogManager.GetLogger("SendOrders");
+        protected ILog _dbOperationsLog = LogManager.GetLogger("DbOperations");
+        
         #region Wrapper Members
 
         public AccountInformationWrapper AccoutInformationWrapper = new AccountInformationWrapper();
@@ -102,7 +105,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     openedOrder.Profit = TradingFunctionsWrapper.OrderProfit(this);
                 }
                 ExpertDetailsRepository.Update(openedOrder);
-                _logger.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
+                _dbOperationsLog.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
             }
         }
 
@@ -127,15 +130,15 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = bid - int.Parse(_config.StopLoss)*point;
                 result = TradingFunctionsWrapper.OrderSend(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
 
-                _logger.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
+                _sendOrdersLog.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
                
                 if (result == -1)
                 {
                     result = TradingFunctionsWrapper.OrderSend(this,_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
-                    _logger.DebugFormat("OpenOffer was sent second time. Result = {0}", result);
+                    _sendOrdersLog.DebugFormat("OpenOffer was sent second time. Result = {0}", result);
                     if (result == -1)
                     {
-                        _logger.DebugFormat("OpenOffer was not executed. Try later");
+                        _sendOrdersLog.DebugFormat("OpenOffer was not executed. Try later");
                         return;
                     }
                 }
@@ -147,16 +150,16 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var stopLoss = ask + int.Parse(_config.StopLoss)*point;
                 result = TradingFunctionsWrapper.OrderSend(this,_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
 
-                _logger.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);  
+                _sendOrdersLog.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);  
 
                 if (result == -1)
                 {
                     result = TradingFunctionsWrapper.OrderSend(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
-                        
-                    _logger.DebugFormat("OpenOffer was sent second time.Symbol={0}", _symbol);
+
+                    _sendOrdersLog.DebugFormat("OpenOffer was sent second time.Symbol={0}", _symbol);
                     if (result == -1)
                     {
-                        _logger.DebugFormat("OpenOffer was not executed. Try later");
+                        _sendOrdersLog.DebugFormat("OpenOffer was not executed. Try later");
                         return;
                     }
                 }
@@ -173,7 +176,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 OrderId = result
             };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _logger.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}", expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType); 
+            _dbOperationsLog.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}", expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType); 
         }
 
         abstract protected TREND_TYPE GetTrendType();

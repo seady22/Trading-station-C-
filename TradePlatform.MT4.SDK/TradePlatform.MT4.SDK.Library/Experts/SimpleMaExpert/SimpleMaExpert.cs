@@ -44,8 +44,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaExpert
                 if (lastThreeBarPrice<sma21Price && lastThreeBarPrice > sma70Price && lastTwoBarsClosePrice > sma21Price && lastOneBarClosePrice > sma21Price)
                 {
                     result = true;
-                    _logger.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    _logger.DebugFormat("Sma21Price={0}, Sma70Price={1}, lastOneBarClosePrice={2}, lastTwoBarsClosePrice={3}, lastThreeBarPrice={4} ", sma21Price, sma70Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
+                    _openOfferLog.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
+                    _openOfferLog.DebugFormat("Sma21Price={0}, Sma70Price={1}, lastOneBarClosePrice={2}, lastTwoBarsClosePrice={3}, lastThreeBarPrice={4} ", sma21Price, sma70Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
                 }
             }
 
@@ -54,8 +54,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaExpert
                 if (lastThreeBarPrice>sma21Price && lastThreeBarPrice < sma70Price && lastTwoBarsClosePrice < sma21Price && lastOneBarClosePrice < sma21Price)
                 {
                      result = true;
-                    _logger.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    _logger.DebugFormat("Sma21Price={0}, Sma70Price={1}, lastOneBarClosePrice={2}, lastTwoBarsClosePrice={3}, lastThreeBarPrice={4} ", sma21Price, sma70Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
+                    _openOfferLog.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
+                    _openOfferLog.DebugFormat("Sma21Price={0}, Sma70Price={1}, lastOneBarClosePrice={2}, lastTwoBarsClosePrice={3}, lastThreeBarPrice={4} ", sma21Price, sma70Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
                 }
             }
 
