@@ -43,12 +43,12 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
 
             if (trendType == TREND_TYPE.ASC)
             {
-                if (ema25Price > lastThreeBarPrice && ema25Price < lastOneBarClosePrice &&
-                    ema25Price < lastTwoBarsClosePrice)
+                if (ema25Price > lastThreeBarPrice && ema25Price < lastOneBarClosePrice && ema25Price < lastTwoBarsClosePrice)
+                   
                 {
                     result = true;
                     _logger.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
+                    _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
                 }
             }
 
@@ -58,7 +58,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
                 {
                     result = true;
                     _logger.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                   _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}", ema25Price, lastOneBarClosePrice);
+                    _logger.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
                 }
             }
             return result;
