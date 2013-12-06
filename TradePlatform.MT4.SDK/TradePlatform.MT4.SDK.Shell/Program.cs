@@ -9,7 +9,7 @@ namespace TradePlatform.MT4.SDK.Shell
 
     class Program
     {
-        private static readonly ILog _log = LogManager.GetLogger(Assembly.GetAssembly(typeof(Program)), typeof(Program));
+        private static readonly ILog _log = log4net.LogManager.GetLogger("GeneralLog");
         static void Main(string[] args)
         {
            SetupLogger();
