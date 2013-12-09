@@ -73,11 +73,14 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, i, SELECT_BY.SELECT_BY_POS);
                 if (isOrderSelected)
                 {
-                    var orderInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name);
-                    var orderSymbol = TradingFunctionsWrapper.OrderSymbol(this);
-                    if (orderSymbol == _symbol & orderInDb.Count() == 1)
+                    var orderCloseTime = TradingFunctionsWrapper.OrderCloseTime(this);
+                    if (orderCloseTime.Year == 1970)//order still open
                     {
-                        result = true;
+                        var symbol = TradingFunctionsWrapper.OrderSymbol(this);
+                        if (symbol == _symbol)
+                        {
+                            result = true;
+                        }
                     }
                 }
             }
@@ -87,7 +90,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         private bool IsWorkDay()
         {
             var currentDateTime = DateTime.Now;
-            return (currentDateTime.DayOfWeek != DayOfWeek.Saturday | currentDateTime.DayOfWeek != DayOfWeek.Sunday) ;
+            return (currentDateTime.DayOfWeek != DayOfWeek.Saturday || currentDateTime.DayOfWeek != DayOfWeek.Sunday) ;
         }
 
         private void UpdateOrdersInDb()
@@ -95,17 +98,25 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var orderInDb = ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList();
             foreach (var openedOrder in orderInDb)
             {
-                openedOrder.ClosedOn = DateTime.Now;
-                openedOrder.BalanceOnClose = AccoutInformationWrapper.AccountEquity(this);
-                openedOrder.State = State.Closed.ToString();
-                openedOrder.Profit = 0;
-
-                if (TradingFunctionsWrapper.OrderSelect(this, openedOrder.OrderId, SELECT_BY.SELECT_BY_TICKET))
+                var ticketId = openedOrder.OrderId;
+                if (TradingFunctionsWrapper.OrderSelect(this, ticketId, SELECT_BY.SELECT_BY_TICKET))
                 {
-                    openedOrder.Profit = TradingFunctionsWrapper.OrderProfit(this);
-                }
-                ExpertDetailsRepository.Update(openedOrder);
-                _dbOperationsLog.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
+                    var orderCloseTime = TradingFunctionsWrapper.OrderCloseTime(this);
+                    if (orderCloseTime.Year != 1970)
+                    {
+                        openedOrder.ClosedOn = DateTime.Now;
+                        openedOrder.BalanceOnClose = AccoutInformationWrapper.AccountEquity(this);
+                        openedOrder.State = State.Closed.ToString();
+                        openedOrder.Profit = 0;
+
+                        if (TradingFunctionsWrapper.OrderSelect(this, openedOrder.OrderId, SELECT_BY.SELECT_BY_TICKET))
+                        {
+                            openedOrder.Profit = TradingFunctionsWrapper.OrderProfit(this);
+                        }
+                        ExpertDetailsRepository.Update(openedOrder);
+                        _dbOperationsLog.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
+                    }
+                }   
             }
         }
 
