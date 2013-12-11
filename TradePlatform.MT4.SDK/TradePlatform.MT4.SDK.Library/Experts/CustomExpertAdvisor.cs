@@ -18,9 +18,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         protected string _symbol;
 
         protected ILog _generalLog = LogManager.GetLogger("GeneralLog");
-        protected ILog _openOfferLog = LogManager.GetLogger("OpenOffer");
-        protected ILog _sendOrdersLog = LogManager.GetLogger("SendOrders");
-        protected ILog _dbOperationsLog = LogManager.GetLogger("DbOperations");
+        protected ILog _openOfferLog = LogManager.GetLogger("OpenOfferLogger");
+        protected ILog _sendOrdersLog = LogManager.GetLogger("SendOrdersLogger");
+        protected ILog _dbOperationsLog = LogManager.GetLogger("DbOperationsLogger");
         
         #region Wrapper Members
 
