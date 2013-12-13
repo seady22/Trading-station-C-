@@ -72,6 +72,7 @@
     <Compile Include="Constants\SELECT_BY.cs" />
     <Compile Include="Constants\MARKER_INFO_MODE.cs" />
     <Compile Include="Constants\TREND_TYPE.cs" />
+    <Compile Include="Operations\OrderOperations.cs" />
     <Compile Include="WindowFunctions.cs" />
     <Compile Include="PredefinedVariables.cs" />
     <Compile Include="TechnicalIndicators.cs" />
@@ -94,6 +95,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

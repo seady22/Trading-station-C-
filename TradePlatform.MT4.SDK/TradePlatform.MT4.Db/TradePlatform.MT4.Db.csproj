@@ -70,6 +70,7 @@
     <Compile Include="Entities\State.cs" />
     <Compile Include="Extensions\ExpertDetailsRepositoryExtension.cs" />
     <Compile Include="Entities\ExpertDetails.cs" />
+    <Compile Include="Extensions\ModifyOrderHistoryExtension.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Mappings\ExpertDetailsMap.cs" />
     <Compile Include="Mappings\ModifyOrderHistoryMap.cs" />
