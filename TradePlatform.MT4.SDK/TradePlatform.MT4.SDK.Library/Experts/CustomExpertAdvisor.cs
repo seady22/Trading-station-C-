@@ -14,6 +14,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
     public abstract class CustomExpertAdvisor : ExtendedExpertAdvisor
     {
         public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
+        public IRepository<ModifyOrderHistory> ModifyOrderRepository = new Repository<ModifyOrderHistory>();
+ 
         protected ExpertElement _config;
         protected string _symbol;
 
@@ -192,6 +194,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         abstract protected TREND_TYPE GetTrendType();
         abstract protected bool CanOpenOffer(TREND_TYPE trendType);
-        protected abstract void ReadConfigData();
+        abstract protected void ReadConfigData();
     }
 }
