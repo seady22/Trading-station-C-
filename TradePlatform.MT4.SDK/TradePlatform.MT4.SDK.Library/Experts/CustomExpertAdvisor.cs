@@ -14,8 +14,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 {
     public abstract class CustomExpertAdvisor : ExtendedExpertAdvisor
     {
-        public Repository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
-       // public IRepository<ModifyOrderHistory> ModifyOrderRepository = new Repository<ModifyOrderHistory>();
+        public IRepository<ExpertDetails> ExpertDetailsRepository = new Repository<ExpertDetails>();
+        public IRepository<ModifyOrderHistory> ModifyOrderRepository = new Repository<ModifyOrderHistory>();
  
         protected ExpertElement _config;
         protected string _symbol;

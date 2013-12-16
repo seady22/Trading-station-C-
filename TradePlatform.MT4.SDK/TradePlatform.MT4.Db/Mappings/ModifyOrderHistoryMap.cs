@@ -7,7 +7,7 @@ namespace TradePlatform.MT4.Db.Mappings
     {
         public ModifyOrderHistoryMap()
         {
-            Schema("ExpertDetails");
+            Schema("ExpertAdvisors");
             Table("ModifyOrderHistory");
 
             Id(x => x.Id);
@@ -15,6 +15,7 @@ namespace TradePlatform.MT4.Db.Mappings
             Map(x => x.Points);
             Map(x => x.UpdatedStopLoss);
             Map(x => x.UpdatedTakeProfit);
+            Map(x => x.OrderId);
         }
     }
 }
