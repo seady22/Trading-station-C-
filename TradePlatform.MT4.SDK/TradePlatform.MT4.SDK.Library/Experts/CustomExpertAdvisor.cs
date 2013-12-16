@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using TradePlatform.MT4.SDK.API.Operations;
 using TradePlatform.MT4.SDK.API.Wrappers;
 using log4net;
 using TradePlatform.MT4.Db;
@@ -21,18 +22,22 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
         protected ILog _generalLog = LogManager.GetLogger("GeneralLog");
         protected ILog _openOfferLog = LogManager.GetLogger("OpenOfferLogger");
-        protected ILog _sendOrdersLog = LogManager.GetLogger("SendOrdersLogger");
         protected ILog _dbOperationsLog = LogManager.GetLogger("DbOperationsLogger");
         
         #region Wrapper Members
 
-        public AccountInformationWrapper AccoutInformationWrapper = new AccountInformationWrapper();
-        public CommonFunctionsWrapper CommonFunctionsWrapper = new CommonFunctionsWrapper();
-        public PredefinedVariabledWrapper PredefinedVariablesWrapper = new PredefinedVariabledWrapper();
-        public TechnicalIndicatorsWrapper TechnicalIndicatiorsWrapper = new TechnicalIndicatorsWrapper();
-        public TradingFunctionsWrapper TradingFunctionsWrapper = new TradingFunctionsWrapper();
-        public WindowsFunctionWrapper WindowsFunctionWrapper = new WindowsFunctionWrapper();  
+        protected AccountInformationWrapper AccoutInformationWrapper = new AccountInformationWrapper();
+        protected CommonFunctionsWrapper CommonFunctionsWrapper = new CommonFunctionsWrapper();
+        protected PredefinedVariabledWrapper PredefinedVariablesWrapper = new PredefinedVariabledWrapper();
+        protected TechnicalIndicatorsWrapper TechnicalIndicatiorsWrapper = new TechnicalIndicatorsWrapper();
+        protected TradingFunctionsWrapper TradingFunctionsWrapper = new TradingFunctionsWrapper();
+        protected WindowsFunctionWrapper WindowsFunctionWrapper = new WindowsFunctionWrapper();  
        
+        #endregion
+
+        #region Operations 
+
+        protected OrderOperations OrderOperations = new OrderOperations();
         #endregion
 
         protected override int Init()
@@ -141,42 +146,21 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
                 var stopLoss = bid - int.Parse(_config.StopLoss)*point;
-                result = TradingFunctionsWrapper.OrderSend(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
-
-                _sendOrdersLog.DebugFormat("Open buy offer. Ask price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", ask, stopLoss, takeProfit, _symbol);
-               
-                if (result == -1)
-                {
-                    result = TradingFunctionsWrapper.OrderSend(this,_symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
-                    _sendOrdersLog.DebugFormat("OpenOffer was sent second time. Result = {0}", result);
-                    if (result == -1)
-                    {
-                        _sendOrdersLog.DebugFormat("OpenOffer was not executed. Try later");
-                        return;
-                    }
-                }
+                result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
                 var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
                 var stopLoss = ask + int.Parse(_config.StopLoss)*point;
-                result = TradingFunctionsWrapper.OrderSend(this,_symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
-
-                _sendOrdersLog.DebugFormat("Open sell offer. Bid price={0}, StopLoss={1}, TakeProfit={2}, Symbol={3}", bid, stopLoss, takeProfit, _symbol);  
-
-                if (result == -1)
-                {
-                    result = TradingFunctionsWrapper.OrderSend(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
-
-                    _sendOrdersLog.DebugFormat("OpenOffer was sent second time.Symbol={0}", _symbol);
-                    if (result == -1)
-                    {
-                        _sendOrdersLog.DebugFormat("OpenOffer was not executed. Try later");
-                        return;
-                    }
-                }
+                result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
             }
+
+            if (result == -1)
+            {
+                return;
+            }
+
             var expertDetailRecord = new ExpertDetails
             {
                 State = State.Active.ToString(),
