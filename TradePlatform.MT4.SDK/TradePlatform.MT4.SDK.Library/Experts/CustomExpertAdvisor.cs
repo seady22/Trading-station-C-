@@ -161,19 +161,25 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 return;
             }
 
+            AddActiveExpertDetail(trendType, accountBalance, result);
+        }
+
+        private void AddActiveExpertDetail(TREND_TYPE trendType, double accountBalance, int result)
+        {
             var expertDetailRecord = new ExpertDetails
-            {
-                State = State.Active.ToString(),
-                CreatedOn = DateTime.Now,
-                Pair = _symbol,
-                TimeFrame = GetCurrentTimeFrame(),
-                TrendType = trendType.ToString(),
-                BalanceOnCreate = accountBalance,
-                ExpertName = GetType().Name,
-                OrderId = result
-            };
+                {
+                    State = State.Active.ToString(),
+                    CreatedOn = DateTime.Now,
+                    Pair = _symbol,
+                    TimeFrame = GetCurrentTimeFrame(),
+                    TrendType = trendType.ToString(),
+                    BalanceOnCreate = accountBalance,
+                    ExpertName = GetType().Name,
+                    OrderId = result
+                };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _dbOperationsLog.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}", expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType); 
+            _dbOperationsLog.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}",
+                                         expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType);
         }
 
         abstract protected TREND_TYPE GetTrendType();
