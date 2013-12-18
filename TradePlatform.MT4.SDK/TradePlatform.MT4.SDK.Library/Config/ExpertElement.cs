@@ -32,13 +32,25 @@ namespace TradePlatform.MT4.SDK.Library.Config
             set { base["orderAmount"] = value; }
         }
 
-       
-
         [ConfigurationProperty("timeFrame", IsRequired = true, IsKey = true)]
         public string TimeFrame
         {
             get { return base["timeFrame"] as string; }
             set { base["timeFrame"] = value; }
+        }
+
+        [ConfigurationProperty("modifyStopLoss", IsRequired = true, IsKey = true)]
+        public string ModifyStopLossAmount
+        {
+            get { return base["modifyStopLoss"] as string; }
+            set { base["modifyStopLoss"] = value; }
+        }
+
+        [ConfigurationProperty("modifyStopLoss", IsRequired = true, IsKey = true)]
+        public string ModifyTakeProfitAmount
+        {
+            get { return base["modifyTakeProfit"] as string; }
+            set { base["modifyTakeProfit"] = value; }
         }
     }
 }
