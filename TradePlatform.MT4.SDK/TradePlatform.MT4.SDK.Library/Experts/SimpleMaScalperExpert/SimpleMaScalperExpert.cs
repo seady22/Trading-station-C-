@@ -12,7 +12,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
         {
             var result = TREND_TYPE.OTHER;
             var timeFrame = GetCurrentTimeFrame();
-            var sma200Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 200, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma200Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var askPrice = PredefinedVariablesWrapper.Ask(this);
             var bidPrice = PredefinedVariablesWrapper.Bid(this);
 
@@ -36,7 +36,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
         {
             var result = false;
             var timeFrame = GetCurrentTimeFrame();
-            var sma200Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 200, 8, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma200Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Close(this, 2);
             var lastOneBarClosePrice = PredefinedVariablesWrapper.Close(this, 1);
             var lastThreeBarPrice = PredefinedVariablesWrapper.Close(this, 3);
