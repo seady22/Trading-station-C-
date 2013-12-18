@@ -81,7 +81,9 @@
     <Compile Include="Experts\SimpleMaExpert\SimpleMaExpertGBPUSD.cs" />
     <Compile Include="Experts\SimpleMaExpert\SimpleMaExpert.cs" />
     <Compile Include="Experts\SimpleMaExpert\SimpleMaExpertUSDCAD.cs" />
+    <Compile Include="Experts\SimpleMaExpert\SimpleMaExpertUSDCHF.cs" />
     <Compile Include="Experts\SimpleMaScalperExpert\SimpleMaScalperExpert.cs" />
+    <Compile Include="Experts\SimpleMaScalperExpert\SimpleMaScalperExpertGBPUSD.cs" />
     <Compile Include="Experts\SimpleMaScalperExpert\SimpleMaScalperUSDCADExpert.cs" />
     <Compile Include="Handlers\PerformanceCounterBase.cs" />
     <Compile Include="Handlers\ExtendedExpertAdvisor.cs" />
