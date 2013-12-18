@@ -46,7 +46,7 @@ namespace TradePlatform.MT4.SDK.Library.Config
             set { base["modifyStopLoss"] = value; }
         }
 
-        [ConfigurationProperty("modifyStopLoss", IsRequired = true, IsKey = true)]
+        [ConfigurationProperty("modifyTakeProfit", IsRequired = true, IsKey = true)]
         public string ModifyTakeProfitAmount
         {
             get { return base["modifyTakeProfit"] as string; }
