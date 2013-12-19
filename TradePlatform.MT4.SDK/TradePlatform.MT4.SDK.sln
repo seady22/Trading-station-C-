@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7743BA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.WindowsService", "TradePlatform.MT4.SDK.WindowsService\TradePlatform.MT4.SDK.WindowsService.csproj", "{51B7867E-0EC7-4697-B1C4-8D8DA47B546F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A05DB421-34B5-4AC0-9899-57C91B2A0D55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B7867E-0EC7-4697-B1C4-8D8DA47B546F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B7867E-0EC7-4697-B1C4-8D8DA47B546F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B7867E-0EC7-4697-B1C4-8D8DA47B546F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B7867E-0EC7-4697-B1C4-8D8DA47B546F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
