@@ -17,6 +17,7 @@
 
         private void InitializeComponent()
         {
+            log4net.Config.XmlConfigurator.Configure();
             this.ServiceName = "TradePlatformExperts";
         }
 

@@ -4,7 +4,6 @@ namespace TradePlatform.MT4.SDK.WindowsService
 {
     static class Program
     {
-
         static void Main()
         {
             ServiceBase[] ServicesToRun;
