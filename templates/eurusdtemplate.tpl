@@ -1,7 +1,7 @@
 <chart>
 symbol=EURUSD
 period=60
-leftpos=2508
+leftpos=3732
 digits=5
 scale=16
 graph=1
@@ -17,10 +17,10 @@ days=0
 descriptions=0
 shift_size=20
 fixed_pos=0
-window_left=0
-window_top=0
-window_right=1034
-window_bottom=307
+window_left=75
+window_top=75
+window_right=1059
+window_bottom=387
 window_type=3
 background_color=0
 foreground_color=16777215
@@ -55,7 +55,7 @@ show_data=1
 
 <expert>
 name=Expert_NET
-flags=471
+flags=343
 window_num=0
 <inputs>
 System_NET_HandlerName=LineBalanceAdvisorEURUSD
