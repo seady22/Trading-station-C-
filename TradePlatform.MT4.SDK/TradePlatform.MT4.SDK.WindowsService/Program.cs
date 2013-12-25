@@ -6,12 +6,14 @@ namespace TradePlatform.MT4.SDK.WindowsService
     {
         static void Main()
         {
+           
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
             { 
                 new TradePlatformExperts() 
             };
             ServiceBase.Run(ServicesToRun);
+            //ServicesToRun.LoadServices(); -- use this line to debug service
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Threading;
 using TradePlatform.MT4.Core.Config;
 using TradePlatform.MT4.Core.Exceptions;
 using TradePlatform.MT4.Core.Utils;
+using log4net;
 
 namespace TradePlatform.MT4.Core.Internals
 {
@@ -18,6 +19,7 @@ namespace TradePlatform.MT4.Core.Internals
     {
         private readonly bool _isBackground;
         private readonly Thread _listenThread;
+        private readonly ILog _log = log4net.LogManager.GetLogger(typeof(HandlerHost));
 
         private readonly string _name;
 
@@ -88,6 +90,7 @@ namespace TradePlatform.MT4.Core.Internals
             string str1;
             var tcpClient = (TcpClient) client;
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, "Connection opened"));
+            _log.DebugFormat("ConnectionOpened");
             HandlerProvider orCreate = null;
             try
             {
@@ -205,6 +208,7 @@ namespace TradePlatform.MT4.Core.Internals
                 tcpClient.Close();
             }
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, "Connection closed\n"));
+            _log.DebugFormat("Connection closed");
         }
 
         private void ListenForClients()
@@ -213,6 +217,7 @@ namespace TradePlatform.MT4.Core.Internals
             var pAddress = new object[]
                 {"TCP listening for MT4 at ", HostConfiguration.IPAddress, ":", HostConfiguration.Port, "\n"};
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, string.Concat(pAddress)));
+            _log.DebugFormat("Tcp listening at ={0} : {1}", HostConfiguration.IPAddress, HostConfiguration.Port);
             while (true)
             {
                 TcpClient tcpClient = _tcpListener.AcceptTcpClient();

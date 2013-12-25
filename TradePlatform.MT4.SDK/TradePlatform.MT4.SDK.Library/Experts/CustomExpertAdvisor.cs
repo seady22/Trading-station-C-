@@ -20,9 +20,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         protected ExpertElement _config;
         protected string _symbol;
 
-        protected ILog _generalLog = LogManager.GetLogger("GeneralLog");
-        protected ILog _openOfferLog = LogManager.GetLogger("OpenOfferLogger");
-        protected ILog _dbOperationsLog = LogManager.GetLogger("DbOperationsLogger");
+        protected ILog Log = LogManager.GetLogger(typeof(CustomExpertAdvisor));
         
         #region Wrapper Members
 
@@ -127,7 +125,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                             openedOrder.Profit = TradingFunctionsWrapper.OrderProfit(this);
                         }
                         ExpertDetailsRepository.Update(openedOrder);
-                        _dbOperationsLog.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
+                        Log.DebugFormat("OrderId={0}. Order was updated. ClosedOn={1}, BalanceOnClosed={2}, State={3}, Profit={4}, Pair={5}", openedOrder.Id, openedOrder.ClosedOn, openedOrder.BalanceOnClose, openedOrder.State, openedOrder.Profit, openedOrder.Pair);
                     }
                 }   
             }
@@ -184,7 +182,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     OrderId = result
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
-            _dbOperationsLog.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}",
+            Log.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}",
                                          expertDetailRecord.Id, expertDetailRecord.Pair, expertDetailRecord.TrendType);
         }
 

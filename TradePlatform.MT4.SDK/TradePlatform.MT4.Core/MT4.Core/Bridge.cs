@@ -3,7 +3,6 @@ using System.Configuration;
 using TradePlatform.MT4.Core.Config;
 using TradePlatform.MT4.Core.Internals;
 
-//using TradePlatform.MT4.Data;
 
 namespace TradePlatform.MT4.Core
 {

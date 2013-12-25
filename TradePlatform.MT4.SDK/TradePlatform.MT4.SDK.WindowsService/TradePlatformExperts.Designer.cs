@@ -1,9 +1,15 @@
-﻿namespace TradePlatform.MT4.SDK.WindowsService
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using TradePlatform.MT4.Core;
+using log4net;
+
+namespace TradePlatform.MT4.SDK.WindowsService
 {
     partial class TradePlatformExperts
     {
         private System.ComponentModel.IContainer components = null;
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -17,8 +23,9 @@
 
         private void InitializeComponent()
         {
-            log4net.Config.XmlConfigurator.Configure();
             this.ServiceName = "TradePlatformExperts";
+            this.EventLog.Source = "TradePlatformExperts";
+            this.EventLog.Log = "TradePlatformExpertsLog";
         }
 
         #endregion

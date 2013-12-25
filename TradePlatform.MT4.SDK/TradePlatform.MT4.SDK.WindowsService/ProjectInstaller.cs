@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration.Install;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace TradePlatform.MT4.SDK.WindowsService
 {
@@ -14,6 +8,11 @@ namespace TradePlatform.MT4.SDK.WindowsService
         public ProjectInstaller()
         {
             InitializeComponent();
+        }
+
+        private void TradePlatformExperts_AfterInstall(object sender, System.Configuration.Install.InstallEventArgs e)
+        {
+
         }
     }
 }

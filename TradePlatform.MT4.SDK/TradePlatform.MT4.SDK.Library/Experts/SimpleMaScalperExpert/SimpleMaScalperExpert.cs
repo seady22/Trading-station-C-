@@ -46,8 +46,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
                 if (sma200Price > lastThreeBarPrice && sma200Price < lastOneBarClosePrice && sma200Price < lastTwoBarsClosePrice)
                 {
                     result = true;
-                    _openOfferLog.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    _openOfferLog.DebugFormat("Sma200Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", sma200Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
+                    Log.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
+                    Log.DebugFormat("Sma200Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", sma200Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
                 }
             }
 
@@ -56,8 +56,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
                 if (lastThreeBarPrice > sma200Price && lastTwoBarsClosePrice < sma200Price && lastOneBarClosePrice < sma200Price)
                 {
                     result = true;
-                    _openOfferLog.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    _openOfferLog.DebugFormat("Sma200Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", sma200Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
+                    Log.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
+                    Log.DebugFormat("Sma200Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", sma200Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
                 }
             }
             return result;

@@ -36,6 +36,7 @@
             this.TradePlatformExperts.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.TradePlatformExperts.Password = null;
             this.TradePlatformExperts.Username = null;
+            this.TradePlatformExperts.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.TradePlatformExperts_AfterInstall);
             // 
             // TradePlatformExpertsInstaller
             // 
