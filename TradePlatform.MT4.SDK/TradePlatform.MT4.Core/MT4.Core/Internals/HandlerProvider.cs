@@ -8,6 +8,7 @@ using System.Threading;
 using TradePlatform.MT4.Core.Config;
 using TradePlatform.MT4.Core.Exceptions;
 using TradePlatform.MT4.Core.Utils;
+using log4net;
 
 namespace TradePlatform.MT4.Core.Internals
 {
@@ -30,6 +31,8 @@ namespace TradePlatform.MT4.Core.Internals
 
         internal DateTime EndTime;
         internal MethodCallInfo ServerMethod;
+
+        private readonly ILog _log = log4net.LogManager.GetLogger(typeof(HandlerProvider));
 
         static HandlerProvider()
         {
@@ -145,12 +148,14 @@ namespace TradePlatform.MT4.Core.Internals
                         var mqlErrorException = new MqlErrorException(ExpertInfo, ClientMethod);
                         _mqlHandler.MqlError(mqlErrorException);
                         Trace.Write(new TraceInfo(BridgeTraceErrorType.MqlError, mqlErrorException, ""));
+                        _log.DebugFormat("MqlError. Exception={0}", mqlErrorException.Message);
                     }
                 }
                 catch (Exception exception1)
                 {
                     Exception exception = exception1;
                     Trace.Write(new TraceInfo(BridgeTraceErrorType.Execption, exception, ""));
+                    _log.DebugFormat("Exception={0}", exception.Message);
                 }
             }
             finally

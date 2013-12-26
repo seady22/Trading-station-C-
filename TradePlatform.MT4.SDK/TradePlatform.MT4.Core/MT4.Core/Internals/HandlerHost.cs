@@ -90,7 +90,6 @@ namespace TradePlatform.MT4.Core.Internals
             string str1;
             var tcpClient = (TcpClient) client;
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, "Connection opened"));
-            _log.DebugFormat("ConnectionOpened");
             HandlerProvider orCreate = null;
             try
             {
@@ -124,6 +123,7 @@ namespace TradePlatform.MT4.Core.Internals
                                             orCreate.ServerMethod.ErrorMessage = handlerExecutionException.Message;
                                             Trace.Write(new TraceInfo(BridgeTraceErrorType.HandlerExecutionError,
                                                                       handlerExecutionException, ""));
+                                            _log.DebugFormat("Exception was happened. Message={0}", exception1.Message);
                                         }
                                     }
                                     finally
@@ -194,6 +194,7 @@ namespace TradePlatform.MT4.Core.Internals
                 {
                     Exception exception2 = exception3;
                     Trace.Write(new TraceInfo(BridgeTraceErrorType.Execption, exception2, ""));
+                    _log.DebugFormat("Exception was happened. Message={0}",  exception2.Message);
                 }
             }
             finally
@@ -208,7 +209,6 @@ namespace TradePlatform.MT4.Core.Internals
                 tcpClient.Close();
             }
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, "Connection closed\n"));
-            _log.DebugFormat("Connection closed");
         }
 
         private void ListenForClients()

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using TradePlatform.MT4.Core.Exceptions;
 using TradePlatform.MT4.Core.Utils;
+using log4net;
 
 namespace TradePlatform.MT4.Core
 {
@@ -12,6 +13,8 @@ namespace TradePlatform.MT4.Core
         internal Func<string, IEnumerable<string>, string> CallMqlInternal;
 
         public Action<MqlErrorException> MqlError;
+
+        private readonly ILog _log = log4net.LogManager.GetLogger(typeof(MqlHandler));
 
         public string CallMqlMethod(string methodName, params object[] parameters)
         {
@@ -38,6 +41,7 @@ namespace TradePlatform.MT4.Core
             {
                 Exception exception = exception1;
                 Trace.Write(new TraceInfo(BridgeTraceErrorType.Execption, exception, ""));
+                _log.DebugFormat("Exception. Message={0}", exception.Message);
             }
             return null;
         }
