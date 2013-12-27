@@ -19,7 +19,7 @@ namespace TradePlatform.MT4.Core.Internals
     {
         private readonly bool _isBackground;
         private readonly Thread _listenThread;
-        private readonly ILog _log = log4net.LogManager.GetLogger(typeof(HandlerHost));
+        private readonly ILog _log = LogManager.GetLogger(typeof(HandlerHost));
 
         private readonly string _name;
 
@@ -53,7 +53,6 @@ namespace TradePlatform.MT4.Core.Internals
             var chrArray = new char[1];
             string str = aSCIIEncoding.GetString(numArray, 0, num).Trim(chrArray);
             Trace.Write(new TraceInfo(BridgeTraceErrorType.CommunicationWorkflow, null, string.Concat(" --> ", str)));
-           // _log.DebugFormat("CommunicationWorkflow. {0}", str);
             string[] array = GetSplit(str, '|').ToArray();
             return array;
         }
@@ -91,7 +90,6 @@ namespace TradePlatform.MT4.Core.Internals
             string str1;
             var tcpClient = (TcpClient) client;
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, "Connection opened"));
-            //_log.DebugFormat("Connection opened");
             HandlerProvider orCreate = null;
             try
             {
@@ -214,7 +212,6 @@ namespace TradePlatform.MT4.Core.Internals
                 tcpClient.Close();
             }
             Trace.Write(new TraceInfo(BridgeTraceErrorType.HostInfo, null, "Connection closed\n"));
-          //  _log.DebugFormat("Connection closed");
         }
 
         private void ListenForClients()
@@ -248,7 +245,6 @@ namespace TradePlatform.MT4.Core.Internals
             message.ToList().ForEach((string x) => str = string.Concat(str, x, "|"));
             byte[] bytes = aSCIIEncoding.GetBytes(str);
             Trace.Write(new TraceInfo(BridgeTraceErrorType.CommunicationWorkflow, null, string.Concat(" <-- ", str)));
-           // _log.DebugFormat("CommunicationWorkflow. {0}", str);
             stream.Write(bytes, 0, bytes.Length);
             stream.Flush();
         }
