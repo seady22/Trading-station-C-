@@ -74,27 +74,22 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             var result = false;
             var expertAdvisorRecord =
                 ExpertDetailsRepository.GetAll().FirstOrDefault(x => x.State == State.Active.ToString() && x.ExpertName == GetType().Name);
-            if (expertAdvisorRecord != null)
-            {
-                result = true;
-            }
-           // var ordersTotal = TradingFunctionsWrapper.OrdersTotal(this);
-            //for (int i = 0; i < ordersTotal; i++)
-            //{
-            //    var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, i, SELECT_BY.SELECT_BY_POS);
-            //    if (isOrderSelected)
-            //    {
-            //        var orderCloseTime = TradingFunctionsWrapper.OrderCloseTime(this);
-            //        if (orderCloseTime.Year == 1970)//order still open
-            //        {
-            //            var symbol = TradingFunctionsWrapper.OrderSymbol(this);
-            //            if (symbol == _symbol)
-            //            {
-            //                result = true;
-            //            }
-            //        }
-            //    }
-            //}
+       if (expertAdvisorRecord != null)
+       {
+           var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, expertAdvisorRecord.OrderId, SELECT_BY.SELECT_BY_TICKET);
+           if (isOrderSelected)
+           {
+               var orderCloseTime = TradingFunctionsWrapper.OrderCloseTime(this);
+               if (orderCloseTime.Year == 1970)//order still open
+               {
+                   var symbol = TradingFunctionsWrapper.OrderSymbol(this);
+                   if (symbol == _symbol)
+                   {
+                       result = true;
+                   }
+               }
+           }
+       }
             return result;
         }
 
