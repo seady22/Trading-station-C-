@@ -20,7 +20,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         protected ExpertElement _config;
         protected string _symbol;
 
-        protected ILog Log = LogManager.GetLogger(typeof(CustomExpertAdvisor));
+        protected ILog Log = LogManager.GetLogger("ExpertsLogger");
         
         #region Wrapper Members
 
