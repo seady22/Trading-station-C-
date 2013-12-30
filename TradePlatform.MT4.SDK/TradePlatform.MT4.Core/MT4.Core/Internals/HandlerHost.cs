@@ -204,7 +204,7 @@ namespace TradePlatform.MT4.Core.Internals
                 {
                     Exception exception2 = exception3;
                     Trace.Write(new TraceInfo(BridgeTraceErrorType.Execption, exception2, ""));
-                    _log.DebugFormat("Exception was happened. Message={0}",  exception2.Message);
+                    _log.ErrorFormat("Exception was happened. Message={0}",  exception2.Message);
                 }
             }
             finally
