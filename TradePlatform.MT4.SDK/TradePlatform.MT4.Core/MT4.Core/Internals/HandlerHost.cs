@@ -139,6 +139,7 @@ namespace TradePlatform.MT4.Core.Internals
                                                              _tcpListener.Server.LocalEndPoint);
                             cultureInfo.Start(orCreate);
                             orCreate.ClientCallSemaphore.WaitOne();
+                            var methodCallInfoLogger = new MethodCallInfoList();
                             while (orCreate.ClientMethod != null)
                             {
                                 var methodName = new string[2 + orCreate.ClientMethod.Parameters.Count()];
@@ -163,10 +164,9 @@ namespace TradePlatform.MT4.Core.Internals
                                     }
                                     clientMethod.ErrorMessage = str;
                                     MethodCallInfo clientMethod1 = orCreate.ClientMethod;
-                                    _log.DebugFormat(clientMethod1.ToString());
                                     str1 = (strArrays[1] == "###EMPTY###" ? string.Empty : strArrays[1]);
                                     clientMethod1.ReturnValue = str1;
-                                    _log.DebugFormat("Returned value={0}", str1);
+                                    methodCallInfoLogger.AppendMethodCallInfoList(clientMethod1);
                                     orCreate.ServerCallSemaphore.Set();
                                     orCreate.ClientCallSemaphore.WaitOne();
                                 }
@@ -175,6 +175,7 @@ namespace TradePlatform.MT4.Core.Internals
                                     throw new MessageException(strArrays, 2, "lastError|returnValue");
                                 }
                             }
+
                             if (orCreate.ServerMethod.ErrorMessage != null)
                             {
                                 var errorMessage = new[] {"###ERR###", orCreate.ServerMethod.ErrorMessage};
@@ -184,6 +185,12 @@ namespace TradePlatform.MT4.Core.Internals
                             {
                                 var returnValue = new[] {orCreate.ServerMethod.ReturnValue};
                                 WriteMessage(stream, returnValue);
+                            }
+
+                            if (orCreate.ClientMethod == null)
+                            {
+                                // assume all methods was executed
+                                _log.DebugFormat(methodCallInfoLogger.ToString());
                             }
                         }
                     }

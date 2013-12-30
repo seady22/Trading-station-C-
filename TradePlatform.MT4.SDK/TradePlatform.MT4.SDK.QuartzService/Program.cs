@@ -1,5 +1,4 @@
 ﻿using System.ServiceProcess;
-using ServiceProcess.Helpers;
 
 namespace TradePlatform.MT4.SDK.QuartzService
 {
@@ -12,8 +11,8 @@ namespace TradePlatform.MT4.SDK.QuartzService
                 {
                     new QuartzService()
                 };
-            //ServiceBase.Run(ServicesToRun);
-            ServicesToRun.LoadServices();
+            ServiceBase.Run(ServicesToRun);
+            //ServicesToRun.LoadServices();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace TradePlatform.MT4.Core.Utils
 {
@@ -38,6 +39,36 @@ namespace TradePlatform.MT4.Core.Utils
             var chrArray = new[] {',', ' '};
             str = str.TrimEnd(chrArray);
             return string.Concat(str, ")");
+        }
+    }
+
+    public class MethodCallInfoList
+    {
+        private IList<MethodCallInfo> _methodCallInfos;
+
+        public MethodCallInfoList()
+        {
+            _methodCallInfos = new List<MethodCallInfo>();
+        }
+
+        public void AppendMethodCallInfoList(MethodCallInfo methodCall)
+        {
+            _methodCallInfos.Add(methodCall);
+        }
+
+        public void EmptyLoggerItems()
+        {
+            _methodCallInfos.Clear();
+        }
+
+        public override string ToString()
+        {
+            var result = new StringBuilder();
+            foreach (var methodCallInfo in _methodCallInfos)
+            {
+                result.AppendFormat("MethodName={0}, ReturnedResult={1} ", methodCallInfo.MethodName, methodCallInfo.ReturnValue);
+            }
+            return result.ToString();
         }
     }
 }

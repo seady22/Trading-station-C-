@@ -1,4 +1,6 @@
 ﻿using System.ServiceProcess;
+using Quartz;
+using Quartz.Impl;
 using log4net;
 
 namespace TradePlatform.MT4.SDK.QuartzService
@@ -14,6 +16,10 @@ namespace TradePlatform.MT4.SDK.QuartzService
         protected override void OnStart(string[] args)
         {
             log4net.Config.XmlConfigurator.Configure();
+
+            ISchedulerFactory schedFact = new StdSchedulerFactory();
+            IScheduler sched = schedFact.GetScheduler();
+            sched.Start();
             _log.DebugFormat("Service was started");
         }
 
