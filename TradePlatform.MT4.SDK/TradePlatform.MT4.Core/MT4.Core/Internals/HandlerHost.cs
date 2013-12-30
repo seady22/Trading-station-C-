@@ -190,7 +190,11 @@ namespace TradePlatform.MT4.Core.Internals
                             if (orCreate.ClientMethod == null)
                             {
                                 // assume all methods was executed
-                                _log.DebugFormat(methodCallInfoLogger.ToString());
+                                var logOutput = methodCallInfoLogger.ToString();
+                                if (!string.IsNullOrEmpty(logOutput))
+                                {
+                                 _log.DebugFormat(logOutput);   
+                                }
                             }
                         }
                     }
