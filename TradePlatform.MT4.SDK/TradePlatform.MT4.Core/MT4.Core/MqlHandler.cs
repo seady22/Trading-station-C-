@@ -41,7 +41,7 @@ namespace TradePlatform.MT4.Core
             {
                 Exception exception = exception1;
                 Trace.Write(new TraceInfo(BridgeTraceErrorType.Execption, exception, ""));
-                _log.DebugFormat("Exception. Message={0}", exception.Message);
+                _log.ErrorFormat("Exception. Message={0}", exception.Message);
             }
             return null;
         }
