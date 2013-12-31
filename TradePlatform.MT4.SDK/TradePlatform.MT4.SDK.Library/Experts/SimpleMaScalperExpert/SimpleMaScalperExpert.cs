@@ -15,26 +15,22 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
             var sma200M5Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var askPrice = PredefinedVariablesWrapper.Ask(this);
             var bidPrice = PredefinedVariablesWrapper.Bid(this);
+            var sma200H1Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, TIME_FRAME.PERIOD_H1, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
 
             if (askPrice >= sma200M5Price && bidPrice >= sma200M5Price)
             {
-                result = TREND_TYPE.ASC;
+                if (askPrice >= sma200H1Price && bidPrice >= sma200H1Price)
+                {
+                    result = TREND_TYPE.ASC;
+                }
             }
 
             if (askPrice <= sma200M5Price && bidPrice <= sma200M5Price)
             {
-                result = TREND_TYPE.DESC;
-            }
-
-            var sma200H1Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, TIME_FRAME.PERIOD_H1, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
-            if (askPrice >= sma200H1Price && bidPrice >= sma200H1Price && result == TREND_TYPE.ASC)
-            {
-                result = TREND_TYPE.ASC;
-            }
-
-            if (askPrice <= sma200H1Price && bidPrice <= sma200H1Price && result == TREND_TYPE.DESC)
-            {
-                result = TREND_TYPE.DESC;
+                if (askPrice <= sma200H1Price && bidPrice <= sma200H1Price)
+                {
+                    result = TREND_TYPE.DESC;
+                }
             }
 
             if (result == TREND_TYPE.OTHER)
