@@ -15,11 +15,11 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
             var sma200M5Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var askPrice = PredefinedVariablesWrapper.Ask(this);
             var bidPrice = PredefinedVariablesWrapper.Bid(this);
-            var sma200H1Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, TIME_FRAME.PERIOD_H1, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var sma200H4Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, TIME_FRAME.PERIOD_H4, 200, 0, MA_METHOD.MODE_SMA, APPLY_PRICE.PRICE_CLOSE, 0);
 
             if (askPrice >= sma200M5Price && bidPrice >= sma200M5Price)
             {
-                if (askPrice >= sma200H1Price && bidPrice >= sma200H1Price)
+                if (askPrice >= sma200H4Price && bidPrice >= sma200H4Price)
                 {
                     result = TREND_TYPE.ASC;
                 }
@@ -27,7 +27,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
 
             if (askPrice <= sma200M5Price && bidPrice <= sma200M5Price)
             {
-                if (askPrice <= sma200H1Price && bidPrice <= sma200H1Price)
+                if (askPrice <= sma200H4Price && bidPrice <= sma200H4Price)
                 {
                     result = TREND_TYPE.DESC;
                 }
