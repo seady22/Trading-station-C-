@@ -7,7 +7,7 @@ namespace TradePlatform.MT4.SDK.API.Operations
     public class OrderOperations
     {
         private readonly TradingFunctionsWrapper _tradingFunctionsWrapper = new TradingFunctionsWrapper();
-        protected ILog _log = LogManager.GetLogger(typeof(OrderOperations));
+        protected ILog _log = LogManager.GetLogger("ExpertsLogger");
 
         public int OpenOffer(MqlHandler handler, string symbol, ORDER_TYPE orderType, double orderAmount, double price, int slippage, double stopLoss, double takeProfit)
         {
