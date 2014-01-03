@@ -55,6 +55,33 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
                     Log.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice);
                 }
             }
+
+            if (!result)// try to check if bar was touched near MA
+            {
+                var lastOneBarHighPrice = PredefinedVariablesWrapper.High(this, 1);
+                var lastOneBarLowPrice = PredefinedVariablesWrapper.Low(this, 1);
+                if (trendType == TREND_TYPE.ASC)
+                {
+                    if (lastOneBarLowPrice == ema25Price ||(lastOneBarHighPrice > ema25Price && lastOneBarLowPrice < ema25Price) || (lastOneBarClosePrice == ema25Price))
+                    {
+                        result = true;
+                        Log.DebugFormat("LastBar are on ema25 or near ema25. Can open ASC Offer");
+                        Log.DebugFormat("Symbol={0}, Ema25Price={1},LastOneBarClosePrice={2}, TrendType={3}", _symbol, ema25Price, lastOneBarClosePrice, trendType);
+                    }
+                }
+
+                if (trendType == TREND_TYPE.DESC)
+                {
+                    if (lastOneBarHighPrice == ema25Price || (lastOneBarLowPrice > ema25Price && lastOneBarHighPrice < ema25Price) || (lastOneBarClosePrice == ema25Price))
+                    {
+                        result = true;
+                        Log.DebugFormat("LastBar are on ema25Price or near. Can open DESC Offer");
+                        Log.DebugFormat("Symbol={0}, Ema25Price={1},LastOneBarClosePrice={2}, TrendType={3}", _symbol, ema25Price, lastOneBarClosePrice, trendType);
+                    }
+                }
+
+                
+            }
             return result;
         }
 
