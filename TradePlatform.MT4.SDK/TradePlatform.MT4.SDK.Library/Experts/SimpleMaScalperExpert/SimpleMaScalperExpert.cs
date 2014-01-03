@@ -32,11 +32,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts.SimpleMaScalperExpert
                     result = TREND_TYPE.DESC;
                 }
             }
-
-            if (result == TREND_TYPE.OTHER)
-            {
-                throw new Exception("Problem with declaring trend type");
-            }
             return result;
         }
 

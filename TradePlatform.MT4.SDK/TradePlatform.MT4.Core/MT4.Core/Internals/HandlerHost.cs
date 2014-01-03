@@ -124,7 +124,7 @@ namespace TradePlatform.MT4.Core.Internals
                                             orCreate.ServerMethod.ErrorMessage = handlerExecutionException.Message;
                                             Trace.Write(new TraceInfo(BridgeTraceErrorType.HandlerExecutionError,
                                                                       handlerExecutionException, ""));
-                                            _log.DebugFormat("Exception was happened. Message={0}", exception1.Message);
+                                            _log.DebugFormat("Exception was happened. Message={0}", exception1.ToString());
                                         }
                                     }
                                     finally
@@ -208,7 +208,7 @@ namespace TradePlatform.MT4.Core.Internals
                 {
                     Exception exception2 = exception3;
                     Trace.Write(new TraceInfo(BridgeTraceErrorType.Execption, exception2, ""));
-                    _log.ErrorFormat("Exception was happened. Message={0}",  exception2.Message);
+                    _log.ErrorFormat("Exception was happened. Message={0}",  exception2.ToString());
                 }
             }
             finally
