@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using TradePlatform.MT4.SDK.API;
 using TradePlatform.MT4.SDK.API.Constants;
 using TradePlatform.MT4.SDK.Library.Config;
@@ -12,7 +11,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
         {
             var result = TREND_TYPE.OTHER;
             var timeFrame = GetCurrentTimeFrame();
-            var ema25Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var ema25Price = TechnicalIndicatiorsWrapper.iMA(this, _symbol, timeFrame, 25, 0, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var askPrice = PredefinedVariablesWrapper.Ask(this);
             var bidPrice = PredefinedVariablesWrapper.Bid(this);
 
@@ -25,10 +24,6 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
             {
                 result = TREND_TYPE.DESC;
             }
-            if (result == TREND_TYPE.OTHER)
-            {
-                throw new Exception("Problem with declaring trend type");
-            }
             return result;
         }
 
@@ -36,29 +31,28 @@ namespace TradePlatform.MT4.SDK.Library.Experts.LineBalanceAdvisor
         {
             var result = false;
             var timeFrame = GetCurrentTimeFrame();
-            var ema25Price = TechnicalIndicatiorsWrapper.iMA(this,_symbol, timeFrame, 25, 8, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
+            var ema25Price = TechnicalIndicatiorsWrapper.iMA(this,_symbol, timeFrame, 25, 0, MA_METHOD.MODE_EMA, APPLY_PRICE.PRICE_CLOSE, 0);
             var lastTwoBarsClosePrice = PredefinedVariablesWrapper.Close(this,2);
             var lastOneBarClosePrice = PredefinedVariablesWrapper.Close(this,1);
-            var lastThreeBarPrice = PredefinedVariablesWrapper.Close(this,3);
 
             if (trendType == TREND_TYPE.ASC)
             {
-                if (ema25Price > lastThreeBarPrice && ema25Price < lastOneBarClosePrice && ema25Price < lastTwoBarsClosePrice)
+                if (ema25Price > lastTwoBarsClosePrice && ema25Price < lastOneBarClosePrice)
                    
                 {
                     result = true;
                     Log.DebugFormat("Can open ASC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    Log.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
+                    Log.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice);
                 }
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
-                if (lastThreeBarPrice > ema25Price && lastTwoBarsClosePrice<ema25Price && lastOneBarClosePrice<ema25Price)
+                if (lastTwoBarsClosePrice > ema25Price && lastOneBarClosePrice < ema25Price)
                 {
                     result = true;
                     Log.DebugFormat("Can open DESC offer. TrendType={0}, Symbol={1}", GetTrendType(), _symbol);
-                    Log.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}, lastThreeBarsClosePrice={3}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice, lastThreeBarPrice);
+                    Log.DebugFormat("Ema25Price={0}, LastClosedBarPrice={1}, lastTwoBarsClosePrice={2}", ema25Price, lastOneBarClosePrice, lastTwoBarsClosePrice);
                 }
             }
             return result;
