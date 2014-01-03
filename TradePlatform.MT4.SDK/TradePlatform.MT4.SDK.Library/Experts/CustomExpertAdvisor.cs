@@ -155,7 +155,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
             }
 
-            if (result == -1)
+            if (result == -1 || result == 1)
             {
                 return;
             }
