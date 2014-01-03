@@ -157,6 +157,8 @@ namespace TradePlatform.MT4.SDK.Library.Experts
 
             if (result == -1 || result == 1)
             {
+                var error = CallMqlMethod("GetLastError", null);
+                Log.DebugFormat("Order was not created. Error={0}", error);
                 return;
             }
 
