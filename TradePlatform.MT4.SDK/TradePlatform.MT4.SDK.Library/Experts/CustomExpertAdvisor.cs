@@ -145,14 +145,14 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             {
                 var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
                 var stopLoss = bid - int.Parse(_config.StopLoss)*point;
-                result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 3, stopLoss, takeProfit);
+                result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 0, stopLoss, takeProfit);
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
                 var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
                 var stopLoss = ask + int.Parse(_config.StopLoss)*point;
-                result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 3, stopLoss, takeProfit);
+                result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 0, stopLoss, takeProfit);
             }
 
             if (result == -1 || result == 1)
@@ -160,6 +160,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 return;
             }
 
+            Log.DebugFormat("Order was opened");
             AddActiveExpertDetail(trendType, accountBalance, result);
         }
 
