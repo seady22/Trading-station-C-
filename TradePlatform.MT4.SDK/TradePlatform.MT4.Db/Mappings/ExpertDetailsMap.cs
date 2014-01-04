@@ -23,6 +23,8 @@ namespace TradePlatform.MT4.Db.Mappings
             Map(x => x.ExpertName);
             Map(x => x.Profit);
             Map(x => x.OrderId);
+            Map(x => x.StopLoss);
+            Map(x => x.TakeProfit);
         }
     }
 }

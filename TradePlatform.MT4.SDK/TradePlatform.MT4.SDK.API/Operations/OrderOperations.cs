@@ -17,5 +17,16 @@ namespace TradePlatform.MT4.SDK.API.Operations
             _log.DebugFormat("Send offer. Result={0}", result);
             return result;
         }
+
+        public bool ModifyOffer(MqlHandler handler, int ticketNumber, double price, double stopLoss, double takeProfit)
+        {
+            var result = _tradingFunctionsWrapper.OrderModify(handler, ticketNumber, price, stopLoss, takeProfit);
+
+            _log.DebugFormat("ModifyOrder. Handler Name={0}, TicketNumber={1}, Price={2}, StopLoss={3}, TakeProfit={4}", handler.GetType().Name, ticketNumber, price, stopLoss, takeProfit);
+            _log.DebugFormat("ModifyOrder. Result={0}", result);
+            return result;
+        }
+
+
     }
 }

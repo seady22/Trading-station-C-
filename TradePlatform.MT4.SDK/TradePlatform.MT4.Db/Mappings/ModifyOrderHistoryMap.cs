@@ -12,7 +12,6 @@ namespace TradePlatform.MT4.Db.Mappings
 
             Id(x => x.Id);
             Map(x => x.CreatedOn);
-            Map(x => x.Points);
             Map(x => x.UpdatedStopLoss);
             Map(x => x.UpdatedTakeProfit);
             Map(x => x.OrderId);

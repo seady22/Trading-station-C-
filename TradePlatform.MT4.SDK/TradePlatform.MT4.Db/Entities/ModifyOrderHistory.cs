@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Data;
+﻿using System;
+using FluentNHibernate.Data;
 
 namespace TradePlatform.MT4.Db.Entities
 {
@@ -8,7 +9,6 @@ namespace TradePlatform.MT4.Db.Entities
         public virtual int OrderId { get; set; }
         public virtual double UpdatedTakeProfit { get; set; }
         public virtual double UpdatedStopLoss { get; set; }
-        public virtual int Points { get; set; }
-        public virtual int CreatedOn { get; set; }
+        public virtual DateTime CreatedOn { get; set; }
     }
 }

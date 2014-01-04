@@ -61,7 +61,100 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     OpenOffer(trendType);
                 }
             }
+
+            if (IsOrderOpenForSymbol() && IsWorkDay())
+            {
+                
+                foreach (var openOffer in ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList())
+                {
+                    var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, openOffer.OrderId, SELECT_BY.SELECT_BY_TICKET);
+                    if (isOrderSelected)
+                    {
+                       TryToModifyOrder(openOffer);
+                    }
+                    else
+                    {
+                        var errorMessage = CallMqlMethod("GetLastError", null);
+                        Log.DebugFormat("Order was not selected. OrderId={0}, ErrorMessage={1}", openOffer.OrderId, errorMessage);                
+                    }
+                }
+            }
             return 1;
+        }
+
+        private void TryToModifyOrder(ExpertDetails openOffer)
+        {
+            var point = PredefinedVariablesWrapper.Point(this);
+            var trendType = openOffer.TrendType;
+            var orderOpenPrice = TradingFunctionsWrapper.OrderOpenPrice(this);
+            var orderStopLoss = TradingFunctionsWrapper.OrderStopLoss(this);
+            var orderTakeProfit = TradingFunctionsWrapper.OrderTakeProfit(this);
+            
+            if (trendType == "ASC")
+            {
+                var bidPrice = PredefinedVariablesWrapper.Bid(this);
+                var takeProfitPriceWith5PointsDifference = bidPrice + (int.Parse(_config.TakeProfit) - 5)*point;
+                if (bidPrice >= takeProfitPriceWith5PointsDifference)
+                {
+                    Log.DebugFormat("Time to modify Order. Symbol={0}, TrendType={1}, BidPrice={2}, TakeProfitPriceWith5PointsDifference = {3}",
+                                    openOffer.Pair, openOffer.TrendType, bidPrice, takeProfitPriceWith5PointsDifference);
+                       
+                    var updatedStopLoss = orderStopLoss - int.Parse(_config.StopLoss) * point;
+                    var updatedTakeProfit = orderTakeProfit + int.Parse(_config.TakeProfit) * point;
+                    var modifyOrderResult = OrderOperations.ModifyOffer(this, openOffer.OrderId, orderOpenPrice, updatedStopLoss, updatedTakeProfit);
+                    
+                    if (!modifyOrderResult)
+                    {
+                        Log.DebugFormat("ModifyOrder was not executed.");
+                        var errorMessage = this.CallMqlMethod("GetLastError", null);
+                        Log.DebugFormat("ModifyOrder error = {0}", errorMessage);
+                    }
+
+                    if (modifyOrderResult)
+                    {
+                        LogModifyOrderAttempt(openOffer.OrderId, updatedStopLoss, updatedTakeProfit);
+                    }
+                }
+            }
+
+            if (trendType == "DESC")
+            {
+                var askPrice = PredefinedVariablesWrapper.Ask(this);
+                var takeProfitPriceWith5PointsDifference = askPrice - (int.Parse(_config.TakeProfit) - 5)*point;
+                if (askPrice <= takeProfitPriceWith5PointsDifference)
+                {
+                    Log.DebugFormat("Time to modify Order. Symbol={0}, TrendType={1}, AskPrice={2}, takeProfitPriceWith5PointsDifference = {3}", openOffer.Pair, openOffer.TrendType, askPrice, takeProfitPriceWith5PointsDifference);
+                    var updatedStopLoss = orderStopLoss + int.Parse(_config.StopLoss)*point;
+                    var updatedTakeProfit = orderTakeProfit - int.Parse(_config.TakeProfit)*point;
+                    var modifyOrderResult = OrderOperations.ModifyOffer(this, openOffer.OrderId, orderOpenPrice,
+                                                                        updatedStopLoss,
+                                                                        updatedTakeProfit);
+                    if (!modifyOrderResult)
+                    {
+                        Log.DebugFormat("ModifyOrder was not executed.");
+                        var errorMessage = this.CallMqlMethod("GetLastError", null);
+                        Log.DebugFormat("ModifyOrder error = {0}", errorMessage);
+                    }
+
+                    if (modifyOrderResult)
+                    {
+                        LogModifyOrderAttempt(openOffer.OrderId, updatedStopLoss, updatedTakeProfit);
+                    }
+                }
+            }
+        }
+
+        private void LogModifyOrderAttempt(int orderId, double stopLoss, double takeProfit)
+        {
+            var modifyOrderHistoryRecord = new ModifyOrderHistory
+            {
+                CreatedOn = DateTime.UtcNow,
+                OrderId = orderId,
+                UpdatedStopLoss = stopLoss,
+                UpdatedTakeProfit = takeProfit
+            };
+            ModifyOrderRepository.Save(modifyOrderHistoryRecord);
+            Log.DebugFormat("ModifyOrderHistory record was added. OrderId={0}, UpdatedStopLoss={1}, UpdatedTakeProfit={2}, Symbol={3}", orderId, stopLoss, takeProfit, _symbol);
         }
 
         private void GetSymbol()
@@ -141,17 +234,20 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             double ask = PredefinedVariablesWrapper.Ask(this);
             double bid = PredefinedVariablesWrapper.Bid(this);
 
+            double stopLoss = 0;
+            double takeProfit = 0;
+
             if (trendType == TREND_TYPE.ASC)
             {
-                var takeProfit = bid + int.Parse(_config.TakeProfit)*point;
-                var stopLoss = bid - int.Parse(_config.StopLoss)*point;
+                takeProfit = bid + int.Parse(_config.TakeProfit)*point;
+                stopLoss = bid - int.Parse(_config.StopLoss)*point;
                 result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_BUY, double.Parse(_config.OrderAmount), ask, 0, stopLoss, takeProfit);
             }
 
             if (trendType == TREND_TYPE.DESC)
             {
-                var takeProfit = ask - int.Parse(_config.TakeProfit)*point;
-                var stopLoss = ask + int.Parse(_config.StopLoss)*point;
+                takeProfit = ask - int.Parse(_config.TakeProfit)*point;
+                stopLoss = ask + int.Parse(_config.StopLoss)*point;
                 result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 0, stopLoss, takeProfit);
             }
 
@@ -163,10 +259,10 @@ namespace TradePlatform.MT4.SDK.Library.Experts
             }
 
             Log.DebugFormat("Order was opened");
-            AddActiveExpertDetail(trendType, accountBalance, result);
+            AddActiveExpertDetail(trendType, accountBalance, result, stopLoss, takeProfit);
         }
 
-        private void AddActiveExpertDetail(TREND_TYPE trendType, double accountBalance, int result)
+        private void AddActiveExpertDetail(TREND_TYPE trendType, double accountBalance, int result, double stopLoss, double takeProfit)
         {
             var expertDetailRecord = new ExpertDetails
                 {
@@ -177,7 +273,9 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                     TrendType = trendType.ToString(),
                     BalanceOnCreate = accountBalance,
                     ExpertName = GetType().Name,
-                    OrderId = result
+                    OrderId = result,
+                    StopLoss = stopLoss,
+                    TakeProfit = takeProfit
                 };
             ExpertDetailsRepository.Save(expertDetailRecord);
             Log.DebugFormat("New expertDetail Record was added. Id={0}. Pair={1}, TrendType={2}",
