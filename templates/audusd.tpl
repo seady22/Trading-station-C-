@@ -1,7 +1,7 @@
 <chart>
 symbol=AUDUSD
-period=5
-leftpos=12921
+period=60
+leftpos=4247
 digits=5
 scale=8
 graph=1
@@ -19,8 +19,8 @@ shift_size=20
 fixed_pos=0
 window_left=50
 window_top=50
-window_right=1009
-window_bottom=406
+window_right=1059
+window_bottom=320
 window_type=3
 background_color=0
 foreground_color=16777215
@@ -41,9 +41,9 @@ name=main
 </indicator>
 <indicator>
 name=Moving Average
-period=200
+period=40
 shift=0
-method=0
+method=1
 apply=0
 color=65535
 style=0
@@ -58,7 +58,7 @@ name=Expert_NET
 flags=343
 window_num=0
 <inputs>
-System_NET_HandlerName=SimpleMaScalperExpertAUDUSD
+System_NET_HandlerName=LineBalanceAdvisorAUDUSD
 NET=###
 System_NET_Server=127.0.0.1
 System_NET_Port=2011

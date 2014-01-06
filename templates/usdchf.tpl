@@ -1,7 +1,7 @@
 <chart>
 symbol=USDCHF
-period=5
-leftpos=12986
+period=60
+leftpos=2994
 digits=5
 scale=16
 graph=1
@@ -19,8 +19,8 @@ shift_size=20
 fixed_pos=0
 window_left=75
 window_top=75
-window_right=1034
-window_bottom=392
+window_right=1084
+window_bottom=345
 window_type=3
 background_color=0
 foreground_color=16777215
@@ -41,11 +41,11 @@ name=main
 </indicator>
 <indicator>
 name=Moving Average
-period=200
+period=40
 shift=0
-method=0
+method=1
 apply=0
-color=16711680
+color=65535
 style=0
 weight=2
 period_flags=0
@@ -58,7 +58,7 @@ name=Expert_NET
 flags=343
 window_num=0
 <inputs>
-System_NET_HandlerName=SimpleMaScalperExpertUSDCHF
+System_NET_HandlerName=LineBalanceAdvisorUSDCHF
 NET=###
 System_NET_Server=127.0.0.1
 System_NET_Port=2009

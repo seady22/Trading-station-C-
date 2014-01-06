@@ -1,7 +1,7 @@
 <chart>
 symbol=USDJPY
-period=240
-leftpos=6086
+period=60
+leftpos=2929
 digits=3
 scale=8
 graph=1
@@ -17,10 +17,10 @@ days=0
 descriptions=0
 shift_size=20
 fixed_pos=0
-window_left=25
-window_top=25
-window_right=1059
-window_bottom=332
+window_left=0
+window_top=0
+window_right=1009
+window_bottom=270
 window_type=3
 background_color=0
 foreground_color=16777215
@@ -41,13 +41,13 @@ name=main
 </indicator>
 <indicator>
 name=Moving Average
-period=21
+period=40
 shift=0
 method=1
 apply=0
-color=255
+color=65535
 style=0
-weight=1
+weight=2
 period_flags=0
 show_data=1
 </indicator>

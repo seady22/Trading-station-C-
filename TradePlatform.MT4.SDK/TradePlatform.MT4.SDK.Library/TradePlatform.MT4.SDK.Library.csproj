@@ -74,7 +74,10 @@
     <Compile Include="Config\ExpertElement.cs" />
     <Compile Include="Config\ExpertElementCollection.cs" />
     <Compile Include="Experts\CustomExpertAdvisor.cs" />
+    <Compile Include="Experts\LineBalanceAdvisor\LineBalanceAdvisorAUDUSD.cs" />
     <Compile Include="Experts\LineBalanceAdvisor\LineBalanceAdvisorEURUSD.cs" />
+    <Compile Include="Experts\LineBalanceAdvisor\LineBalanceAdvisorGBPUSD.cs" />
+    <Compile Include="Experts\LineBalanceAdvisor\LineBalanceAdvisorUSDCAD.cs" />
     <Compile Include="Experts\LineBalanceAdvisor\LineBalanceAdvisorUSDCHF.cs" />
     <Compile Include="Experts\LineBalanceAdvisor\LineBalanceAdvisorUSDJPY.cs" />
     <Compile Include="Experts\SimpleMaExpert\SimpleMaExpertAUDUSD.cs" />

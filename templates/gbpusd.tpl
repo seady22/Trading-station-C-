@@ -1,7 +1,7 @@
 <chart>
 symbol=GBPUSD
 period=60
-leftpos=2439
+leftpos=2929
 digits=5
 scale=8
 graph=1
@@ -17,10 +17,10 @@ days=0
 descriptions=0
 shift_size=20
 fixed_pos=0
-window_left=0
-window_top=0
-window_right=1034
-window_bottom=286
+window_left=100
+window_top=100
+window_right=1109
+window_bottom=370
 window_type=3
 background_color=0
 foreground_color=16777215
@@ -41,9 +41,9 @@ name=main
 </indicator>
 <indicator>
 name=Moving Average
-period=200
+period=40
 shift=0
-method=0
+method=1
 apply=0
 color=65535
 style=0
@@ -58,7 +58,7 @@ name=Expert_NET
 flags=343
 window_num=0
 <inputs>
-System_NET_HandlerName=SimpleMaScalperExpertGBPUSD
+System_NET_HandlerName=LineBalanceAdvisorGBPUSD
 NET=###
 System_NET_Server=127.0.0.1
 System_NET_Port=2012
