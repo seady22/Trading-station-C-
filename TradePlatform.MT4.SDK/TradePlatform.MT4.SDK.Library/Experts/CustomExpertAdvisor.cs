@@ -21,6 +21,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
         protected string _symbol;
 
         protected ILog Log = LogManager.GetLogger("ExpertsLogger");
+        private ILog _mt4Log = LogManager.GetLogger(typeof (CustomExpertAdvisor));
         
         #region Wrapper Members
 
@@ -183,6 +184,7 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                }
            }
        }
+       _mt4Log.DebugFormat("IsOrderOpenForSymbol returned = {0}. Symbol={1}", result, _symbol);
             return result;
         }
 
