@@ -63,23 +63,24 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 }
             }
 
-            if (IsOrderOpenForSymbol() && IsWorkDay())
-            {
+            //TODO:: need to refactor
+            //if (IsOrderOpenForSymbol() && IsWorkDay())
+            //{
                 
-                foreach (var openOffer in ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList())
-                {
-                    var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, openOffer.OrderId, SELECT_BY.SELECT_BY_TICKET);
-                    if (isOrderSelected)
-                    {
-                       TryToModifyOrder(openOffer);
-                    }
-                    else
-                    {
-                        var errorMessage = CallMqlMethod("GetLastError", null);
-                        Log.DebugFormat("Order was not selected. OrderId={0}, ErrorMessage={1}", openOffer.OrderId, errorMessage);                
-                    }
-                }
-            }
+            //    foreach (var openOffer in ExpertDetailsRepository.GetAll().Where(x => x.ClosedOn == null && x.Pair == _symbol && x.ExpertName == GetType().Name).ToList())
+            //    {
+            //        var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, openOffer.OrderId, SELECT_BY.SELECT_BY_TICKET);
+            //        if (isOrderSelected)
+            //        {
+            //           TryToModifyOrder(openOffer);
+            //        }
+            //        else
+            //        {
+            //            var errorMessage = CallMqlMethod("GetLastError", null);
+            //            Log.DebugFormat("Order was not selected. OrderId={0}, ErrorMessage={1}", openOffer.OrderId, errorMessage);                
+            //        }
+            //    }
+            //}
             return 1;
         }
 
@@ -173,14 +174,11 @@ namespace TradePlatform.MT4.SDK.Library.Experts
            var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, expertAdvisorRecord.OrderId, SELECT_BY.SELECT_BY_TICKET);
            if (isOrderSelected)
            {
-               var orderCloseTime = TradingFunctionsWrapper.OrderCloseTime(this);
-               if (orderCloseTime.Year == 1970)//order still open
+               var orderClosePrice = TradingFunctionsWrapper.OrderClosePrice(this);
+               if (orderClosePrice != 0d)
                {
-                   var symbol = TradingFunctionsWrapper.OrderSymbol(this);
-                   if (symbol == _symbol)
-                   {
-                       result = true;
-                   }
+                   result = true;
+                   _mt4Log.DebugFormat("Order still open. OrderId={0}, OrderClosePrice={1}", expertAdvisorRecord.OrderId, orderClosePrice);
                }
            }
        }
@@ -253,15 +251,16 @@ namespace TradePlatform.MT4.SDK.Library.Experts
                 result = OrderOperations.OpenOffer(this, _symbol, ORDER_TYPE.OP_SELL, double.Parse(_config.OrderAmount), bid, 0, stopLoss, takeProfit);
             }
 
-            if (result == -1 || result == 1)
+            var isOrderSelected = TradingFunctionsWrapper.OrderSelect(this, result, SELECT_BY.SELECT_BY_TICKET);
+            if (isOrderSelected)
             {
-                var error = CallMqlMethod("GetLastError", null);
-                Log.DebugFormat("Order was not created. Error={0}", error);
-                return;
+                Log.DebugFormat("Order was opened");
+                AddActiveExpertDetail(trendType, accountBalance, result, stopLoss, takeProfit);
             }
-
-            Log.DebugFormat("Order was opened");
-            AddActiveExpertDetail(trendType, accountBalance, result, stopLoss, takeProfit);
+            else
+            {
+                Log.DebugFormat("Order was not opened. OrderId={0}", result);
+            }
         }
 
         private void AddActiveExpertDetail(TREND_TYPE trendType, double accountBalance, int result, double stopLoss, double takeProfit)
