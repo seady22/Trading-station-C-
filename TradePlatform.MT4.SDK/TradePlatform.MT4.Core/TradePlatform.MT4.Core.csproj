@@ -1,169 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\svyat\Desktop\tradeplatform-79897 (1)\TradePlatform.MT4.Demo\TradePlatform.MT4.Demo.Console\bin\Debug\TradePlatform.MT4.Core.dll-->
   <PropertyGroup>
-    <ProjectGuid>{65AA3653-CE56-4029-A9AD-46D5CAA45829}</ProjectGuid>
-    <SchemaVersion>2</SchemaVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <AssemblyName>TradePlatform.MT4.Core</AssemblyName>
+    <ProjectGuid>{65AA3653-CE56-4029-A9AD-46D5CAA45829}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TradePlatform</RootNamespace>
+    <AssemblyName>TradePlatform.MT4.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <ApplicationVersion>3.6.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>TradePlatform.MT4.Core</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\output\</OutputPath>
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <Optimize>false</Optimize>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>full</DebugType>
-    <ErrorReport>prompt</ErrorReport>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\output\</OutputPath>
-    <DebugSymbols>false</DebugSymbols>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>pdbonly</DebugType>
-    <ErrorReport>prompt</ErrorReport>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Container_T_.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Exceptions\MqlErrorException.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\BridgeTraceListener.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\ConsoleBridgeTraceListener.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\TraceInfo.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\BridgeTraceErrorType.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\ExpertInfo.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Bridge.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\HandlerElement.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\HandlerElementCollection.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\HostElementCollection.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\BridgeConfiguration.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\ParameterElementCollection.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\ParameterElement.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Config\HostElement.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\Convertor.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Exceptions\HandlerExecutionException.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Exceptions\HandlerLoadException.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Exceptions\ConsoleTraceListenerException.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Exceptions\MessageException.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\MqlHandler.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\ExpertAdvisor.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Internals\HandlerProvider.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Utils\MethodCallInfo.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\MetaTrader4.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\QuoteListener.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\QuoterExtensions.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="MT4.Core\Internals\HandlerHost.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
+    <Compile Include="ExpertAdvisor.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Bridge.cs" />
+    <Compile Include="MqlHandler.cs" />
+    <Compile Include="MetaTrader4.cs" />
+    <Compile Include="QuoteListener.cs" />
+    <Compile Include="QuoterExtensions.cs" />
+    <Compile Include="Exceptions\MqlErrorException.cs" />
+    <Compile Include="Exceptions\HandlerExecutionException.cs" />
+    <Compile Include="Exceptions\HandlerLoadException.cs" />
+    <Compile Include="Exceptions\MessageException.cs" />
+    <Compile Include="Utils\ExpertInfo.cs" />
+    <Compile Include="Utils\Convertor.cs" />
+    <Compile Include="Utils\MethodCallInfo.cs" />
+    <Compile Include="Config\HandlerElement.cs" />
+    <Compile Include="Config\HandlerElementCollection.cs" />
+    <Compile Include="Config\HostElementCollection.cs" />
+    <Compile Include="Config\BridgeConfiguration.cs" />
+    <Compile Include="Config\ParameterElementCollection.cs" />
+    <Compile Include="Config\ParameterElement.cs" />
+    <Compile Include="Config\HostElement.cs" />
+    <Compile Include="Internals\HandlerProvider.cs" />
+    <Compile Include="Internals\HandlerHost.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TradePlatform.MT4.Engine\TradePlatform.MT4.Engine.csproj">
+      <Project>{f3603db5-ad31-458c-ba87-119f27e64042}</Project>
+      <Name>TradePlatform.MT4.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
