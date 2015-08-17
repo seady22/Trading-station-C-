@@ -44,12 +44,19 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Core" />
+    <Reference Include="TradePlatform.MT4.Data">
+      <HintPath>..\TradePlatform.MT4.Data\TradePlatform.MT4.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Exceptions\TraceListenerException.cs" />
     <Compile Include="Extension\MinIntervalAttribute.cs" />
     <Compile Include="Extension\NameAttribute.cs" />
+    <Compile Include="Log\ConsoleLogger.cs" />
+    <Compile Include="Log\EventLogger.cs" />
+    <Compile Include="Log\LogInfo.cs" />
+    <Compile Include="Log\LogType.cs" />
     <Compile Include="Tasks\PingTask.cs" />
     <Compile Include="Model\TaskEvaluator.cs" />
     <Compile Include="Model\TaskInfo.cs" />

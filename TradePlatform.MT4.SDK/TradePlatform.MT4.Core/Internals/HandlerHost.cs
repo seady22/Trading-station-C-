@@ -76,9 +76,9 @@ namespace TradePlatform.MT4.Core.Internals
               }
               catch (Exception exception_1)
               {
-                HandlerExecutionException local_1 = new HandlerExecutionException(expertInfo, exception_1);
-                handlerProvider.ServerMethod.ErrorMessage = local_1.Message;
-                Trace.Write((object) new LogInfo(LogType.HandlerExecutionError, (Exception) local_1, ""));
+                HandlerExecutionException local_5 = new HandlerExecutionException(expertInfo, exception_1);
+                handlerProvider.ServerMethod.ErrorMessage = local_5.Message;
+                Trace.Write((object) new LogInfo(LogType.HandlerExecutionError, (Exception) local_5, ""));
               }
               finally
               {
@@ -174,12 +174,13 @@ namespace TradePlatform.MT4.Core.Internals
       string result = "";
       Enumerable.ToList<string>((IEnumerable<string>) message).ForEach((Action<string>) (x =>
       {
-        // ISSUE: variable of a compiler-generated type
-        HandlerHost.\u003C\u003Ec__DisplayClass11 temp_37 = this;
+        // ISSUE: variable of a compiler-generated type         
+  //      HandlerHost.\u003C\u003Ec__DisplayClass11 temp_37 = this;  //TODO fixfix
         // ISSUE: reference to a compiler-generated field
-        string temp_41 = temp_37.result + x + "|";
+          string temp_41 = x + "|";
+//        string temp_41 = temp_37.result + x + "|";
         // ISSUE: reference to a compiler-generated field
-        temp_37.result = temp_41;
+//        temp_37.result = temp_41;
       }));
       result = result.Trim(new char[1]
       {
