@@ -11,7 +11,7 @@ namespace TradePlatform.MT4.Core
 
     protected abstract int DeInit();
 
-    protected internal override string ResolveMethod(string methodName, List<string> parameters)
+    public override string ResolveMethod(string methodName, List<string> parameters)
     {
       switch (methodName)
       {

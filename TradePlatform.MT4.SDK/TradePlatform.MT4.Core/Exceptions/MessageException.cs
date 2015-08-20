@@ -15,6 +15,7 @@ namespace TradePlatform.MT4.Core.Exceptions
     private static string ComputeArray(IEnumerable<string> message)
     {
       string result = "";
+      message.ToList().ForEach((string x) => result = string.Concat(result, x, "|"));
       /*     Enumerable.ToList<string>(message).ForEach((Action<string>) (x => //TODO //TODO fixfix
            {
              // ISSUE: variable of a compiler-generated type

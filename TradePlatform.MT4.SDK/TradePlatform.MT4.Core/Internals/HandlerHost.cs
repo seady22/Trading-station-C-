@@ -171,21 +171,23 @@ namespace TradePlatform.MT4.Core.Internals
     private void WriteMessage(NetworkStream stream, params string[] message)
     {
       ASCIIEncoding asciiEncoding = new ASCIIEncoding();
-      string result = "";
+      string result = "";  
+      message.ToList().ForEach((string x) => result = string.Concat(result, x, "|"));  
+/*
       Enumerable.ToList<string>((IEnumerable<string>) message).ForEach((Action<string>) (x =>
       {
         // ISSUE: variable of a compiler-generated type         
-  //      HandlerHost.\u003C\u003Ec__DisplayClass11 temp_37 = this;  //TODO fixfix
+        HandlerHost.\u003C\u003Ec__DisplayClass11 temp_37 = this;  //TODO fixfix
         // ISSUE: reference to a compiler-generated field
           string temp_41 = x + "|";
-//        string temp_41 = temp_37.result + x + "|";
+         string temp_41 = temp_37.result + x + "|";
         // ISSUE: reference to a compiler-generated field
-//        temp_37.result = temp_41;
+        temp_37.result = temp_41;
       }));
       result = result.Trim(new char[1]
       {
         '|'
-      });
+      });*/
       byte[] bytes = asciiEncoding.GetBytes(result);
       Trace.Write((object) new LogInfo(LogType.Workflow, (Exception) null, " <-- " + result));
       stream.Write(bytes, 0, bytes.Length);
