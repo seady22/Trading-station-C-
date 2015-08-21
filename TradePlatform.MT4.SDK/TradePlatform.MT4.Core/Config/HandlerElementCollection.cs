@@ -34,7 +34,7 @@ namespace TradePlatform.MT4.Core.Config
       }
     }
 
-    public HandlerElement this[string name]
+    new public HandlerElement this[string name]
     {
       get
       {

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: T:\work\mql4\ForexSharp1\TradePlatform.MT4.SDK\TradePlatform.MT4.Engine\lib\TradePlatform.MT4.Data.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FF2E75A-D7D2-45E6-BD75-87442529D86D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>TradePlatform.MT4.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ApplicationVersion>3.6.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>TradePlatform.MT4.Data</RootNamespace>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TradePlatformEntities.cs" />
+    <Compile Include="aspnet_Applications.cs" />
+    <Compile Include="aspnet_Membership.cs" />
+    <Compile Include="aspnet_Profile.cs" />
+    <Compile Include="aspnet_Roles.cs" />
+    <Compile Include="aspnet_SchemaVersions.cs" />
+    <Compile Include="aspnet_Users.cs" />
+    <Compile Include="BankAccount.cs" />
+    <Compile Include="BankAccountGroup.cs" />
+    <Compile Include="BankTransaction.cs" />
+    <Compile Include="BankTransactionCategory.cs" />
+    <Compile Include="BankTransactionCategoryBudget.cs" />
+    <Compile Include="BankTransactionCategoryBudgetPeriod.cs" />
+    <Compile Include="BankTransactionCategoryGroup.cs" />
+    <Compile Include="C__RefactorLog.cs" />
+    <Compile Include="ExpertSystem.cs" />
+    <Compile Include="MetaTraderAccount.cs" />
+    <Compile Include="MetaTraderAccountFilterSet.cs" />
+    <Compile Include="MetaTraderOrder.cs" />
+    <Compile Include="MetaTraderOrderFilterSet.cs" />
+    <Compile Include="MetaTraderTickData.cs" />
+    <Compile Include="MonthlyData.cs" />
+    <Compile Include="RolePermission.cs" />
+    <Compile Include="ScheduledTask.cs" />
+    <Compile Include="ScheduledTaskParameter.cs" />
+    <Compile Include="TradeDuplicatorBee.cs" />
+    <Compile Include="TradeDuplicatorDrone.cs" />
+    <Compile Include="vw_aspnet_Applications.cs" />
+    <Compile Include="vw_aspnet_MembershipUsers.cs" />
+    <Compile Include="vw_aspnet_Profiles.cs" />
+    <Compile Include="vw_aspnet_Roles.cs" />
+    <Compile Include="vw_aspnet_Users.cs" />
+    <Compile Include="vw_aspnet_UsersInRoles.cs" />
+    <Compile Include="aspnet_Membership_GetPassword_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPassword1_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPassword2_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPassword3_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPasswordWithFormat_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPasswordWithFormat1_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPasswordWithFormat2_Result.cs" />
+    <Compile Include="aspnet_Membership_GetPasswordWithFormat3_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByName_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByName1_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByName2_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByName3_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByUserId_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByUserId1_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByUserId2_Result.cs" />
+    <Compile Include="aspnet_Membership_GetUserByUserId3_Result.cs" />
+    <Compile Include="aspnet_Profile_GetProperties_Result.cs" />
+    <Compile Include="aspnet_Profile_GetProperties1_Result.cs" />
+    <Compile Include="aspnet_Profile_GetProperties2_Result.cs" />
+    <Compile Include="aspnet_Profile_GetProperties3_Result.cs" />
+    <Compile Include="aspnet_UsersInRoles_RemoveUsersFromRoles_Result.cs" />
+    <Compile Include="aspnet_UsersInRoles_RemoveUsersFromRoles1_Result.cs" />
+    <Compile Include="aspnet_UsersInRoles_RemoveUsersFromRoles2_Result.cs" />
+    <Compile Include="aspnet_UsersInRoles_RemoveUsersFromRoles3_Result.cs" />
+    <Compile Include="TradePlatformDataService.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TradePlatformModel.csdl" />
+    <EmbeddedResource Include="TradePlatformModel.msl" />
+    <EmbeddedResource Include="TradePlatformModel.ssdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+</Project>

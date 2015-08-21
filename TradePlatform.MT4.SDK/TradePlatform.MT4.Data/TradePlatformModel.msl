@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TradePlatformModelStoreContainer" CdmEntityContainer="TradePlatformEntities">
+    <EntitySetMapping Name="C__RefactorLog">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.C__RefactorLog)">
+        <MappingFragment StoreEntitySet="C__RefactorLog">
+          <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Applications">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.aspnet_Applications)">
+        <MappingFragment StoreEntitySet="aspnet_Applications">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Membership">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.aspnet_Membership)">
+        <MappingFragment StoreEntitySet="aspnet_Membership">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Profile">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.aspnet_Profile)">
+        <MappingFragment StoreEntitySet="aspnet_Profile">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+          <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
+          <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.aspnet_Roles)">
+        <MappingFragment StoreEntitySet="aspnet_Roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_SchemaVersions">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.aspnet_SchemaVersions)">
+        <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+          <ScalarProperty Name="Feature" ColumnName="Feature" />
+          <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+          <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.aspnet_Users)">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankAccountGroups">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankAccountGroup)">
+        <MappingFragment StoreEntitySet="BankAccountGroups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankAccounts">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankAccount)">
+        <MappingFragment StoreEntitySet="BankAccounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Abbr" ColumnName="Abbr" />
+          <ScalarProperty Name="InitionalDeposit" ColumnName="InitionalDeposit" />
+          <ScalarProperty Name="BankAccount_BankAccountGroup" ColumnName="BankAccount_BankAccountGroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankTransactionCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankTransactionCategory)">
+        <MappingFragment StoreEntitySet="BankTransactionCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HasBudget" ColumnName="HasBudget" />
+          <ScalarProperty Name="BankTransactionCategoryGroup_BankTransactionCategory" ColumnName="BankTransactionCategoryGroup_BankTransactionCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankTransactionCategoryBudgetPeriods">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankTransactionCategoryBudgetPeriod)">
+        <MappingFragment StoreEntitySet="BankTransactionCategoryBudgetPeriods">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="BudgetPeriodStart" ColumnName="BudgetPeriodStart" />
+          <ScalarProperty Name="BudgetPeriodEnd" ColumnName="BudgetPeriodEnd" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankTransactionCategoryBudgets">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankTransactionCategoryBudget)">
+        <MappingFragment StoreEntitySet="BankTransactionCategoryBudgets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="PeriodLimit" ColumnName="PeriodLimit" />
+          <ScalarProperty Name="BankTransactionCategoryBudget_BankTransactionCategory" ColumnName="BankTransactionCategoryBudget_BankTransactionCategory" />
+          <ScalarProperty Name="BankTransactionCategoryBudgetP_BankTransactionCategoryBudget" ColumnName="BankTransactionCategoryBudgetP_BankTransactionCategoryBudget" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankTransactionCategoryGroups">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankTransactionCategoryGroup)">
+        <MappingFragment StoreEntitySet="BankTransactionCategoryGroups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankTransactions">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.BankTransaction)">
+        <MappingFragment StoreEntitySet="BankTransactions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Payee" ColumnName="Payee" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+          <ScalarProperty Name="TransactionUniqueId" ColumnName="TransactionUniqueId" />
+          <ScalarProperty Name="BankAccount_BankTransaction" ColumnName="BankAccount_BankTransaction" />
+          <ScalarProperty Name="BankTransactionCategory_BankTransaction" ColumnName="BankTransactionCategory_BankTransaction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpertSystems">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.ExpertSystem)">
+        <MappingFragment StoreEntitySet="ExpertSystems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="SystemVersion" ColumnName="SystemVersion" />
+          <ScalarProperty Name="ExpertVersion" ColumnName="ExpertVersion" />
+          <ScalarProperty Name="ExpertName" ColumnName="ExpertName" />
+          <ScalarProperty Name="ExpertAllowAddones" ColumnName="ExpertAllowAddones" />
+          <ScalarProperty Name="ModuleTacticsAutoEven" ColumnName="ModuleTacticsAutoEven" />
+          <ScalarProperty Name="ModuleTacticsAutoEvenAll" ColumnName="ModuleTacticsAutoEvenAll" />
+          <ScalarProperty Name="ModuleTacticsAutoEvenBars" ColumnName="ModuleTacticsAutoEvenBars" />
+          <ScalarProperty Name="ModuleTacticsAutoEvenPips" ColumnName="ModuleTacticsAutoEvenPips" />
+          <ScalarProperty Name="ModuleTacticsEvenStop" ColumnName="ModuleTacticsEvenStop" />
+          <ScalarProperty Name="ModuleTacticsAutoTrail" ColumnName="ModuleTacticsAutoTrail" />
+          <ScalarProperty Name="ModuleTacticsAutoTrailAll" ColumnName="ModuleTacticsAutoTrailAll" />
+          <ScalarProperty Name="ModuleTacticsAutoTrailBars" ColumnName="ModuleTacticsAutoTrailBars" />
+          <ScalarProperty Name="ModuleTacticsAutoTrailPips" ColumnName="ModuleTacticsAutoTrailPips" />
+          <ScalarProperty Name="ModuleTacticsTrailStop" ColumnName="ModuleTacticsTrailStop" />
+          <ScalarProperty Name="ModuleTacticsAutoLockLoss" ColumnName="ModuleTacticsAutoLockLoss" />
+          <ScalarProperty Name="ModuleTacticsAutoLockLossAll" ColumnName="ModuleTacticsAutoLockLossAll" />
+          <ScalarProperty Name="ModuleTacticsAutoLockLossPips" ColumnName="ModuleTacticsAutoLockLossPips" />
+          <ScalarProperty Name="ModuleTacticsLockLossRatio" ColumnName="ModuleTacticsLockLossRatio" />
+          <ScalarProperty Name="ModuleTacticsLockLossStop" ColumnName="ModuleTacticsLockLossStop" />
+          <ScalarProperty Name="ModuleTacticsAutoLock" ColumnName="ModuleTacticsAutoLock" />
+          <ScalarProperty Name="ModuleTacticsAutoLockAll" ColumnName="ModuleTacticsAutoLockAll" />
+          <ScalarProperty Name="ModuleTacticsAutoLockPips" ColumnName="ModuleTacticsAutoLockPips" />
+          <ScalarProperty Name="ModuleTacticsLockStop" ColumnName="ModuleTacticsLockStop" />
+          <ScalarProperty Name="ModuleTacticsRelock" ColumnName="ModuleTacticsRelock" />
+          <ScalarProperty Name="ModuleTacticsPartialLockRatio" ColumnName="ModuleTacticsPartialLockRatio" />
+          <ScalarProperty Name="ModuleTacticsAutoMartin" ColumnName="ModuleTacticsAutoMartin" />
+          <ScalarProperty Name="ModuleTacticsMartinExponent" ColumnName="ModuleTacticsMartinExponent" />
+          <ScalarProperty Name="ModuleTacticsMartinKnees" ColumnName="ModuleTacticsMartinKnees" />
+          <ScalarProperty Name="ModuleTacticsAutoBalance" ColumnName="ModuleTacticsAutoBalance" />
+          <ScalarProperty Name="ModuleTacticsBalancePips" ColumnName="ModuleTacticsBalancePips" />
+          <ScalarProperty Name="ModuleTacticsHalfTake" ColumnName="ModuleTacticsHalfTake" />
+          <ScalarProperty Name="ModuleTacticsHalfTakeTake" ColumnName="ModuleTacticsHalfTakeTake" />
+          <ScalarProperty Name="ModuleTacticsHalfTakeStop" ColumnName="ModuleTacticsHalfTakeStop" />
+          <ScalarProperty Name="ModuleTacticsSmartStop" ColumnName="ModuleTacticsSmartStop" />
+          <ScalarProperty Name="ModuleTacticsSmartStopPips" ColumnName="ModuleTacticsSmartStopPips" />
+          <ScalarProperty Name="ModuleTacticsSmartStopBars" ColumnName="ModuleTacticsSmartStopBars" />
+          <ScalarProperty Name="ModuleTacticsSmartStopBreak" ColumnName="ModuleTacticsSmartStopBreak" />
+          <ScalarProperty Name="ModuleTacticsDispersPips" ColumnName="ModuleTacticsDispersPips" />
+          <ScalarProperty Name="ModuleTacticsDispersBars" ColumnName="ModuleTacticsDispersBars" />
+          <ScalarProperty Name="ModuleTacticsVolatile" ColumnName="ModuleTacticsVolatile" />
+          <ScalarProperty Name="ModuleTraderUseStrategy" ColumnName="ModuleTraderUseStrategy" />
+          <ScalarProperty Name="ModuleTraderUseTrendFilter" ColumnName="ModuleTraderUseTrendFilter" />
+          <ScalarProperty Name="ModuleTraderUsePositionLock" ColumnName="ModuleTraderUsePositionLock" />
+          <ScalarProperty Name="ModuleTraderHoursStart" ColumnName="ModuleTraderHoursStart" />
+          <ScalarProperty Name="ModuleTraderHoursEnd" ColumnName="ModuleTraderHoursEnd" />
+          <ScalarProperty Name="ModuleTraderLossInARow" ColumnName="ModuleTraderLossInARow" />
+          <ScalarProperty Name="ModuleTraderEquityLimit" ColumnName="ModuleTraderEquityLimit" />
+          <ScalarProperty Name="ModuleTraderOnlyInZones" ColumnName="ModuleTraderOnlyInZones" />
+          <ScalarProperty Name="ModuleTraderTakeInZones" ColumnName="ModuleTraderTakeInZones" />
+          <ScalarProperty Name="AdnVisualTraderIsActive" ColumnName="AdnVisualTraderIsActive" />
+          <ScalarProperty Name="AdnVisualTraderOrderComment" ColumnName="AdnVisualTraderOrderComment" />
+          <ScalarProperty Name="ModuleMMStopLoss" ColumnName="ModuleMMStopLoss" />
+          <ScalarProperty Name="ModuleMMTakeProfit" ColumnName="ModuleMMTakeProfit" />
+          <ScalarProperty Name="ModuleMMMinMarginLevel" ColumnName="ModuleMMMinMarginLevel" />
+          <ScalarProperty Name="ModuleMMMaxOpenOrders" ColumnName="ModuleMMMaxOpenOrders" />
+          <ScalarProperty Name="ModuleMMMaxSpread" ColumnName="ModuleMMMaxSpread" />
+          <ScalarProperty Name="ModuleMMRiskFactor" ColumnName="ModuleMMRiskFactor" />
+          <ScalarProperty Name="ModuleMMUseFixedLot" ColumnName="ModuleMMUseFixedLot" />
+          <ScalarProperty Name="ModuleMMFixedLot" ColumnName="ModuleMMFixedLot" />
+          <ScalarProperty Name="ExtOperatorUseDefaultPoint" ColumnName="ExtOperatorUseDefaultPoint" />
+          <ScalarProperty Name="ExtOperatorPoint" ColumnName="ExtOperatorPoint" />
+          <ScalarProperty Name="ExtOperatorMagicNumber" ColumnName="ExtOperatorMagicNumber" />
+          <ScalarProperty Name="ExtOperatorAutoMagic" ColumnName="ExtOperatorAutoMagic" />
+          <ScalarProperty Name="ExtOperatorRequoteTimes" ColumnName="ExtOperatorRequoteTimes" />
+          <ScalarProperty Name="ExtOperatorRequoteSleep" ColumnName="ExtOperatorRequoteSleep" />
+          <ScalarProperty Name="ExtOperatorSlippage" ColumnName="ExtOperatorSlippage" />
+          <ScalarProperty Name="ExtOperatorStealthMode" ColumnName="ExtOperatorStealthMode" />
+          <ScalarProperty Name="ExtOperatorSetStopAfter" ColumnName="ExtOperatorSetStopAfter" />
+          <ScalarProperty Name="SignalIndicatorsEMASlow" ColumnName="SignalIndicatorsEMASlow" />
+          <ScalarProperty Name="SignalIndicatorsEMAFast" ColumnName="SignalIndicatorsEMAFast" />
+          <ScalarProperty Name="SignalIndicatorsRSIPeriod" ColumnName="SignalIndicatorsRSIPeriod" />
+          <ScalarProperty Name="SignalIndicatorsRSIUpper" ColumnName="SignalIndicatorsRSIUpper" />
+          <ScalarProperty Name="SignalIndicatorsRSILower" ColumnName="SignalIndicatorsRSILower" />
+          <ScalarProperty Name="SignalPASlippage" ColumnName="SignalPASlippage" />
+          <ScalarProperty Name="AdnStealthUseBestPrice" ColumnName="AdnStealthUseBestPrice" />
+          <ScalarProperty Name="ExtTimeTRM" ColumnName="ExtTimeTRM" />
+          <ScalarProperty Name="AdnReportingIsActive" ColumnName="AdnReportingIsActive" />
+          <ScalarProperty Name="AdnLevelsIsActive" ColumnName="AdnLevelsIsActive" />
+          <ScalarProperty Name="AdnDiagnosticsUseDebug" ColumnName="AdnDiagnosticsUseDebug" />
+          <ScalarProperty Name="AdnDiagnosticsUseTrace" ColumnName="AdnDiagnosticsUseTrace" />
+          <ScalarProperty Name="AdnDiagnosticsUseLog" ColumnName="AdnDiagnosticsUseLog" />
+          <ScalarProperty Name="AdnDiagnosticsUseNotify" ColumnName="AdnDiagnosticsUseNotify" />
+          <ScalarProperty Name="AdnDiagnosticsShowOrders" ColumnName="AdnDiagnosticsShowOrders" />
+          <ScalarProperty Name="AdnDiagnosticsShowInfo" ColumnName="AdnDiagnosticsShowInfo" />
+          <ScalarProperty Name="BridgeNETIsActive" ColumnName="BridgeNETIsActive" />
+          <ScalarProperty Name="BridgeNETServer" ColumnName="BridgeNETServer" />
+          <ScalarProperty Name="BridgeNETPort" ColumnName="BridgeNETPort" />
+          <ScalarProperty Name="WorkingSymbol" ColumnName="WorkingSymbol" />
+          <ScalarProperty Name="WorkingPeriod" ColumnName="WorkingPeriod" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="LastActivity" ColumnName="LastActivity" />
+          <ScalarProperty Name="LastExecutionError" ColumnName="LastExecutionError" />
+          <ScalarProperty Name="ExpertSystem_MetaTraderAccount" ColumnName="ExpertSystem_MetaTraderAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaTraderAccountFilterSets">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.MetaTraderAccountFilterSet)">
+        <MappingFragment StoreEntitySet="MetaTraderAccountFilterSets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDemo" ColumnName="IsDemo" />
+          <ScalarProperty Name="IsTesting" ColumnName="IsTesting" />
+          <ScalarProperty Name="IsOptimization" ColumnName="IsOptimization" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="AccountCompany" ColumnName="AccountCompany" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaTraderAccounts">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.MetaTraderAccount)">
+        <MappingFragment StoreEntitySet="MetaTraderAccounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+          <ScalarProperty Name="AccountCredit" ColumnName="AccountCredit" />
+          <ScalarProperty Name="AccountCompany" ColumnName="AccountCompany" />
+          <ScalarProperty Name="AccountCurrency" ColumnName="AccountCurrency" />
+          <ScalarProperty Name="AccountEquity" ColumnName="AccountEquity" />
+          <ScalarProperty Name="AccountFreeMargin" ColumnName="AccountFreeMargin" />
+          <ScalarProperty Name="AccountFreeMarginMode" ColumnName="AccountFreeMarginMode" />
+          <ScalarProperty Name="AccountLeverage" ColumnName="AccountLeverage" />
+          <ScalarProperty Name="AccountMargin" ColumnName="AccountMargin" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="AccountProfit" ColumnName="AccountProfit" />
+          <ScalarProperty Name="AccountServer" ColumnName="AccountServer" />
+          <ScalarProperty Name="AccountStopoutLevel" ColumnName="AccountStopoutLevel" />
+          <ScalarProperty Name="AccountStopoutMode" ColumnName="AccountStopoutMode" />
+          <ScalarProperty Name="IsDemo" ColumnName="IsDemo" />
+          <ScalarProperty Name="IsTesting" ColumnName="IsTesting" />
+          <ScalarProperty Name="IsOptimization" ColumnName="IsOptimization" />
+          <ScalarProperty Name="IsExpertEnabled" ColumnName="IsExpertEnabled" />
+          <ScalarProperty Name="DrawDown" ColumnName="DrawDown" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaTraderOrderFilterSets">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.MetaTraderOrderFilterSet)">
+        <MappingFragment StoreEntitySet="MetaTraderOrderFilterSets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CloseTimeFrom" ColumnName="CloseTimeFrom" />
+          <ScalarProperty Name="CloseTimeTo" ColumnName="CloseTimeTo" />
+          <ScalarProperty Name="OpenTimeFrom" ColumnName="OpenTimeFrom" />
+          <ScalarProperty Name="OpenTimeTo" ColumnName="OpenTimeTo" />
+          <ScalarProperty Name="CommentContains" ColumnName="CommentContains" />
+          <ScalarProperty Name="CommentNotContains" ColumnName="CommentNotContains" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="MagicNumber" ColumnName="MagicNumber" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaTraderOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.MetaTraderOrder)">
+        <MappingFragment StoreEntitySet="MetaTraderOrders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
+          <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+          <ScalarProperty Name="OpenPrice" ColumnName="OpenPrice" />
+          <ScalarProperty Name="ClosePrice" ColumnName="ClosePrice" />
+          <ScalarProperty Name="StopLoss" ColumnName="StopLoss" />
+          <ScalarProperty Name="TakeProfit" ColumnName="TakeProfit" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="Swap" ColumnName="Swap" />
+          <ScalarProperty Name="Profit" ColumnName="Profit" />
+          <ScalarProperty Name="MagicNumber" ColumnName="MagicNumber" />
+          <ScalarProperty Name="Commission" ColumnName="Commission" />
+          <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+          <ScalarProperty Name="MetaTraderOrder_MetaTraderAccount" ColumnName="MetaTraderOrder_MetaTraderAccount" />
+          <ScalarProperty Name="ExpertSystem_MetaTraderOrder" ColumnName="ExpertSystem_MetaTraderOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetaTraderTickDatas">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.MetaTraderTickData)">
+        <MappingFragment StoreEntitySet="MetaTraderTickDatas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+          <ScalarProperty Name="Ask" ColumnName="Ask" />
+          <ScalarProperty Name="TickDate" ColumnName="TickDate" />
+          <ScalarProperty Name="Equity" ColumnName="Equity" />
+          <ScalarProperty Name="MetaTraderTickData_MetaTraderAccount" ColumnName="MetaTraderTickData_MetaTraderAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonthlyDatas">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.MonthlyData)">
+        <MappingFragment StoreEntitySet="MonthlyDatas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="MonthlyData_MetaTraderAccount" ColumnName="MonthlyData_MetaTraderAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolePermissions">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.RolePermission)">
+        <MappingFragment StoreEntitySet="RolePermissions">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduledTaskParameters">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.ScheduledTaskParameter)">
+        <MappingFragment StoreEntitySet="ScheduledTaskParameters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ScheduledTaskParameter_ScheduledTask" ColumnName="ScheduledTaskParameter_ScheduledTask" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduledTasks">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.ScheduledTask)">
+        <MappingFragment StoreEntitySet="ScheduledTasks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Interval" ColumnName="Interval" />
+          <ScalarProperty Name="Executions" ColumnName="Executions" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="LastMessage" ColumnName="LastMessage" />
+          <ScalarProperty Name="LastExecution" ColumnName="LastExecution" />
+          <ScalarProperty Name="LastError" ColumnName="LastError" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TradeDuplicatorBees">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.TradeDuplicatorBee)">
+        <MappingFragment StoreEntitySet="TradeDuplicatorBees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TradeDuplicatorBee_MetaTraderAccount" ColumnName="TradeDuplicatorBee_MetaTraderAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TradeDuplicatorDrones">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.TradeDuplicatorDrone)">
+        <MappingFragment StoreEntitySet="TradeDuplicatorDrones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LotRatio" ColumnName="LotRatio" />
+          <ScalarProperty Name="Slippage" ColumnName="Slippage" />
+          <ScalarProperty Name="TradeDuplicatorBee_TradeDuplicatorDrone" ColumnName="TradeDuplicatorBee_TradeDuplicatorDrone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_aspnet_Applications">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.vw_aspnet_Applications)">
+        <MappingFragment StoreEntitySet="vw_aspnet_Applications">
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_aspnet_MembershipUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.vw_aspnet_MembershipUsers)">
+        <MappingFragment StoreEntitySet="vw_aspnet_MembershipUsers">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_aspnet_Profiles">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.vw_aspnet_Profiles)">
+        <MappingFragment StoreEntitySet="vw_aspnet_Profiles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="DataSize" ColumnName="DataSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_aspnet_Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.vw_aspnet_Roles)">
+        <MappingFragment StoreEntitySet="vw_aspnet_Roles">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_aspnet_Users">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.vw_aspnet_Users)">
+        <MappingFragment StoreEntitySet="vw_aspnet_Users">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_aspnet_UsersInRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(TradePlatformModel.vw_aspnet_UsersInRoles)">
+        <MappingFragment StoreEntitySet="vw_aspnet_UsersInRoles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="TradePlatformModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+      <EndProperty Name="aspnet_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="aspnet_Roles_RoleId" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Users">
+        <ScalarProperty Name="UserId" ColumnName="aspnet_Users_UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

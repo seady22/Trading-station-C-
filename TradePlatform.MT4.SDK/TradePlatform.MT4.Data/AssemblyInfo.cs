@@ -1,0 +1,38 @@
+﻿using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using TradePlatform.MT4.Data;
+
+[assembly: AssemblyProduct("TradePlatform.MT4.Data")]
+[assembly: AssemblyCopyright("Copyright © TradePlatform 2013")]
+[assembly: AssemblyTrademark("")]
+[assembly: EdmRelationship("TradePlatformModel", "TradeDuplicatorBee_TradeDuplicatorDrone", "TradeDuplicatorBee", RelationshipMultiplicity.One, typeof (TradeDuplicatorBee), "TradeDuplicatorDrone", RelationshipMultiplicity.Many, typeof (TradeDuplicatorDrone), true)]
+[assembly: AssemblyTitle("TradePlatform.MT4.Data")]
+[assembly: EdmRelationship("TradePlatformModel", "ScheduledTaskParameter_ScheduledTask", "ScheduledTask", RelationshipMultiplicity.One, typeof (ScheduledTask), "ScheduledTaskParameter", RelationshipMultiplicity.Many, typeof (ScheduledTaskParameter), true)]
+[assembly: EdmRelationship("TradePlatformModel", "FK__aspnet_Ro__Appli__45F365D3", "aspnet_Applications", RelationshipMultiplicity.One, typeof (aspnet_Applications), "aspnet_Roles", RelationshipMultiplicity.Many, typeof (aspnet_Roles), true)]
+[assembly: EdmRelationship("TradePlatformModel", "TradeDuplicatorBee_MetaTraderAccount", "MetaTraderAccount", RelationshipMultiplicity.One, typeof (MetaTraderAccount), "TradeDuplicatorBee", RelationshipMultiplicity.Many, typeof (TradeDuplicatorBee), true)]
+[assembly: Guid("e94ac17d-ddf1-4be5-9423-e3c4ec39d1b6")]
+[assembly: AssemblyFileVersion("3.6.0.0")]
+[assembly: EdmRelationship("TradePlatformModel", "aspnet_UsersInRoles", "aspnet_Roles", RelationshipMultiplicity.Many, typeof (aspnet_Roles), "aspnet_Users", RelationshipMultiplicity.Many, typeof (aspnet_Users))]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("TradePlatform")]
+[assembly: EdmSchema]
+[assembly: EdmRelationship("TradePlatformModel", "FK__aspnet_Me__Appli__276EDEB3", "aspnet_Applications", RelationshipMultiplicity.One, typeof (aspnet_Applications), "aspnet_Membership", RelationshipMultiplicity.Many, typeof (aspnet_Membership), true)]
+[assembly: ComVisible(false)]
+[assembly: EdmRelationship("TradePlatformModel", "FK__aspnet_Us__Appli__173876EA", "aspnet_Applications", RelationshipMultiplicity.One, typeof (aspnet_Applications), "aspnet_Users", RelationshipMultiplicity.Many, typeof (aspnet_Users), true)]
+[assembly: EdmRelationship("TradePlatformModel", "FK__aspnet_Me__UserI__286302EC", "aspnet_Users", RelationshipMultiplicity.One, typeof (aspnet_Users), "aspnet_Membership", RelationshipMultiplicity.ZeroOrOne, typeof (aspnet_Membership), true)]
+[assembly: EdmRelationship("TradePlatformModel", "FK__aspnet_Pr__UserI__3C69FB99", "aspnet_Users", RelationshipMultiplicity.One, typeof (aspnet_Users), "aspnet_Profile", RelationshipMultiplicity.ZeroOrOne, typeof (aspnet_Profile), true)]
+[assembly: EdmRelationship("TradePlatformModel", "BankAccount_BankAccountGroup", "BankAccountGroup", RelationshipMultiplicity.ZeroOrOne, typeof (BankAccountGroup), "BankAccount", RelationshipMultiplicity.Many, typeof (BankAccount), true)]
+[assembly: EdmRelationship("TradePlatformModel", "BankAccount_BankTransaction", "BankAccount", RelationshipMultiplicity.One, typeof (BankAccount), "BankTransaction", RelationshipMultiplicity.Many, typeof (BankTransaction), true)]
+[assembly: EdmRelationship("TradePlatformModel", "BankTransactionCategory_BankTransaction", "BankTransactionCategory", RelationshipMultiplicity.One, typeof (BankTransactionCategory), "BankTransaction", RelationshipMultiplicity.Many, typeof (BankTransaction), true)]
+[assembly: EdmRelationship("TradePlatformModel", "BankTransactionCategoryBudget_BankTransactionCategory", "BankTransactionCategory", RelationshipMultiplicity.One, typeof (BankTransactionCategory), "BankTransactionCategoryBudget", RelationshipMultiplicity.Many, typeof (BankTransactionCategoryBudget), true)]
+[assembly: EdmRelationship("TradePlatformModel", "BankTransactionCategoryGroup_BankTransactionCategory", "BankTransactionCategoryGroup", RelationshipMultiplicity.One, typeof (BankTransactionCategoryGroup), "BankTransactionCategory", RelationshipMultiplicity.Many, typeof (BankTransactionCategory), true)]
+[assembly: EdmRelationship("TradePlatformModel", "BankTransactionCategoryBudgetP_BankTransactionCategoryBudget", "BankTransactionCategoryBudgetPeriod", RelationshipMultiplicity.One, typeof (BankTransactionCategoryBudgetPeriod), "BankTransactionCategoryBudget", RelationshipMultiplicity.Many, typeof (BankTransactionCategoryBudget), true)]
+[assembly: EdmRelationship("TradePlatformModel", "ExpertSystem_MetaTraderAccount", "MetaTraderAccount", RelationshipMultiplicity.One, typeof (MetaTraderAccount), "ExpertSystem", RelationshipMultiplicity.Many, typeof (ExpertSystem), true)]
+[assembly: EdmRelationship("TradePlatformModel", "ExpertSystem_MetaTraderOrder", "ExpertSystem", RelationshipMultiplicity.ZeroOrOne, typeof (ExpertSystem), "MetaTraderOrder", RelationshipMultiplicity.Many, typeof (MetaTraderOrder), true)]
+[assembly: EdmRelationship("TradePlatformModel", "MetaTraderOrder_MetaTraderAccount", "MetaTraderAccount", RelationshipMultiplicity.One, typeof (MetaTraderAccount), "MetaTraderOrder", RelationshipMultiplicity.Many, typeof (MetaTraderOrder), true)]
+[assembly: EdmRelationship("TradePlatformModel", "MetaTraderTickData_MetaTraderAccount", "MetaTraderAccount", RelationshipMultiplicity.One, typeof (MetaTraderAccount), "MetaTraderTickData", RelationshipMultiplicity.Many, typeof (MetaTraderTickData), true)]
+[assembly: EdmRelationship("TradePlatformModel", "MonthlyData_MetaTraderAccount", "MetaTraderAccount", RelationshipMultiplicity.One, typeof (MetaTraderAccount), "MonthlyData", RelationshipMultiplicity.Many, typeof (MonthlyData), true)]
+[assembly: AssemblyVersion("3.6.0.0")]

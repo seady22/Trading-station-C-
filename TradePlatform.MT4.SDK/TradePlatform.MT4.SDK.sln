@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.API", "TradePlatform.MT4.SDK.API\TradePlatform.MT4.SDK.API.csproj", "{44136017-54EE-4868-9557-ACB70B85BD7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.Library", "TradePlatform.MT4.SDK.Library\TradePlatform.MT4.SDK.Library.csproj", "{6B024C9D-EAE3-4450-981B-625D7A56A3ED}"
@@ -19,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.SDK.WindowsService", "TradePlatform.MT4.SDK.WindowsService\TradePlatform.MT4.SDK.WindowsService.csproj", "{51B7867E-0EC7-4697-B1C4-8D8DA47B546F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.Engine", "TradePlatform.MT4.Engine\TradePlatform.MT4.Engine.csproj", "{F3603DB5-AD31-458C-BA87-119F27E64042}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradePlatform.MT4.Data", "TradePlatform.MT4.Data\TradePlatform.MT4.Data.csproj", "{1FF2E75A-D7D2-45E6-BD75-87442529D86D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,10 @@ Global
 		{F3603DB5-AD31-458C-BA87-119F27E64042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3603DB5-AD31-458C-BA87-119F27E64042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3603DB5-AD31-458C-BA87-119F27E64042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF2E75A-D7D2-45E6-BD75-87442529D86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF2E75A-D7D2-45E6-BD75-87442529D86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF2E75A-D7D2-45E6-BD75-87442529D86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF2E75A-D7D2-45E6-BD75-87442529D86D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
