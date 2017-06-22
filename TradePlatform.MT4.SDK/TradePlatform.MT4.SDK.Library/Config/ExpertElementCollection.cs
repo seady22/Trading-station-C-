@@ -25,7 +25,7 @@ namespace TradePlatform.MT4.SDK.Library.Config
             get { return "Expert"; }
         }
 
-        public ExpertElement this[string name]
+        new public ExpertElement this[string name]
         {
             get { return (ExpertElement)base.BaseGet(name); }
         }

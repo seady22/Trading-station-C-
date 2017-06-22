@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using TradePlatform.MT4.Data;
 using TradePlatform.MT4.Engine.Extension;
 
 namespace TradePlatform.MT4.Engine.Tasks

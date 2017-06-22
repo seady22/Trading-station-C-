@@ -15,15 +15,16 @@ namespace TradePlatform.MT4.Core.Exceptions
     private static string ComputeArray(IEnumerable<string> message)
     {
       string result = "";
-      Enumerable.ToList<string>(message).ForEach((Action<string>) (x =>
-      {
-        // ISSUE: variable of a compiler-generated type
-        MessageException.\u003C\u003Ec__DisplayClass1 temp_10 = this;
-        // ISSUE: reference to a compiler-generated field
-        string temp_14 = temp_10.result + x + "|";
-        // ISSUE: reference to a compiler-generated field
-        temp_10.result = temp_14;
-      }));
+      message.ToList().ForEach((string x) => result = string.Concat(result, x, "|"));
+      /*     Enumerable.ToList<string>(message).ForEach((Action<string>) (x => //TODO //TODO fixfix
+           {
+             // ISSUE: variable of a compiler-generated type
+             MessageException.\u003C\u003Ec__DisplayClass1 temp_10 = this;
+             // ISSUE: reference to a compiler-generated field
+             string temp_14 = temp_10.result + x + "|";
+             // ISSUE: reference to a compiler-generated field
+             temp_10.result = temp_14;
+           }));*/
       return result;
     }
   }

@@ -17,7 +17,7 @@ namespace TradePlatform.MT4.Core.Utils
 
     public override string ToString()
     {
-      return "[HandlerName=" + (object) this.HandlerName + ", Discriminator=" + this.Discriminator + "]." + (string) (object) this.MethodCallInfo;
+      return "[HandlerName=" + this.HandlerName + ", Discriminator=" + this.Discriminator + "]." + this.MethodCallInfo;
     }
   }
 }

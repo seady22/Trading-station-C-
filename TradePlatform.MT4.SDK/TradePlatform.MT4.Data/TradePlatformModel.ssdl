@@ -1,0 +1,913 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradePlatformModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TradePlatformModelStoreContainer">
+    <EntitySet Name="C__RefactorLog" EntityType="TradePlatformModel.Store.C__RefactorLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Applications" EntityType="TradePlatformModel.Store.aspnet_Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Membership" EntityType="TradePlatformModel.Store.aspnet_Membership" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Profile" EntityType="TradePlatformModel.Store.aspnet_Profile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Roles" EntityType="TradePlatformModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_SchemaVersions" EntityType="TradePlatformModel.Store.aspnet_SchemaVersions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Users" EntityType="TradePlatformModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankAccountGroups" EntityType="TradePlatformModel.Store.BankAccountGroups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankAccounts" EntityType="TradePlatformModel.Store.BankAccounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankTransactionCategories" EntityType="TradePlatformModel.Store.BankTransactionCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankTransactionCategoryBudgetPeriods" EntityType="TradePlatformModel.Store.BankTransactionCategoryBudgetPeriods" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankTransactionCategoryBudgets" EntityType="TradePlatformModel.Store.BankTransactionCategoryBudgets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankTransactionCategoryGroups" EntityType="TradePlatformModel.Store.BankTransactionCategoryGroups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankTransactions" EntityType="TradePlatformModel.Store.BankTransactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExpertSystems" EntityType="TradePlatformModel.Store.ExpertSystems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaTraderAccountFilterSets" EntityType="TradePlatformModel.Store.MetaTraderAccountFilterSets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaTraderAccounts" EntityType="TradePlatformModel.Store.MetaTraderAccounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaTraderOrderFilterSets" EntityType="TradePlatformModel.Store.MetaTraderOrderFilterSets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaTraderOrders" EntityType="TradePlatformModel.Store.MetaTraderOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MetaTraderTickDatas" EntityType="TradePlatformModel.Store.MetaTraderTickDatas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MonthlyDatas" EntityType="TradePlatformModel.Store.MonthlyDatas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RolePermissions" EntityType="TradePlatformModel.Store.RolePermissions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduledTaskParameters" EntityType="TradePlatformModel.Store.ScheduledTaskParameters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduledTasks" EntityType="TradePlatformModel.Store.ScheduledTasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TradeDuplicatorBees" EntityType="TradePlatformModel.Store.TradeDuplicatorBees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TradeDuplicatorDrones" EntityType="TradePlatformModel.Store.TradeDuplicatorDrones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_aspnet_Applications" EntityType="TradePlatformModel.Store.vw_aspnet_Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_aspnet_MembershipUsers" EntityType="TradePlatformModel.Store.vw_aspnet_MembershipUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_aspnet_Profiles" EntityType="TradePlatformModel.Store.vw_aspnet_Profiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_aspnet_Roles" EntityType="TradePlatformModel.Store.vw_aspnet_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_aspnet_Users" EntityType="TradePlatformModel.Store.vw_aspnet_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_aspnet_UsersInRoles" EntityType="TradePlatformModel.Store.vw_aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_UsersInRoles" EntityType="TradePlatformModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__aspnet_Me__Appli__276EDEB3" Association="TradePlatformModel.Store.FK__aspnet_Me__Appli__276EDEB3">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Ro__Appli__45F365D3" Association="TradePlatformModel.Store.FK__aspnet_Ro__Appli__45F365D3">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__173876EA" Association="TradePlatformModel.Store.FK__aspnet_Us__Appli__173876EA">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Me__UserI__286302EC" Association="TradePlatformModel.Store.FK__aspnet_Me__UserI__286302EC">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pr__UserI__3C69FB99" Association="TradePlatformModel.Store.FK__aspnet_Pr__UserI__3C69FB99">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="BankAccount_BankAccountGroup" Association="TradePlatformModel.Store.BankAccount_BankAccountGroup">
+      <End Role="BankAccountGroup" EntitySet="BankAccountGroups" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="BankAccount_BankTransaction" Association="TradePlatformModel.Store.BankAccount_BankTransaction">
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+      <End Role="BankTransaction" EntitySet="BankTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="BankTransactionCategory_BankTransaction" Association="TradePlatformModel.Store.BankTransactionCategory_BankTransaction">
+      <End Role="BankTransactionCategory" EntitySet="BankTransactionCategories" />
+      <End Role="BankTransaction" EntitySet="BankTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="BankTransactionCategoryBudget_BankTransactionCategory" Association="TradePlatformModel.Store.BankTransactionCategoryBudget_BankTransactionCategory">
+      <End Role="BankTransactionCategory" EntitySet="BankTransactionCategories" />
+      <End Role="BankTransactionCategoryBudget" EntitySet="BankTransactionCategoryBudgets" />
+    </AssociationSet>
+    <AssociationSet Name="BankTransactionCategoryGroup_BankTransactionCategory" Association="TradePlatformModel.Store.BankTransactionCategoryGroup_BankTransactionCategory">
+      <End Role="BankTransactionCategoryGroup" EntitySet="BankTransactionCategoryGroups" />
+      <End Role="BankTransactionCategory" EntitySet="BankTransactionCategories" />
+    </AssociationSet>
+    <AssociationSet Name="BankTransactionCategoryBudgetP_BankTransactionCategoryBudget" Association="TradePlatformModel.Store.BankTransactionCategoryBudgetP_BankTransactionCategoryBudget">
+      <End Role="BankTransactionCategoryBudgetPeriod" EntitySet="BankTransactionCategoryBudgetPeriods" />
+      <End Role="BankTransactionCategoryBudget" EntitySet="BankTransactionCategoryBudgets" />
+    </AssociationSet>
+    <AssociationSet Name="ExpertSystem_MetaTraderAccount" Association="TradePlatformModel.Store.ExpertSystem_MetaTraderAccount">
+      <End Role="MetaTraderAccount" EntitySet="MetaTraderAccounts" />
+      <End Role="ExpertSystem" EntitySet="ExpertSystems" />
+    </AssociationSet>
+    <AssociationSet Name="ExpertSystem_MetaTraderOrder" Association="TradePlatformModel.Store.ExpertSystem_MetaTraderOrder">
+      <End Role="ExpertSystem" EntitySet="ExpertSystems" />
+      <End Role="MetaTraderOrder" EntitySet="MetaTraderOrders" />
+    </AssociationSet>
+    <AssociationSet Name="MetaTraderOrder_MetaTraderAccount" Association="TradePlatformModel.Store.MetaTraderOrder_MetaTraderAccount">
+      <End Role="MetaTraderAccount" EntitySet="MetaTraderAccounts" />
+      <End Role="MetaTraderOrder" EntitySet="MetaTraderOrders" />
+    </AssociationSet>
+    <AssociationSet Name="MetaTraderTickData_MetaTraderAccount" Association="TradePlatformModel.Store.MetaTraderTickData_MetaTraderAccount">
+      <End Role="MetaTraderAccount" EntitySet="MetaTraderAccounts" />
+      <End Role="MetaTraderTickData" EntitySet="MetaTraderTickDatas" />
+    </AssociationSet>
+    <AssociationSet Name="MonthlyData_MetaTraderAccount" Association="TradePlatformModel.Store.MonthlyData_MetaTraderAccount">
+      <End Role="MetaTraderAccount" EntitySet="MetaTraderAccounts" />
+      <End Role="MonthlyData" EntitySet="MonthlyDatas" />
+    </AssociationSet>
+    <AssociationSet Name="TradeDuplicatorBee_MetaTraderAccount" Association="TradePlatformModel.Store.TradeDuplicatorBee_MetaTraderAccount">
+      <End Role="MetaTraderAccount" EntitySet="MetaTraderAccounts" />
+      <End Role="TradeDuplicatorBee" EntitySet="TradeDuplicatorBees" />
+    </AssociationSet>
+    <AssociationSet Name="ScheduledTaskParameter_ScheduledTask" Association="TradePlatformModel.Store.ScheduledTaskParameter_ScheduledTask">
+      <End Role="ScheduledTask" EntitySet="ScheduledTasks" />
+      <End Role="ScheduledTaskParameter" EntitySet="ScheduledTaskParameters" />
+    </AssociationSet>
+    <AssociationSet Name="TradeDuplicatorBee_TradeDuplicatorDrone" Association="TradePlatformModel.Store.TradeDuplicatorBee_TradeDuplicatorDrone">
+      <End Role="TradeDuplicatorBee" EntitySet="TradeDuplicatorBees" />
+      <End Role="TradeDuplicatorDrone" EntitySet="TradeDuplicatorDrones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_aspnet_UsersInRoles_aspnet_Roles" Association="TradePlatformModel.Store.FK_aspnet_UsersInRoles_aspnet_Roles">
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+      <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_aspnet_UsersInRoles_aspnet_Users" Association="TradePlatformModel.Store.FK_aspnet_UsersInRoles_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__RefactorLog">
+    <Key>
+      <PropertyRef Name="OperationKey" />
+    </Key>
+    <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Applications">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PasswordFormat" Type="int" Nullable="false" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="MobilePIN" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="LoweredEmail" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="PasswordQuestion" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="PasswordAnswer" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="aspnet_Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PropertyNames" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PropertyValuesString" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PropertyValuesBinary" Type="varbinary(max)" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredRoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_SchemaVersions">
+    <Key>
+      <PropertyRef Name="Feature" />
+      <PropertyRef Name="CompatibleSchemaVersion" />
+    </Key>
+    <Property Name="Feature" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="CompatibleSchemaVersion" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BankAccountGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="BankAccounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Number" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Abbr" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="InitionalDeposit" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="BankAccount_BankAccountGroup" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="BankTransactionCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="HasBudget" Type="bit" Nullable="false" />
+    <Property Name="BankTransactionCategoryGroup_BankTransactionCategory" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BankTransactionCategoryBudgetPeriods">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="BudgetPeriodStart" Type="datetime" Nullable="false" />
+    <Property Name="BudgetPeriodEnd" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="BankTransactionCategoryBudgets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="PeriodLimit" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="BankTransactionCategoryBudget_BankTransactionCategory" Type="int" Nullable="false" />
+    <Property Name="BankTransactionCategoryBudgetP_BankTransactionCategoryBudget" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BankTransactionCategoryGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="BankTransactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Payee" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Ammount" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TransactionUniqueId" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="BankAccount_BankTransaction" Type="int" Nullable="false" />
+    <Property Name="BankTransactionCategory_BankTransaction" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExpertSystems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="SystemVersion" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="ExpertVersion" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="ExpertName" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="ExpertAllowAddones" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoEven" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoEvenAll" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoEvenBars" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsAutoEvenPips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsEvenStop" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsAutoTrail" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoTrailAll" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoTrailBars" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsAutoTrailPips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsTrailStop" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsAutoLockLoss" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoLockLossAll" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoLockLossPips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsLockLossRatio" Type="float" Nullable="true" />
+    <Property Name="ModuleTacticsLockLossStop" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsAutoLock" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoLockAll" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsAutoLockPips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsLockStop" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsRelock" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsPartialLockRatio" Type="float" Nullable="true" />
+    <Property Name="ModuleTacticsAutoMartin" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsMartinExponent" Type="float" Nullable="true" />
+    <Property Name="ModuleTacticsMartinKnees" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsAutoBalance" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsBalancePips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsHalfTake" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsHalfTakeTake" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsHalfTakeStop" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsSmartStop" Type="bit" Nullable="true" />
+    <Property Name="ModuleTacticsSmartStopPips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsSmartStopBars" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsSmartStopBreak" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsDispersPips" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsDispersBars" Type="int" Nullable="true" />
+    <Property Name="ModuleTacticsVolatile" Type="int" Nullable="true" />
+    <Property Name="ModuleTraderUseStrategy" Type="bit" Nullable="true" />
+    <Property Name="ModuleTraderUseTrendFilter" Type="bit" Nullable="true" />
+    <Property Name="ModuleTraderUsePositionLock" Type="bit" Nullable="true" />
+    <Property Name="ModuleTraderHoursStart" Type="int" Nullable="true" />
+    <Property Name="ModuleTraderHoursEnd" Type="int" Nullable="true" />
+    <Property Name="ModuleTraderLossInARow" Type="int" Nullable="true" />
+    <Property Name="ModuleTraderEquityLimit" Type="int" Nullable="true" />
+    <Property Name="ModuleTraderOnlyInZones" Type="bit" Nullable="true" />
+    <Property Name="ModuleTraderTakeInZones" Type="bit" Nullable="true" />
+    <Property Name="AdnVisualTraderIsActive" Type="bit" Nullable="true" />
+    <Property Name="AdnVisualTraderOrderComment" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="ModuleMMStopLoss" Type="int" Nullable="true" />
+    <Property Name="ModuleMMTakeProfit" Type="int" Nullable="true" />
+    <Property Name="ModuleMMMinMarginLevel" Type="int" Nullable="true" />
+    <Property Name="ModuleMMMaxOpenOrders" Type="int" Nullable="true" />
+    <Property Name="ModuleMMMaxSpread" Type="int" Nullable="true" />
+    <Property Name="ModuleMMRiskFactor" Type="float" Nullable="true" />
+    <Property Name="ModuleMMUseFixedLot" Type="bit" Nullable="true" />
+    <Property Name="ModuleMMFixedLot" Type="float" Nullable="true" />
+    <Property Name="ExtOperatorUseDefaultPoint" Type="bit" Nullable="true" />
+    <Property Name="ExtOperatorPoint" Type="float" Nullable="true" />
+    <Property Name="ExtOperatorMagicNumber" Type="int" Nullable="true" />
+    <Property Name="ExtOperatorAutoMagic" Type="bit" Nullable="true" />
+    <Property Name="ExtOperatorRequoteTimes" Type="int" Nullable="true" />
+    <Property Name="ExtOperatorRequoteSleep" Type="int" Nullable="true" />
+    <Property Name="ExtOperatorSlippage" Type="int" Nullable="true" />
+    <Property Name="ExtOperatorStealthMode" Type="bit" Nullable="true" />
+    <Property Name="ExtOperatorSetStopAfter" Type="bit" Nullable="true" />
+    <Property Name="SignalIndicatorsEMASlow" Type="int" Nullable="true" />
+    <Property Name="SignalIndicatorsEMAFast" Type="int" Nullable="true" />
+    <Property Name="SignalIndicatorsRSIPeriod" Type="int" Nullable="true" />
+    <Property Name="SignalIndicatorsRSIUpper" Type="int" Nullable="true" />
+    <Property Name="SignalIndicatorsRSILower" Type="int" Nullable="true" />
+    <Property Name="SignalPASlippage" Type="int" Nullable="true" />
+    <Property Name="AdnStealthUseBestPrice" Type="bit" Nullable="true" />
+    <Property Name="ExtTimeTRM" Type="int" Nullable="true" />
+    <Property Name="AdnReportingIsActive" Type="bit" Nullable="true" />
+    <Property Name="AdnLevelsIsActive" Type="bit" Nullable="true" />
+    <Property Name="AdnDiagnosticsUseDebug" Type="bit" Nullable="true" />
+    <Property Name="AdnDiagnosticsUseTrace" Type="bit" Nullable="true" />
+    <Property Name="AdnDiagnosticsUseLog" Type="bit" Nullable="true" />
+    <Property Name="AdnDiagnosticsUseNotify" Type="bit" Nullable="true" />
+    <Property Name="AdnDiagnosticsShowOrders" Type="bit" Nullable="true" />
+    <Property Name="AdnDiagnosticsShowInfo" Type="bit" Nullable="true" />
+    <Property Name="BridgeNETIsActive" Type="bit" Nullable="true" />
+    <Property Name="BridgeNETServer" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="BridgeNETPort" Type="int" Nullable="true" />
+    <Property Name="WorkingSymbol" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="WorkingPeriod" Type="int" Nullable="true" />
+    <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="LastActivity" Type="datetime" Nullable="false" />
+    <Property Name="LastExecutionError" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="ExpertSystem_MetaTraderAccount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MetaTraderAccountFilterSets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="IsDemo" Type="bit" Nullable="true" />
+    <Property Name="IsTesting" Type="bit" Nullable="true" />
+    <Property Name="IsOptimization" Type="bit" Nullable="true" />
+    <Property Name="AccountName" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="AccountNumber" Type="int" Nullable="true" />
+    <Property Name="AccountCompany" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="MetaTraderAccounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="AccountBalance" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="AccountCredit" Type="float" Nullable="false" />
+    <Property Name="AccountCompany" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="AccountCurrency" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="AccountEquity" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="AccountFreeMargin" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="AccountFreeMarginMode" Type="float" Nullable="false" />
+    <Property Name="AccountLeverage" Type="int" Nullable="false" />
+    <Property Name="AccountMargin" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="AccountName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="AccountNumber" Type="int" Nullable="false" />
+    <Property Name="AccountProfit" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="AccountServer" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="AccountStopoutLevel" Type="int" Nullable="false" />
+    <Property Name="AccountStopoutMode" Type="int" Nullable="false" />
+    <Property Name="IsDemo" Type="bit" Nullable="false" />
+    <Property Name="IsTesting" Type="bit" Nullable="false" />
+    <Property Name="IsOptimization" Type="bit" Nullable="false" />
+    <Property Name="IsExpertEnabled" Type="bit" Nullable="false" />
+    <Property Name="DrawDown" Type="decimal" Nullable="true" Precision="18" Scale="9" />
+  </EntityType>
+  <EntityType Name="MetaTraderOrderFilterSets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="CloseTimeFrom" Type="datetime" Nullable="true" />
+    <Property Name="CloseTimeTo" Type="datetime" Nullable="true" />
+    <Property Name="OpenTimeFrom" Type="datetime" Nullable="true" />
+    <Property Name="OpenTimeTo" Type="datetime" Nullable="true" />
+    <Property Name="CommentContains" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="CommentNotContains" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Symbol" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="MagicNumber" Type="int" Nullable="true" />
+    <Property Name="Type" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="IsClosed" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MetaTraderOrders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Ticket" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="OpenTime" Type="datetime" Nullable="false" />
+    <Property Name="CloseTime" Type="datetime" Nullable="false" />
+    <Property Name="OpenPrice" Type="float" Nullable="false" />
+    <Property Name="ClosePrice" Type="float" Nullable="false" />
+    <Property Name="StopLoss" Type="float" Nullable="false" />
+    <Property Name="TakeProfit" Type="float" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Size" Type="float" Nullable="false" />
+    <Property Name="Symbol" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Swap" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Profit" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MagicNumber" Type="int" Nullable="false" />
+    <Property Name="Commission" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IsClosed" Type="bit" Nullable="false" />
+    <Property Name="MetaTraderOrder_MetaTraderAccount" Type="int" Nullable="false" />
+    <Property Name="ExpertSystem_MetaTraderOrder" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MetaTraderTickDatas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Bid" Type="float" Nullable="false" />
+    <Property Name="Ask" Type="float" Nullable="false" />
+    <Property Name="TickDate" Type="datetime" Nullable="false" />
+    <Property Name="Equity" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MetaTraderTickData_MetaTraderAccount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MonthlyDatas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="MonthlyData_MetaTraderAccount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RolePermissions">
+    <Key>
+      <PropertyRef Name="RoleName" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PermissionId" Type="nvarchar" Nullable="false" MaxLength="322" />
+  </EntityType>
+  <EntityType Name="ScheduledTaskParameters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="ScheduledTaskParameter_ScheduledTask" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScheduledTasks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Interval" Type="int" Nullable="false" />
+    <Property Name="Executions" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="LastMessage" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="LastExecution" Type="datetime" Nullable="true" />
+    <Property Name="LastError" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TradeDuplicatorBees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="TradeDuplicatorBee_MetaTraderAccount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TradeDuplicatorDrones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="LotRatio" Type="float" Nullable="false" />
+    <Property Name="Slippage" Type="int" Nullable="false" />
+    <Property Name="TradeDuplicatorBee_TradeDuplicatorDrone" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_aspnet_Applications">
+    <Key>
+      <PropertyRef Name="ApplicationName" />
+      <PropertyRef Name="LoweredApplicationName" />
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="vw_aspnet_MembershipUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="PasswordFormat" />
+      <PropertyRef Name="IsApproved" />
+      <PropertyRef Name="IsLockedOut" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="LastLoginDate" />
+      <PropertyRef Name="LastPasswordChangedDate" />
+      <PropertyRef Name="LastLockoutDate" />
+      <PropertyRef Name="FailedPasswordAttemptCount" />
+      <PropertyRef Name="FailedPasswordAttemptWindowStart" />
+      <PropertyRef Name="FailedPasswordAnswerAttemptCount" />
+      <PropertyRef Name="FailedPasswordAnswerAttemptWindowStart" />
+      <PropertyRef Name="ApplicationId" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="IsAnonymous" />
+      <PropertyRef Name="LastActivityDate" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PasswordFormat" Type="int" Nullable="false" />
+    <Property Name="MobilePIN" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="LoweredEmail" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="PasswordQuestion" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="PasswordAnswer" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_aspnet_Profiles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LastUpdatedDate" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+    <Property Name="DataSize" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="vw_aspnet_Roles">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="RoleName" />
+      <PropertyRef Name="LoweredRoleName" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredRoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="vw_aspnet_Users">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="LoweredUserName" />
+      <PropertyRef Name="IsAnonymous" />
+      <PropertyRef Name="LastActivityDate" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_aspnet_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_UsersInRoles">
+    <Key>
+      <PropertyRef Name="aspnet_Roles_RoleId" />
+      <PropertyRef Name="aspnet_Users_UserId" />
+    </Key>
+    <Property Name="aspnet_Roles_RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="aspnet_Users_UserId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__aspnet_Me__Appli__276EDEB3">
+    <End Role="aspnet_Applications" Type="TradePlatformModel.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="TradePlatformModel.Store.aspnet_Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Ro__Appli__45F365D3">
+    <End Role="aspnet_Applications" Type="TradePlatformModel.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Roles" Type="TradePlatformModel.Store.aspnet_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Roles">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__173876EA">
+    <End Role="aspnet_Applications" Type="TradePlatformModel.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Users" Type="TradePlatformModel.Store.aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Me__UserI__286302EC">
+    <End Role="aspnet_Users" Type="TradePlatformModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="TradePlatformModel.Store.aspnet_Membership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pr__UserI__3C69FB99">
+    <End Role="aspnet_Users" Type="TradePlatformModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Profile" Type="TradePlatformModel.Store.aspnet_Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BankAccount_BankAccountGroup">
+    <End Role="BankAccountGroup" Type="TradePlatformModel.Store.BankAccountGroups" Multiplicity="0..1" />
+    <End Role="BankAccount" Type="TradePlatformModel.Store.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccountGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="BankAccount_BankAccountGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BankAccount_BankTransaction">
+    <End Role="BankAccount" Type="TradePlatformModel.Store.BankAccounts" Multiplicity="1" />
+    <End Role="BankTransaction" Type="TradePlatformModel.Store.BankTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankTransaction">
+        <PropertyRef Name="BankAccount_BankTransaction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BankTransactionCategory_BankTransaction">
+    <End Role="BankTransactionCategory" Type="TradePlatformModel.Store.BankTransactionCategories" Multiplicity="1" />
+    <End Role="BankTransaction" Type="TradePlatformModel.Store.BankTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankTransactionCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankTransaction">
+        <PropertyRef Name="BankTransactionCategory_BankTransaction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BankTransactionCategoryBudget_BankTransactionCategory">
+    <End Role="BankTransactionCategory" Type="TradePlatformModel.Store.BankTransactionCategories" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="BankTransactionCategoryBudget" Type="TradePlatformModel.Store.BankTransactionCategoryBudgets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankTransactionCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankTransactionCategoryBudget">
+        <PropertyRef Name="BankTransactionCategoryBudget_BankTransactionCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BankTransactionCategoryGroup_BankTransactionCategory">
+    <End Role="BankTransactionCategoryGroup" Type="TradePlatformModel.Store.BankTransactionCategoryGroups" Multiplicity="1" />
+    <End Role="BankTransactionCategory" Type="TradePlatformModel.Store.BankTransactionCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankTransactionCategoryGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankTransactionCategory">
+        <PropertyRef Name="BankTransactionCategoryGroup_BankTransactionCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BankTransactionCategoryBudgetP_BankTransactionCategoryBudget">
+    <End Role="BankTransactionCategoryBudgetPeriod" Type="TradePlatformModel.Store.BankTransactionCategoryBudgetPeriods" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="BankTransactionCategoryBudget" Type="TradePlatformModel.Store.BankTransactionCategoryBudgets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankTransactionCategoryBudgetPeriod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankTransactionCategoryBudget">
+        <PropertyRef Name="BankTransactionCategoryBudgetP_BankTransactionCategoryBudget" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExpertSystem_MetaTraderAccount">
+    <End Role="MetaTraderAccount" Type="TradePlatformModel.Store.MetaTraderAccounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ExpertSystem" Type="TradePlatformModel.Store.ExpertSystems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetaTraderAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExpertSystem">
+        <PropertyRef Name="ExpertSystem_MetaTraderAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExpertSystem_MetaTraderOrder">
+    <End Role="ExpertSystem" Type="TradePlatformModel.Store.ExpertSystems" Multiplicity="0..1" />
+    <End Role="MetaTraderOrder" Type="TradePlatformModel.Store.MetaTraderOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpertSystem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MetaTraderOrder">
+        <PropertyRef Name="ExpertSystem_MetaTraderOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaTraderOrder_MetaTraderAccount">
+    <End Role="MetaTraderAccount" Type="TradePlatformModel.Store.MetaTraderAccounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MetaTraderOrder" Type="TradePlatformModel.Store.MetaTraderOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetaTraderAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MetaTraderOrder">
+        <PropertyRef Name="MetaTraderOrder_MetaTraderAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetaTraderTickData_MetaTraderAccount">
+    <End Role="MetaTraderAccount" Type="TradePlatformModel.Store.MetaTraderAccounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MetaTraderTickData" Type="TradePlatformModel.Store.MetaTraderTickDatas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetaTraderAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MetaTraderTickData">
+        <PropertyRef Name="MetaTraderTickData_MetaTraderAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MonthlyData_MetaTraderAccount">
+    <End Role="MetaTraderAccount" Type="TradePlatformModel.Store.MetaTraderAccounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MonthlyData" Type="TradePlatformModel.Store.MonthlyDatas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetaTraderAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MonthlyData">
+        <PropertyRef Name="MonthlyData_MetaTraderAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TradeDuplicatorBee_MetaTraderAccount">
+    <End Role="MetaTraderAccount" Type="TradePlatformModel.Store.MetaTraderAccounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TradeDuplicatorBee" Type="TradePlatformModel.Store.TradeDuplicatorBees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetaTraderAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TradeDuplicatorBee">
+        <PropertyRef Name="TradeDuplicatorBee_MetaTraderAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ScheduledTaskParameter_ScheduledTask">
+    <End Role="ScheduledTask" Type="TradePlatformModel.Store.ScheduledTasks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ScheduledTaskParameter" Type="TradePlatformModel.Store.ScheduledTaskParameters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ScheduledTask">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduledTaskParameter">
+        <PropertyRef Name="ScheduledTaskParameter_ScheduledTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TradeDuplicatorBee_TradeDuplicatorDrone">
+    <End Role="TradeDuplicatorBee" Type="TradePlatformModel.Store.TradeDuplicatorBees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TradeDuplicatorDrone" Type="TradePlatformModel.Store.TradeDuplicatorDrones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TradeDuplicatorBee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TradeDuplicatorDrone">
+        <PropertyRef Name="TradeDuplicatorBee_TradeDuplicatorDrone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_aspnet_UsersInRoles_aspnet_Roles">
+    <End Role="aspnet_Roles" Type="TradePlatformModel.Store.aspnet_Roles" Multiplicity="1" />
+    <End Role="aspnet_UsersInRoles" Type="TradePlatformModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="aspnet_UsersInRoles">
+        <PropertyRef Name="aspnet_Roles_RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_aspnet_UsersInRoles_aspnet_Users">
+    <End Role="aspnet_UsersInRoles" Type="TradePlatformModel.Store.aspnet_UsersInRoles" Multiplicity="*" />
+    <End Role="aspnet_Users" Type="TradePlatformModel.Store.aspnet_Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_UsersInRoles">
+        <PropertyRef Name="aspnet_Users_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

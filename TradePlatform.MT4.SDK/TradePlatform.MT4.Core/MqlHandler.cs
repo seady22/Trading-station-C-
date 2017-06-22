@@ -14,7 +14,7 @@ namespace TradePlatform.MT4.Core
 
     protected internal string Discriminator { get; internal set; }
 
-    protected internal abstract string ResolveMethod(string methodName, List<string> parameters);
+    public abstract string ResolveMethod(string methodName, List<string> parameters);
 
     public string CallMqlMethod(string methodName, params object[] parameters)
     {

@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: Extension]
 [assembly: AssemblyTitle("TradePlatform.MT4.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]

@@ -37,7 +37,7 @@ namespace TradePlatform.MT4.Core.Config
       }
     }
 
-    public ParameterElement this[string propertyName]
+    new public ParameterElement this[string propertyName]
     {
       get
       {

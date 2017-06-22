@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using TradePlatform.MT4.Data;
+using TradePlatform.MT4.Engine.Log;
 
 namespace TradePlatform.MT4.Engine.Model
 {

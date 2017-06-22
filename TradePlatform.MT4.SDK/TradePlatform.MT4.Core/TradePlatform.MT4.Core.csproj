@@ -36,36 +36,58 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Data.Services, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Core" />
+    <Reference Include="TradePlatform.MT4.Data, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TradePlatform.MT4.Engine\lib\TradePlatform.MT4.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Bridge.cs" />
-    <Compile Include="BridgeConfiguration.cs" />
+    <Compile Include="Config\BridgeConfiguration.cs" />
+    <Compile Include="Config\HandlerElement.cs" />
+    <Compile Include="Config\HandlerElementCollection.cs" />
+    <Compile Include="Config\HostElement.cs" />
+    <Compile Include="Config\HostElementCollection.cs" />
+    <Compile Include="Config\ParameterElement.cs" />
+    <Compile Include="Config\ParameterElementCollection.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="Exceptions\HandlerExecutionException.cs" />
+    <Compile Include="Exceptions\HandlerLoadException.cs" />
+    <Compile Include="Exceptions\MessageException.cs" />
+    <Compile Include="Exceptions\MqlErrorException.cs" />
     <Compile Include="ExpertAdvisor.cs" />
-    <Compile Include="HandlerElement.cs" />
-    <Compile Include="HandlerElementCollection.cs" />
-    <Compile Include="HostElement.cs" />
-    <Compile Include="HostElementCollection.cs" />
+    <Compile Include="Internals\HandlerHost.cs" />
+    <Compile Include="Internals\HandlerProvider.cs" />
     <Compile Include="MetaTrader4.cs" />
     <Compile Include="MqlHandler.cs" />
-    <Compile Include="ParameterElement.cs" />
-    <Compile Include="ParameterElementCollection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>false</AutoGen>
-      <DesignTimeSharedInput>false</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="QuoteListener.cs" />
     <Compile Include="QuoterExtensions.cs" />
+    <Compile Include="Utils\Convertor.cs" />
+    <Compile Include="Utils\ExpertInfo.cs" />
+    <Compile Include="Utils\MethodCallInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TradePlatform.MT4.Engine\TradePlatform.MT4.Engine.csproj">
+      <Project>{f3603db5-ad31-458c-ba87-119f27e64042}</Project>
+      <Name>TradePlatform.MT4.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
